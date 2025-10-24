@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Dienstgrade Übersicht</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Bild</th>
+            <th>Bezeichnung</th>
+            <th>Abk.</th>
+            <th>Teilstreitkraft</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for r in ranks %}
+        <tr>
+            <td><img src="{{ url_for('static', filename='images/' + r.image_filename) }}" height="50"></td>
+            <td>{{ r.title }}</td>
+            <td>{{ r.abbreviation }}</td>
+            <td>{{ r.branch }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
