@@ -7,6 +7,8 @@ class Rank(db.Model):
     abbreviation = db.Column(db.String(20))
     level_code = db.Column(db.String(20))
     rank_type = db.Column(db.String(50))        # Mannschaft, Unteroffizier, Offizier
+    rank_group = db.Column(db.String(50))       # Offizier: Leutnante und Hauptleute, Stabsoffiziere, Generale
+    specialization = db.Column(db.String(50))   # Sanitäter
     description = db.Column(db.Text)
     image_filename = db.Column(db.String(200))
 

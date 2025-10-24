@@ -1,0 +1,27 @@
+branch,title,abbreviation,level_code,rank_type,rank_group,specialization,description,image_filename
+Heer,Schütze,,,Mannschaften,Mannschaften,,,Schuetze.png
+Heer,"Schütze (Unteroffizieranwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Unteroffizieranwaerter
+Heer,"Schütze (Feldwebelanwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Feldwebelanwaerter
+Heer,"Schütze (Offizieranwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Offizieranwaerter
+Heer,Gefreiter,,,Mannschaften,Mannschaften,,,Heer-Gereiter.png
+Heer,"Gefreiter (Unteroffizieranwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Unteroffizieranwaerter.png
+Heer,"Gefreiter (Feldwebelanwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Feldwebelanwaerter.png
+Heer,"Gefreiter (Offizieranwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Offizieranwaerter.png
+Heer,Obergefreiter,,,Mannschaften,Mannschaften,,,Heer-Obergefreiter.png
+Heer,Hauptgefreiter,,,Mannschaften,Mannschaften,,,Heer-Hauptgefreiter.png
+Heer,Stabsgefreiter,,,Mannschaften,Mannschaften,,,Heer-Stabsgefreiter.png
+Heer,Oberstabsgefreiter,,,Mannschaften,Mannschaften,,,Heer-Oberstabsgefreiter.png
+Heer,Korporal,,,Mannschaften,Mannschaften,,,Heer-Korporal.png
+Heer,Stabskorporal,,,Mannschaften,Mannschaften,,,Heer-Stabskorporal.png
+Heer,Unteroffizier,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Unteroffizier.png
+Heer,"Unteroffizier (Feldwebelanwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Unteroffizier-Feldwebelanwaerter.png
+Heer,"Fahnenjunker (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Fahnenjunker-Offizieranwaerter.png
+Heer,Stabsunteroffizier,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Stabsunteroffizier.png
+Heer,"Stabsunteroffizier (Feldwebelanwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Stabsunteroffizier-Feldwebelanwaerter.png
+Heer,Feldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Feldwebel.png
+Heer,"Fähnrich (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Faehnrich-Offizieranaerter.png
+Heer,Oberfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberfeldwebel.png
+Heer,Hauptfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Hauptfeldwebel.png
+Heer,"Oberfähnrich (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberfaehnrich-Offizieranwaerter.png
+Heer,Stabsfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Stabsfeldwebel.png
+Heer,Oberstabsfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberstabsfeldwebel.png
