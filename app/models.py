@@ -2,6 +2,7 @@ from . import db
 
 class Rank(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    sort_order = db.Column(db.Integer)
     branch = db.Column(db.String(50))           # Heer, Luftwaffe, Marine
     title = db.Column(db.String(100))
     abbreviation = db.Column(db.String(20))
