@@ -1,45 +1,44 @@
 branch,title,abbreviation,level_code,rank_type,rank_group,specialization,description,image_filename
-Heer,Schütze,,,Mannschaften,Mannschaften,,,Schuetze.png
-Heer,"Schütze (Unteroffizieranwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Unteroffizieranwaerter
-Heer,"Schütze (Feldwebelanwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Feldwebelanwaerter
-Heer,"Schütze (Offizieranwärter)",,,Mannschaften,Mannschaften,,,Schuetze-Offizieranwaerter
-Heer,Gefreiter,,,Mannschaften,Mannschaften,,,Heer-Gereiter.png
-Heer,"Gefreiter (Unteroffizieranwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Unteroffizieranwaerter.png
-Heer,"Gefreiter (Feldwebelanwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Feldwebelanwaerter.png
-Heer,"Gefreiter (Offizieranwärter)",,,Mannschaften,Mannschaften,,,Heer-Gefreiter-Offizieranwaerter.png
-Heer,Obergefreiter,,,Mannschaften,Mannschaften,,,Heer-Obergefreiter.png
-Heer,Hauptgefreiter,,,Mannschaften,Mannschaften,,,Heer-Hauptgefreiter.png
-Heer,Stabsgefreiter,,,Mannschaften,Mannschaften,,,Heer-Stabsgefreiter.png
-Heer,Oberstabsgefreiter,,,Mannschaften,Mannschaften,,,Heer-Oberstabsgefreiter.png
-Heer,Korporal,,,Mannschaften,Mannschaften,,,Heer-Korporal.png
-Heer,Stabskorporal,,,Mannschaften,Mannschaften,,,Heer-Stabskorporal.png
-Heer,Unteroffizier,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Unteroffizier.png
-Heer,"Unteroffizier (Feldwebelanwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Unteroffizier-Feldwebelanwaerter.png
-Heer,"Fahnenjunker (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Fahnenjunker-Offizieranwaerter.png
-Heer,Stabsunteroffizier,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Stabsunteroffizier.png
-Heer,"Stabsunteroffizier (Feldwebelanwärter)",,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Heer-Stabsunteroffizier-Feldwebelanwaerter.png
-Heer,Feldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Feldwebel.png
-Heer,"Fähnrich (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Faehnrich-Offizieranaerter.png
-Heer,Oberfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberfeldwebel.png
-Heer,Hauptfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Hauptfeldwebel.png
-Heer,"Oberfähnrich (Offizieranwärter)",,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberfaehnrich-Offizieranwaerter.png
-Heer,Stabsfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Stabsfeldwebel.png
-Heer,Oberstabsfeldwebel,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Heer-Oberstabsfeldwebel.png
-Heer,Leutnant,,,Offiziere,"Leutnante und Hauptleute",,,Heer-Leutnant.png
-Heer,Oberleutnant,,,Offiziere,"Leutnante und Hauptleute",,,Heer-Oberleutnant.png
-Heer,Hauptmann,,,Offiziere,"Leutnante und Hauptleute",,,Heer-Hauptmann.png
-Heer,Stabsarzt/Stabsapotheker/Stabsveterinär,,,Offiziere,"Leutnante und Hauptleute",Sanitäter,,Heer-Stabsarzt_Stabsapotheker_Stabsveterinaer.png
-Heer,Stabshauptmann,,,Offiziere,"Leutnante und Hauptleute",,,Heer-Stabshauptmann.png
-Heer,Major,,,Offiziere,Stabsoffiziere,,,Heer-Major.png
-Heer,Oberstabsarzt/Oberstabsapotheker/Oberstabsveterinär,,,Offiziere,Stabsoffiziere,Sanitäter,,Heer-Oberstabsarzt_Oberstabsapotheker_Oberstabsveterinaer.png
-Heer,Oberleutnant,,,Offiziere,Stabsoffiziere,,,Heer-Oberleutnant.png
-Heer,Oberfeldarzt/Oberfeldapotheker/Oberfeldveterinär,,,Offiziere,Stabsoffiziere,Sanitäter,,Oberfeldarzt_Oberfeldapotheker_Oberfeldveterinaer.png
-Heer,Oberst,,,Offiziere,Stabsoffiziere,,,Heer-Oberst.png
-Heer,Oberstabsarzt/Oberstabsapotheker/Oberstabsveterinär,,,Offiziere,Stabsoffiziere,Sanitäter,,Heer-Oberstabsarzt_Oberstabsapotheker_Oberstabsveterinaer.png
-Heer,Brigadegeneral,,,Offiziere,Generale,,,Heer-Brigadegeneral.png
-Heer,Generalarzt/Generalapotheker,,,Offiziere,Generale,Sanitäter,,Heer-Generalarzt_Generalapotheker.png
-Heer,Generalmajor,,,Offiziere,Generale,,,Heer-Generealmajor.png
-Heer,Generalstabsarzt,,,Offiziere,Generale,Sanitäter,,Heer-Generalstabsarzt.png
-Heer,Generalleutnant,,,Offiziere,Generale,,,Heer-Generalleutnant.png
-Heer,Generaloberstabsarzt,,,Offiziere,Generale,Sanitäter,,Heer-Generaloberstabsarzt.png
-Heer,General,,,Offiziere,Generale,,,Heer-General.png
+Heer,Schütze,Schtz,OR-1,Mannschaften,Mannschaften,,"Einstiegsdienstgrad des Heeres. Bezeichnung variiert je nach Truppengattung (z. B. Jäger, Panzergrenadier, Kanonier).","Heer-Schuetze.png"
+Heer,"Schütze (Unteroffizieranwärter)",Schtz UA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Laufbahn der Unteroffiziere im niedrigsten Mannschaftsdienstgrad.","Heer-Schuetze-Unteroffizieranwaerter.png"
+Heer,"Schütze (Feldwebelanwärter)",Schtz FA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Laufbahn der Feldwebel im niedrigsten Mannschaftsdienstgrad.","Heer-Schuetze-Feldwebelanwaerter.png"
+Heer,"Schütze (Offizieranwärter)",Schtz OA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Offizierslaufbahn im niedrigsten Mannschaftsdienstgrad.","Heer-Schuetze-Offizieranwaerter.png"
+Heer,Gefreiter,Gefr,OR-2,Mannschaften,Mannschaften,,"Erster Beförderungsdienstgrad nach dem Schützen, Kennzeichen für erste Erfahrung.","Heer-Gefreiter.png"
+Heer,"Gefreiter (Unteroffizieranwärter)",Gefr UA,OR-2,Mannschaften,Mannschaften,,"Gefreiter mit Ziel der Unteroffizierslaufbahn.","Heer-Gefreiter-Unteroffizieranwaerter.png"
+Heer,"Gefreiter (Feldwebelanwärter)",Gefr FA,OR-2,Mannschaften,Mannschaften,,"Gefreiter mit Ziel der Feldwebellaufbahn.","Heer-Gefreiter-Feldwebelanwaerter.png"
+Heer,"Gefreiter (Offizieranwärter)",Gefr OA,OR-2,Mannschaften,Mannschaften,,"Gefreiter in der Offizierslaufbahn.","Heer-Gefreiter-Offizieranwaerter.png"
+Heer,Obergefreiter,OGefr,OR-3,Mannschaften,Mannschaften,,"Höherer Mannschaftsdienstgrad mit Erfahrung; häufig Gruppenführerassistent.","Heer-Obergefreiter.png"
+Heer,Hauptgefreiter,HptGefr,OR-3,Mannschaften,Mannschaften,,"Langjähriger Mannschaftsdienstgrad mit erweiterten Aufgaben.","Heer-Hauptgefreiter.png"
+Heer,Stabsgefreiter,StGefr,OR-4,Mannschaften,Mannschaften,,"Erfahrener Mannschaftssoldat mit Führungsverantwortung auf Truppenebene.","Heer-Stabsgefreiter.png"
+Heer,Oberstabsgefreiter,OStGefr,OR-4,Mannschaften,Mannschaften,,"Höchster klassischer Mannschaftsdienstgrad vor Korporal.","Heer-Oberstabsgefreiter.png"
+Heer,Korporal,Korp,OR-4,Mannschaften,Mannschaften,,"Seit 2021 neu eingeführter Dienstgrad zwischen Oberstabsgefreiter und Stabskorporal.","Heer-Korporal.png"
+Heer,Stabskorporal,StKorp,OR-4,Mannschaften,Mannschaften,,"Höchster Mannschaftsdienstgrad, mit erweiterten Aufgaben ähnlich eines Unteroffiziers.","Heer-Stabskorporal.png"
+Heer,Unteroffizier,Uffz,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Einstiegsdienstgrad in die Unteroffizierslaufbahn.","Heer-Unteroffizier.png"
+Heer,"Unteroffizier (Feldwebelanwärter)",Uffz FA,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Unteroffizier mit Ziel der Feldwebellaufbahn.","Heer-Unteroffizier-Feldwebelanwaerter.png"
+Heer,"Fahnenjunker (Offizieranwärter)",Fhj OA,OR-6,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Erster Unteroffiziersdienstgrad für Offizieranwärter.","Heer-Fahnenjunker-Offizieranwaerter.png"
+Heer,Stabsunteroffizier,StUffz,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Erfahrener Unteroffizier ohne Portepee.","Heer-Stabsunteroffizier.png"
+Heer,"Stabsunteroffizier (Feldwebelanwärter)",StUffz FA,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Anwärter auf Feldwebellaufbahn im Stabsunteroffiziersdienstgrad.","Heer-Stabsunteroffizier-Feldwebelanwaerter.png"
+Heer,Feldwebel,Fw,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Erster Dienstgrad mit Portepee, Führungsaufgaben in der Gruppe.","Heer-Feldwebel.png"
+Heer,"Fähnrich (Offizieranwärter)",Fähnr OA,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Unteroffizier mit Portepee in Offizierslaufbahn.","Heer-Faehnrich-Offizieranaerter.png"
+Heer,Oberfeldwebel,OFw,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Erfahrener Unteroffizier mit größerem Verantwortungsbereich.","Heer-Oberfeldwebel.png"
+Heer,Hauptfeldwebel,HptFw,OR-6/7,Unteroffiziere,"Unteroffiziere mit Portepee",,"„Spieß“ – erfahrener Kompaniefeldwebel.","Heer-Hauptfeldwebel.png"
+Heer,"Oberfähnrich (Offizieranwärter)",OFähnr OA,OR-7,Unteroffiziere,"Unteroffiziere mit Portepee",,"Höchster Unteroffiziersgrad der Offizieranwärter.","Heer-Oberfaehnrich-Offizieranwaerter.png"
+Heer,Stabsfeldwebel,StFw,OR-8,Unteroffiziere,"Unteroffiziere mit Portepee",,"Langjähriger erfahrener Portepee-Unteroffizier.","Heer-Stabsfeldwebel.png"
+Heer,Oberstabsfeldwebel,OStFw,OR-9,Unteroffiziere,"Unteroffiziere mit Portepee",,"Höchster Unteroffiziersdienstgrad des Heeres.","Heer-Oberstabsfeldwebel.png"
+Heer,Leutnant,Lt,OF-1,Offiziere,"Leutnante und Hauptleute",,"Einstiegsdienstgrad der Offiziere.","Heer-Leutnant.png"
+Heer,Oberleutnant,OLt,OF-1,Offiziere,"Leutnante und Hauptleute",,"Nächster Dienstgrad nach Leutnant.","Heer-Oberleutnant.png"
+Heer,Hauptmann,Hptm,OF-2,Offiziere,"Leutnante und Hauptleute",,"Führt Kompanien, Batterie- oder Schwadronseinheiten.","Heer-Hauptmann.png"
+Heer,Stabsarzt/Stabsapotheker/Stabsveterinär,StArzt/​StApoth/​StVet,OF-2,Offiziere,"Leutnante und Hauptleute",Sanitäter,"Ärztliche, pharmazeutische oder tierärztliche Offiziere auf Hauptmann-Ebene.","Heer-Stabsarzt_Stabsapotheker_Stabsveterinaer.png"
+Heer,Stabshauptmann,StHptm,OF-2,Offiziere,"Leutnante und Hauptleute",,"Erfahrener Hauptmann, ohne Truppenführungsfunktion, z. B. Stabsdienst.","Heer-Stabshauptmann.png"
+Heer,Major,Maj,OF-3,Offiziere,Stabsoffiziere,,"Erster Stabsoffiziersdienstgrad, Führer von Bataillonen.","Heer-Major.png"
+Heer,Oberstabsarzt/Oberstabsapotheker/Oberstabsveterinär,OStArzt/OStApoth/OStVet,OF-3,Offiziere,Stabsoffiziere,Sanitäter,"Sanitätsstabsoffiziere auf Majors-Ebene.","Heer-Oberstabsarzt_Oberstabsapotheker_Oberstabsveterinaer.png"
+Heer,Oberstleutnant,OLt,OF-4,Offiziere,Stabsoffiziere,,"Zweiter Stabsoffiziersgrad, Führer größerer Truppenteile.","Heer-Oberstleutnant.png"
+Heer,Oberfeldarzt/Oberfeldapotheker/Oberfeldveterinär,OFArzt/OFApoth/OFVet,OF-4,Offiziere,Stabsoffiziere,Sanitäter,"Sanitätsstabsoffiziere im Rang eines Oberstleutnants.","Oberfeldarzt_Oberfeldapotheker_Oberfeldveterinaer.png"
+Heer,Oberst,Obst,OF-5,Offiziere,Stabsoffiziere,,"Höchster Stabsoffiziersdienstgrad, Führer eines Regiments.","Heer-Oberst.png"
+Heer,Brigadegeneral,BrigGen,OF-6,Offiziere,Generale,,"Erster Generalsdienstgrad, Kommandeur einer Brigade.","Heer-Brigadegeneral.png"
+Heer,Generalarzt/Generalapotheker,GenArzt/GenApoth,OF-6,Offiziere,Generale,Sanitäter,"Sanitätsgenerale des Heeres auf Brigadegeneral-Ebene.","Heer-Generalarzt_Generalapotheker.png"
+Heer,Generalmajor,GenMaj,OF-7,Offiziere,Generale,,"Kommandeur einer Division.","Heer-Generalmajor.png"
+Heer,Generalstabsarzt,GenStArzt,OF-7,Offiziere,Generale,Sanitäter,"Sanitätsgeneral auf Divisionsebene.","Heer-Generalstabsarzt.png"
+Heer,Generalleutnant,GenLt,OF-8,Offiziere,Generale,,"Kommandeur eines Korps oder stellvertretender Inspekteur.","Heer-Generalleutnant.png"
+Heer,Generaloberstabsarzt,GenOStArzt,OF-8,Offiziere,Generale,Sanitäter,"Höchster Sanitätsgeneral der Bundeswehr (stellvertretend Inspekteur SanDstBw).","Heer-Generaloberstabsarzt.png"
+Heer,General,Gen,OF-9,Offiziere,Generale,,"Höchster Dienstgrad des Heeres, Inspekteur des Heeres.","Heer-General.png"
