@@ -4,14 +4,27 @@ main.container {
   background: transparent !important;
 }
 
+/* Standard-Farben */
+:root {
+  --bw-gold: #f2b330;                     /* Exakter Goldton aus Marine-Abzeichen */
+  --bw-bg-dark: rgba(20, 20, 30, 0.75);   /* leicht transparenter dunkler Hintergrund */
+  --gray-dark: #1f2937;                   /* Hintergrund / Grundfarbe */
+  --gray-mid: #374151;                    /* Mittelgrau für Kartenrückseite */
+  --txt-light: #f3f4f6;                   /* Textfarbe */
+  --shadows: rgba(0, 0, 0, 0.6);          /* Schatten für bessere Lesbarkeit */
+  --gray-line: #4b5563;                   /* Linienfarbe */
+  --hover: #2d3748;                       /* Highlight Mausposition */
+  --test: #f26366;                        /* Rote Testfarbe */
+}
+
 /* Hintergrund für die gesamte Seite */
 body {
-  background-size: cover;          /* Bild füllt gesamten Bildschirm */
-  background-position: center;     /* zentriert */
-  background-attachment: fixed;    /* bleibt beim Scrollen stehen */
-  background-repeat: no-repeat;    /* keine Kacheln */
-  color: #fff;                     /* weiße Schrift für bessere Lesbarkeit */
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* bessere Lesbarkeit auf Tarnung */
+  background-size: cover;                   /* Bild füllt gesamten Bildschirm */
+  background-position: center;              /* zentriert */
+  background-attachment: fixed;             /* bleibt beim Scrollen stehen */
+  background-repeat: no-repeat;             /* keine Kacheln */
+  color: var(--txt-light);                 /* weiße Schrift für bessere Lesbarkeit */
+  text-shadow: 1px 1px 2px var(--shadows);  /* bessere Lesbarkeit auf Tarnung */
 }
 
 /* Optional: Buttons & Links besser sichtbar machen */
@@ -19,20 +32,116 @@ a, button {
   text-decoration: none;
 }
 
+/* Navigationsleiste */
 .navbar {
-  background-color: rgba(0, 0, 0, 0.8) !important; /* halbtransparentes Schwarz */
+  background-color: var(--bw-bg-dark) !important; /* halbtransparentes Schwarz */
 }
 
-.card-container {
-  perspective: 1000px;
+/* Lern-Tabelle */
+.ranks-container {
+  background-color: var(--bw-bg-dark);
+  color: var(--txt-light);
+  padding: 2rem;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 6px 18px var(--shadows);
 }
 
-.card-flip {
+.ranks-container h1 {
+  text-align: center;
+  color: var(--bw-gold);
+  margin-bottom: 1.5rem;
+}
+
+/* Filterbereich */
+.ranks-filter {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.ranks-filter label {
+  font-weight: bold;
+  margin-right: 0.5rem;
+  color: var(--txt-light);
+}
+
+.ranks-filter select {
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+  border: 1px solid var(--gray-line);
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  text-align: center;
+}
+
+.table-container {
+  background-color: var(--gray-dark);
+  padding: 1rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px var(--shadows);
+}
+
+.rank-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--txt-light);
+}
+
+.rank-table thead {
+  background-color: var(--gray-mid);
+  color: var(--bw-gold);
+}
+
+.rank-table th,
+.rank-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--gray-mid);
+}
+
+.rank-table tr:hover {
+  background-color: var(--hover);
+  transition: background 0.2s ease-in-out;
+}
+
+.rank-table img {
+  height: 50px;
+  border-radius: 4px;
+}
+
+.rank-title {
+  font-weight: bold;
+  color: var(--bw-gold);
+}
+
+/* Lern-Karten */
+.flashcards {
+  text-align: center;
+  color: var(--txt-light);
+  padding-top: 3rem;
+}
+
+.flashcards h1 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--bw-gold);
+  margin-bottom: 2rem;
+}
+
+/* Karten-Container */
+.flashcard-container {
+  width: 380px;
+  height: 580px;
+  margin: 0 auto;
+  perspective: 1200px;
   position: relative;
+}
+
+/* Flip-Logik */
+.card-flip {
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  transition: transform 0.6s;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   cursor: pointer;
 }
 
@@ -40,13 +149,80 @@ a, button {
   transform: rotateY(180deg);
 }
 
-.card-front, .card-back {
+/* Kartenbasis */
+.card-face {
   position: absolute;
   width: 100%;
   height: 100%;
+  border-radius: 16px;
   backface-visibility: hidden;
+  box-shadow: 0 8px 30px var(--shadows);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-mid);
 }
 
+/* Rückseite */
 .card-back {
   transform: rotateY(180deg);
+  background-color: var(--gray-dark);
+}
+
+/* Bild */
+.rank-image {
+  max-height: 320px;
+  width: auto;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+/* Texte */
+#rank-title {
+  color: var(--bw-gold);
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+#rank-desc {
+  margin-top: 1rem;
+  font-size: 1rem;
+  color: var(--txt-light);
+  text-align: center;
+  line-height: 1.6;
+  max-width: 280px;
+}
+
+.flip-hint {
+  font-size: 0.9rem;
+  color: var(--txt-light);
+  opacity: 0.8;
+  margin-top: 0.5rem;
+}
+
+/* Button */
+.next-btn-wrapper {
+  margin-top: 2rem;
+  text-align: center; /* zentriert den Button */
+}
+
+.btn-next {
+  background-color: var(--bw-gold);
+  color: var(--bw-dark);
+  font-weight: 600;
+  border: none;
+  padding: 0.7rem 1.8rem;
+  border-radius: 10px;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: inline-block; /* wichtig für zentrierte Anzeige */
+}
+
+.btn-next:hover {
+  background-color: #f1c86c;
+  transform: translateY(-2px);
 }
