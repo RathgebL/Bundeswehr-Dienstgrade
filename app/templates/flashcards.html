@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="mb-4">Karteikarten: Dienstgrade lernen</h1>
+
+    <div id="flashcard" class="card-container mx-auto" style="width: 378px; height: 600px;">
+        <div class="card-flip" onclick="flipCard()">
+            <div class="card-front bg-dark text-light p-4 d-flex flex-column justify-content-center rounded">
+                <img id="rank-image" src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
+                     alt="{{ ranks[0].title }}" class="mx-auto mb-3 shadow rounded" style="max-height: 400px;">
+                <p class="text-muted">Klick zum Umdrehen</p>
+            </div>
+            <div class="card-back bg-secondary text-light p-4 d-flex flex-column justify-content-center rounded">
+                <h4 id="rank-title">{{ ranks[0].title }}</h4>
+                <p id="rank-desc" class="mt-2">{{ ranks[0].description }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <button class="btn btn-primary" onclick="nextCard()">Nächste Karte</button>
+    </div>
+</div>
+
+<script>
+const ranks = {{ ranks|tojson|safe }};
+let currentIndex = 0;
+
+const flipContainer = document.querySelector(".card-flip");
+const img = document.getElementById("rank-image");
+const title = document.getElementById("rank-title");
+const desc = document.getElementById("rank-desc");
+
+function flipCard() {
+    flipContainer.classList.toggle("flipped");
+}
+
+function nextCard() {
+    flipContainer.classList.remove("flipped");
+    currentIndex = (currentIndex + 1) % ranks.length;
+    const rank = ranks[currentIndex];
+    img.src = `/static/images/${rank.image_filename}`;
+    img.alt = rank.title;
+    title.innerText = rank.title;
+    desc.innerText = rank.description;
+}
+</script>
+{% endblock %}

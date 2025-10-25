@@ -111,3 +111,27 @@ def quiz():
     background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
 
     return render_template("quiz.html", correct=correct, options=options, background=background)
+
+# Karteikarten
+@bp.route("/flashcards")
+def flashcards():
+    ranks = Rank.query.order_by(Rank.branch, Rank.sort_order).all()
+
+    # Hintergrund laden (wie in anderen Views)
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Hier: SQLAlchemy-Objekte in Dictionaries umwandeln
+    ranks_data = [
+        {
+            "id": r.id,
+            "title": r.title,
+            "description": r.description,
+            "image_filename": r.image_filename,
+            "branch": r.branch
+        }
+        for r in ranks
+    ]
+
+    return render_template("flashcards.html", ranks=ranks_data, background=background)

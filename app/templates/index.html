@@ -1,25 +1,24 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center mt-5">
-    <h1 class="display-4 fw-bold mb-4 text-light">Bundeswehr Dienstgrade</h1>
-    
-    {# 
-    <p class="lead text-light mb-4">Wähle deinen Truppenteil:</p>
+<div class="text-center mt-5 bg-dark bg-opacity-75 p-5 rounded shadow">
+    <h1 class="mb-4">Bundeswehr Dienstgrade</h1>
+    <p class="lead mb-5">Wähle einen Modus aus, um die Dienstgrade zu lernen:</p>
 
-    <div class="d-flex justify-content-center gap-3 mb-5">
-        <a href="{{ url_for('main.set_theme', branch='heer') }}" class="btn btn-outline-light btn-lg">Heer</a>
-        <a href="{{ url_for('main.set_theme', branch='luftwaffe') }}" class="btn btn-outline-light btn-lg">Luftwaffe</a>
-        <a href="{{ url_for('main.set_theme', branch='marine') }}" class="btn btn-outline-light btn-lg">Marine</a>
-    </div>
-    #}
-
-    <div class="d-flex flex-column align-items-center gap-3">
-        <a href="{{ url_for('main.ranks') }}" class="btn btn-primary btn-lg px-5">
-            Lernen / Nachschlagen
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+        <!-- Dienstgrad-Tabelle -->
+        <a href="{{ url_for('main.ranks') }}" class="btn btn-primary btn-lg">
+            Dienstgrad-Tabelle
         </a>
-        <a href="{{ url_for('main.quiz') }}" class="btn btn-success btn-lg px-5">
+
+        <!-- Quiz -->
+        <a href="{{ url_for('main.quiz') }}" class="btn btn-success btn-lg">
             Quiz starten
+        </a>
+
+        <!-- Karteikarten -->
+        <a href="{{ url_for('main.flashcards') }}" class="btn btn-warning btn-lg text-dark">
+            Karteikarten
         </a>
     </div>
 </div>
