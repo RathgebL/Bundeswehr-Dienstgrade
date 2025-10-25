@@ -1,26 +1,17 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Bundeswehr Dienstgrade</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
-<body class="bg-gray-50 flex flex-col items-center justify-center min-h-screen">
-    <div class="text-center">
-        <h1 class="text-4xl font-bold mb-8">Bundeswehr Dienstgrade</h1>
-        <p class="text-gray-700 mb-10">Wähle einen Modus:</p>
+{% extends "base.html" %}
 
-        <div class="flex flex-col gap-4">
-            <a href="{{ url_for('main.ranks') }}"
-               class="bg-blue-500 text-white px-6 py-3 rounded text-lg font-semibold hover:bg-blue-600 transition">
-               Lernen / Nachschlagen
-            </a>
+{% block content %}
+<div class="text-center mt-5">
+    <h1 class="display-4 fw-bold mb-4 text-light">Bundeswehr Dienstgrade</h1>
+    <p class="lead text-light mb-5">Wähle einen Modus:</p>
 
-            <a href="{{ url_for('main.quiz') }}"
-               class="bg-green-500 text-white px-6 py-3 rounded text-lg font-semibold hover:bg-green-600 transition">
-               Quiz starten
-            </a>
-        </div>
+    <div class="d-flex flex-column align-items-center gap-3">
+        <a href="{{ url_for('main.ranks') }}" class="btn btn-primary btn-lg px-5">
+            Lernen / Nachschlagen
+        </a>
+        <a href="{{ url_for('main.quiz') }}" class="btn btn-success btn-lg px-5">
+            Quiz starten
+        </a>
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

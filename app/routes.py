@@ -11,7 +11,7 @@ def index():
 
 # Tabelle
 @bp.route("/ranks")
-def home():
+def ranks():
     # Optional: Dropdown-Filter (z. B. ?branch=Heer)
     branch = request.args.get("branch")
     query = Rank.query

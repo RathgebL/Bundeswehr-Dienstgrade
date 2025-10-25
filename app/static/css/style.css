@@ -1,0 +1,25 @@
+/* Der Hauptcontainer soll transparent sein,
+   damit das Hintergrundbild sichtbar bleibt */
+main.container {
+  background: transparent !important;
+}
+
+/* Hintergrund für die gesamte Seite */
+body {
+  background-image: url("../images/Hintergrund-Heer-Wald.png");
+  background-size: cover;          /* Bild füllt gesamten Bildschirm */
+  background-position: center;     /* zentriert */
+  background-attachment: fixed;    /* bleibt beim Scrollen stehen */
+  background-repeat: no-repeat;    /* keine Kacheln */
+  color: #fff;                     /* weiße Schrift für bessere Lesbarkeit */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6); /* bessere Lesbarkeit auf Tarnung */
+}
+
+/* Optional: Buttons & Links besser sichtbar machen */
+a, button {
+  text-decoration: none;
+}
+
+.navbar {
+  background-color: rgba(0, 0, 0, 0.8) !important; /* halbtransparentes Schwarz */
+}

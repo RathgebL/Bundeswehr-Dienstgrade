@@ -23,4 +23,8 @@ def create_app():
     from app.routes import bp as main_bp
     app.register_blueprint(main_bp)
 
+    # Debug
+    print("Registrierte Routen:")
+    print(app.url_map)
+
     return app
