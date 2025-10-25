@@ -117,21 +117,21 @@ def quiz():
 def flashcards():
     ranks = Rank.query.order_by(Rank.branch, Rank.sort_order).all()
 
-    # Hintergrund laden (wie in anderen Views)
-    branch = session.get("default_branch", "Heer")
-    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
-    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
-
-    # Hier: SQLAlchemy-Objekte in Dictionaries umwandeln
-    ranks_data = [
+    # Konvertiere zu JSON-kompatiblen Dictionaries
+    rank_data = [
         {
             "id": r.id,
             "title": r.title,
+            "abbreviation": r.abbreviation,
+            "rank_group": r.rank_group,
+            "rank_type": r.rank_type,
+            "level_code": r.level_code,
             "description": r.description,
-            "image_filename": r.image_filename,
-            "branch": r.branch
+            "image_filename": r.image_filename
         }
         for r in ranks
     ]
 
-    return render_template("flashcards.html", ranks=ranks_data, background=background)
+    background = session.get("current_background", "Hintergrund-Heer-Wald.png")
+
+    return render_template("flashcards.html", ranks=rank_data, background=background)

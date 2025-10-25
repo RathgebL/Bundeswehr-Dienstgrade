@@ -13,7 +13,14 @@
             </div>
             <div class="card-face card-back">
                 <h4 id="rank-title">{{ ranks[0].title }}</h4>
-                <p id="rank-desc">{{ ranks[0].description }}</p>
+
+                <div id="rank-meta" class="rank-meta-clean">
+                    <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
+                    <p id="rank-group">{{ ranks[0].rank_group or ranks[0].rank_type or "-" }}</p>
+                    <p id="rank-nato">{{ ranks[0].level_code or "-" }}</p>
+                </div>
+
+                <p id="rank-desc" class="rank-desc">{{ ranks[0].description }}</p>
             </div>
         </div>
     </div>

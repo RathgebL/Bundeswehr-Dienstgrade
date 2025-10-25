@@ -171,6 +171,20 @@ a, button {
   background-color: var(--gray-dark);
 }
 
+.rank-meta-clean {
+  text-align: center;
+  color: var(--bw-light);
+  font-size: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rank-meta-clean p {
+  margin: 0.2rem 0;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
 /* Bild */
 .rank-image {
   max-height: 320px;
