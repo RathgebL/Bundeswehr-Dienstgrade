@@ -13,8 +13,14 @@ def create_app():
     app.config["SQLALCHEMY_DATABASE_URI"] = f"sqlite:///{db_path}"
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+    # Datenbank initialisieren
     db.init_app(app)
 
+    # Modelle importieren
     from app import models
+
+    # Blueprint importieren & registrieren
+    from app.routes import bp as main_bp
+    app.register_blueprint(main_bp)
 
     return app

@@ -1,24 +1,49 @@
-{% extends "base.html" %}
-{% block content %}
-<h2>Dienstgrade Übersicht</h2>
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th>Bild</th>
-            <th>Bezeichnung</th>
-            <th>Abk.</th>
-            <th>Teilstreitkraft</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for r in ranks %}
-        <tr>
-            <td><img src="{{ url_for('static', filename='images/' + r.image_filename) }}" height="50"></td>
-            <td>{{ r.title }}</td>
-            <td>{{ r.abbreviation }}</td>
-            <td>{{ r.branch }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Bundeswehr Dienstgrade</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <div class="container mx-auto px-6 py-10">
+        <h1 class="text-3xl font-bold mb-6 text-center">Bundeswehr Dienstgrade</h1>
+
+        <form method="get" class="mb-4 text-center">
+            <select name="branch" onchange="this.form.submit()" class="border p-2 rounded">
+                <option value="">Alle Teilstreitkräfte</option>
+                {% for b in branches %}
+                    <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
+                {% endfor %}
+            </select>
+        </form>
+
+        <table class="table-auto w-full border-collapse bg-white shadow rounded-lg">
+            <thead class="bg-gray-200 text-left">
+                <tr>
+                    <th class="p-3">Bild</th>
+                    <th class="p-3">Dienstgrad</th>
+                    <th class="p-3">Abkürzung</th>
+                    <th class="p-3">Kategorie</th>
+                    <th class="p-3">Beschreibung</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for r in ranks %}
+                <tr class="border-t hover:bg-gray-100">
+                    <td class="p-3">
+                        {% if r.image_filename %}
+                            <img src="{{ url_for('static', filename='images/' ~ r.image_filename) }}" alt="{{ r.title }}" class="h-10">
+                        {% endif %}
+                    </td>
+                    <td class="p-3 font-semibold">{{ r.title }}</td>
+                    <td class="p-3">{{ r.abbreviation }}</td>
+                    <td class="p-3">{{ r.rank_group }}</td>
+                    <td class="p-3">{{ r.description }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
