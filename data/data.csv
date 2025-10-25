@@ -85,3 +85,47 @@ sort_order,branch,title,abbreviation,level_code,rank_type,rank_group,specializat
 41,Luftwaffe,Generalleutnant,GenLt,OF-8,Offiziere,Generale,,"Kommandeur eines Korps oder stellvertretender Inspekteur.","Luftwaffe-Generalleutnant.png"
 42,Luftwaffe,Generaloberstabsarzt,GenOStArzt,OF-8,Offiziere,Generale,Sanitäter,"Höchster Sanitätsgeneral der Bundeswehr (stellvertretend Inspekteur SanDstBw).","Luftwaffe-Generaloberstabsarzt.png"
 43,Luftwaffe,General,Gen,OF-9,Offiziere,Generale,,"Höchster Dienstgrad der Luftwaffe, Inspekteur der Luftwaffe.","Luftwaffe-General.png"
+1,Marine,Matrose,,,Mannschaften,Mannschaften,,,Marine-Matrose.png
+2,Marine,Matrose (Unteroffizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Unteroffizieranwaerter.png
+3,Marine,Matrose (Bootsmannanwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Bootsmannanwaerter.png
+4,Marine,Matrose (Offizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Offizieranwaerter.png
+5,Marine,Gefreiter,,,Mannschaften,Mannschaften,,,Marine-Gefreiter.png
+6,Marine,Gefreiter (Unteroffizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Unteroffizieranwaerter.png
+7,Marine,Gefreiter (Bootsmannanwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Bootsmannanwaerter.png
+8,Marine,Gefreiter (Offizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Offizieranwaerter.png
+9,Marine,Obergefreiter,,,Mannschaften,Mannschaften,,,Marine-Obergefreiter.png
+10,Marine,Hauptgefreiter,,,Mannschaften,Mannschaften,,,Marine-Hauptgefreiter.png
+11,Marine,Stabsgefreiter,,,Mannschaften,Mannschaften,,,Marine-Stabsgefreiter.png
+12,Marine,Oberstabsgefreiter,,,Mannschaften,Mannschaften,,,Marine-Oberstabsgefreiter.png
+13,Marine,Korporal,,,Mannschaften,Mannschaften,,,Marine-Korporal.png
+14,Marine,Stabskorporal,,,Mannschaften,Mannschaften,,,Marine-Stabskorporal.png
+15,Marine,Maat,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Maat.png
+16,Marine,Maat (Bootsmannanwärter),,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Maat-Bootsmannanwaerter.png
+17,Marine,Seekadett (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Seekadett-Offizieranwaerter.png
+18,Marine,Obermaat,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Obermaat.png
+19,Marine,Obermaat (Bootsmannanwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Obermaat-Bootsmannanwaerter.png
+20,Marine,Bootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Bootsmann.png
+21,Marine,Fähnrich zur See (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Faehnrich-zur-See-Offizieranwaerter.png
+22,Marine,Oberbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberbootsmann.png
+23,Marine,Hauptbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Hauptbootsmann.png
+24,Marine,Oberfähnrich zur See (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberfaehnrich-zur-See-Offizieranwaerter.png
+25,Marine,Stabsbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Stabsbootsmann.png
+26,Marine,Oberstabsbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberstabsbootsmann.png
+27,Marine,Leutnant zur See,,,Offiziere,Leutnante,,,Marine-Leutnant-zur-See.png
+28,Marine,Oberleutnant zur See,,,Offiziere,Leutnante,,,Marine-Oberleutnant-zur-See.png
+29,Marine,Kapitänleutnant,,,Offiziere,Kapitäne,,,Marine-Kapitaenleutnant.png
+30,Marine,Stabsarzt/Stabsapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Stabsarzt_Stabsapotheker.png
+31,Marine,Stabskapitänleutnant,,,Offiziere,Kapitäne,,,Marine-Stabskapitaenleutnant.png
+32,Marine,Korvettenkapitän,,,Offiziere,Kapitäne,,,Marine-Korvettenkapitaen.png
+33,Marine,Oberstabsarzt/Oberstabsapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Oberstbasarzt_Oberstabsapotheker.png
+34,Marine,Fregattenkapitän,,,Offiziere,Kapitäne,,,Marine-Fregattenkapitaen.png
+35,Marine,Flottillenarzt/Flottillenapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Flottillenarzt_Flottillenapotheker.png
+36,Marine,Kapitän zur See,,,Offiziere,Kapitäne,,,Marine-Kapitaen-zur-See.png
+37,Marine,Flottenarzt/Flottenapotheker,,,Offiziere,Admirale,Sanitäter,,Marine-Flottenarzt_Flottenapotheker.png
+38,Marine,Flottillenadmiral,,,Offiziere,Admirale,,,Marine-Flottillenadmiral.png
+39,Marine,Konteradmiral,,,Offiziere,Admirale,,,Marine-Konteradmiral.png
+40,Marine,Admiralarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiralarzt.png
+41,Marine,Admiralstabsarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiralstabsarzt.png
+42,Marine,Vizeadmiral,,,Offiziere,Admirale,,,Marine-Vizeadmiral.png
+43,Marine,Admiraloberstabsarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiraloberstabsarzt.png
+44,Marine,Admiral,,,Offiziere,Admirale,,,Marine-Admiral.png
