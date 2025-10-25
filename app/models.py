@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
+from . import db
 
-db = SQLAlchemy()
+# print("db id in models:", id(db)) #debug
 
 class Rank(db.Model):
     __tablename__ = "rank"
