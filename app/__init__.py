@@ -6,6 +6,7 @@ db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = "nijagh7z325ibjdsf9"
 
     # Absoluter Pfad zur Datenbank im Hauptordner
     basedir = os.path.abspath(os.path.dirname(__file__))

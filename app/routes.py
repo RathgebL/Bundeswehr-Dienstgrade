@@ -1,42 +1,113 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, url_for, session
 from .models import Rank
 import random
 
 bp = Blueprint("main", __name__)
 
+# Standardhintergründe (Fallback)
+DEFAULT_BACKGROUNDS = {
+    "Heer": "Hintergrund-Heer-Wald.png",
+    "Luftwaffe": "Hintergrund-Luftwaffe-Grau.png",
+    "Marine": "Hintergrund-Marine-Hell.png"
+}
+
 # Startseite
 @bp.route("/")
 def index():
-    return render_template("index.html")
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
 
-# Tabelle
+    # Den passenden Hintergrund für den aktuellen Branch holen
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Aktuellen Hintergrund merken (für andere Templates)
+    if session.get("current_background") != background:
+        session["current_background"] = background
+        session.modified = True
+
+    return render_template("index.html", background=background)
+
+# Einstellungen
+@bp.route("/settings", methods=["GET", "POST"])
+def settings():
+    # Aktuelle oder Standardwerte laden
+    defaults = {
+        "default_branch": session.get("default_branch", "Heer"),
+        "backgrounds": session.get("backgrounds", DEFAULT_BACKGROUNDS)
+    }
+
+    if request.method == "POST":
+        # Ausgewählten Standard-Truppenteil speichern
+        branch_input = request.form.get("default_branch", "Heer").strip().capitalize()
+        session["default_branch"] = branch_input
+
+        # Benutzerdefinierte Hintergründe speichern (alle 3 Truppenteile)
+        backgrounds = {
+            "Heer": request.form.get("bg_heer", defaults["backgrounds"].get("Heer")),
+            "Luftwaffe": request.form.get("bg_luftwaffe", defaults["backgrounds"].get("Luftwaffe")),
+            "Marine": request.form.get("bg_marine", defaults["backgrounds"].get("Marine"))
+        }
+
+        # Sicherheit: Alle Keys groß schreiben
+        backgrounds = {key.capitalize(): value for key, value in backgrounds.items()}
+
+        # Session aktualisieren
+        session["backgrounds"] = backgrounds
+        session.modified = True
+
+        # Debug-Ausgabe (zum Testen, später entfernen)
+        print("SESSION BACKGROUNDS:", session["backgrounds"])
+        print("DEFAULT BRANCH:", session["default_branch"])
+
+        return redirect(url_for("main.index"))
+
+    # Seite anzeigen
+    return render_template("settings.html", defaults=defaults)
+
+# Tabelle (Dienstgrade)
 @bp.route("/ranks")
 def ranks():
-    # Optional: Dropdown-Filter (z. B. ?branch=Heer)
-    branch = request.args.get("branch")
-    query = Rank.query
-    if branch:
-        query = query.filter_by(branch=branch)
+    # Aktueller Truppenteil aus Query oder Session
+    branch = request.args.get("branch", session.get("default_branch", "Heer"))
+    user_backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
 
-    ranks = query.order_by(Rank.branch, Rank.sort_order).all()
-    branches = ["Heer", "Luftwaffe", "Marine"]
+    # Falls "Alle" gewählt wurde → Standardbranch verwenden
+    if not branch or branch == "Alle":
+        active_branch = session.get("default_branch", "Heer")
+        background = user_backgrounds.get(active_branch, DEFAULT_BACKGROUNDS[active_branch])
+        ranks = Rank.query.order_by(Rank.branch, Rank.sort_order).all()
+    else:
+        branch = branch.capitalize()
+        background = user_backgrounds.get(branch, DEFAULT_BACKGROUNDS.get(branch))
+        ranks = Rank.query.filter_by(branch=branch).order_by(Rank.sort_order).all()
 
-    return render_template("ranks.html", ranks=ranks, branches=branches, selected_branch=branch)
+    branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
+
+    # Hintergrund speichern für Template
+    session["current_background"] = background
+
+    return render_template(
+        "ranks.html",
+        ranks=ranks,
+        branches=branches,
+        selected_branch=branch or "Alle",
+        background=background
+    )
 
 # Quiz
 @bp.route("/quiz")
 def quiz():
-    # alle Dienstgrade laden
+    # Alle Dienstgrade laden
     ranks = Rank.query.all()
 
-    # 1 richtigen zufällig wählen
+    # Einen richtigen und drei falsche auswählen
     correct = random.choice(ranks)
-
-    # 3 falsche Antworten (ohne den richtigen)
     wrong = random.sample([r for r in ranks if r.id != correct.id], 3)
 
-    # Antworten mischen
     options = [correct] + wrong
     random.shuffle(options)
 
-    return render_template("quiz.html", correct=correct, options=options)
+    # Aktuellen Hintergrund übernehmen (aus Session)
+    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+
+    return render_template("quiz.html", correct=correct, options=options, background=background)

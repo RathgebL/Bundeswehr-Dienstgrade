@@ -9,11 +9,32 @@
 
     <!-- Eigene Styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    {# Hintergrundlogik direkt im Template #}
+    {% set branch = request.args.get('branch') or session.get('default_branch', 'Heer') %}
+    {% set backgrounds = session.get('backgrounds', {
+        'Heer': 'Hintergrund-Heer-Wald.png',
+        'Luftwaffe': 'Hintergrund-Luftwaffe-Grau.png',
+        'Marine': 'Hintergrund-Marine-Hell.png'
+    }) %}
+    {% set background = backgrounds.get(branch, 'Hintergrund-Heer-Wald.png') %}
+    
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="images/" + background) }}') !important;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
+        <div class="container d-flex justify-content-between">
             <a class="navbar-brand" href="/">Bundeswehr Dienstgrade</a>
+            <a href="{{ url_for('main.settings') }}" class="btn btn-outline-light btn-sm">Einstellungen</a>
         </div>
     </nav>
 
