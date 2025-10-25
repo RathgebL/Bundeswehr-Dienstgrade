@@ -1,47 +1,45 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <title>Bundeswehr Dienstgrade – Quiz</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <script>
-        function checkAnswer(selected, correctId) {
-            const buttons = document.querySelectorAll("button[data-id]");
-            buttons.forEach(btn => btn.disabled = true);
-            if (selected === correctId) {
-                document.getElementById("feedback").innerText = "Richtig!";
-                document.getElementById(selected).classList.add("bg-green-400");
-            } else {
-                document.getElementById("feedback").innerText = "Falsch!";
-                document.getElementById(selected).classList.add("bg-red-400");
-                document.getElementById(correctId).classList.add("bg-green-400");
-            }
-            document.getElementById("next-btn").classList.remove("hidden");
-        }
-    </script>
-</head>
-<body class="bg-gray-50 text-center">
-    <div class="max-w-xl mx-auto py-10">
-        <h1 class="text-3xl font-bold mb-6">Quiz: Schulterklappen erkennen</h1>
+{% extends "base.html" %}
 
+{% block content %}
+<div class="text-center py-5">
+    <h1 class="text-3xl fw-bold mb-4 text-light">Quiz: Schulterklappen erkennen</h1>
+
+    <div class="card bg-dark bg-opacity-75 text-light p-4 mx-auto" style="max-width: 600px;">
         <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
-             alt="{{ correct.title }}" class="mx-auto mb-6 h-32 shadow-lg rounded">
+             alt="{{ correct.title }}"
+             class="d-block mx-auto mb-4 shadow-lg rounded"
+             style="max-height: 270px; width: auto; object-fit: contain;">
 
-        <div class="grid grid-cols-2 gap-4">
+
+        <div class="d-grid gap-3">
             {% for opt in options %}
             <button id="{{ opt.id }}" data-id="{{ opt.id }}" onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-                    class="bg-blue-500 text-white p-3 rounded hover:bg-blue-600 transition">
+                    class="btn btn-primary">
                 {{ opt.title }}
             </button>
             {% endfor %}
         </div>
 
-        <p id="feedback" class="mt-6 text-xl font-semibold"></p>
+        <p id="feedback" class="mt-4 fs-5 fw-semibold"></p>
 
         <a href="{{ url_for('main.quiz') }}" id="next-btn"
-           class="hidden inline-block mt-6 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition">
-            Nächste Frage
-        </a>
+           class="btn btn-success mt-3 d-none">Nächste Frage</a>
     </div>
-</body>
-</html>
+</div>
+
+<script>
+    function checkAnswer(selected, correctId) {
+        const buttons = document.querySelectorAll("button[data-id]");
+        buttons.forEach(btn => btn.disabled = true);
+        if (selected === correctId) {
+            document.getElementById("feedback").innerText = "Richtig!";
+            document.getElementById(selected).classList.replace("btn-primary", "btn-success");
+        } else {
+            document.getElementById("feedback").innerText = "Falsch!";
+            document.getElementById(selected).classList.replace("btn-primary", "btn-danger");
+            document.getElementById(correctId).classList.replace("btn-primary", "btn-success");
+        }
+        document.getElementById("next-btn").classList.remove("d-none");
+    }
+</script>
+{% endblock %}
