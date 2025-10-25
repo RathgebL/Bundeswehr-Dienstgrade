@@ -85,47 +85,47 @@ sort_order,branch,title,abbreviation,level_code,rank_type,rank_group,specializat
 41,Luftwaffe,Generalleutnant,GenLt,OF-8,Offiziere,Generale,,"Kommandeur eines Korps oder stellvertretender Inspekteur.","Luftwaffe-Generalleutnant.png"
 42,Luftwaffe,Generaloberstabsarzt,GenOStArzt,OF-8,Offiziere,Generale,Sanitäter,"Höchster Sanitätsgeneral der Bundeswehr (stellvertretend Inspekteur SanDstBw).","Luftwaffe-Generaloberstabsarzt.png"
 43,Luftwaffe,General,Gen,OF-9,Offiziere,Generale,,"Höchster Dienstgrad der Luftwaffe, Inspekteur der Luftwaffe.","Luftwaffe-General.png"
-1,Marine,Matrose,,,Mannschaften,Mannschaften,,,Marine-Matrose.png
-2,Marine,Matrose (Unteroffizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Unteroffizieranwaerter.png
-3,Marine,Matrose (Bootsmannanwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Bootsmannanwaerter.png
-4,Marine,Matrose (Offizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Matrose-Offizieranwaerter.png
-5,Marine,Gefreiter,,,Mannschaften,Mannschaften,,,Marine-Gefreiter.png
-6,Marine,Gefreiter (Unteroffizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Unteroffizieranwaerter.png
-7,Marine,Gefreiter (Bootsmannanwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Bootsmannanwaerter.png
-8,Marine,Gefreiter (Offizieranwärter),,,Mannschaften,Mannschaften,,,Marine-Gefreiter-Offizieranwaerter.png
-9,Marine,Obergefreiter,,,Mannschaften,Mannschaften,,,Marine-Obergefreiter.png
-10,Marine,Hauptgefreiter,,,Mannschaften,Mannschaften,,,Marine-Hauptgefreiter.png
-11,Marine,Stabsgefreiter,,,Mannschaften,Mannschaften,,,Marine-Stabsgefreiter.png
-12,Marine,Oberstabsgefreiter,,,Mannschaften,Mannschaften,,,Marine-Oberstabsgefreiter.png
-13,Marine,Korporal,,,Mannschaften,Mannschaften,,,Marine-Korporal.png
-14,Marine,Stabskorporal,,,Mannschaften,Mannschaften,,,Marine-Stabskorporal.png
-15,Marine,Maat,,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Maat.png
-16,Marine,Maat (Bootsmannanwärter),,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Maat-Bootsmannanwaerter.png
-17,Marine,Seekadett (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere ohne Portepee",,,Marine-Seekadett-Offizieranwaerter.png
-18,Marine,Obermaat,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Obermaat.png
-19,Marine,Obermaat (Bootsmannanwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Obermaat-Bootsmannanwaerter.png
-20,Marine,Bootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Bootsmann.png
-21,Marine,Fähnrich zur See (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Faehnrich-zur-See-Offizieranwaerter.png
-22,Marine,Oberbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberbootsmann.png
-23,Marine,Hauptbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Hauptbootsmann.png
-24,Marine,Oberfähnrich zur See (Offizieranwärter),,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberfaehnrich-zur-See-Offizieranwaerter.png
-25,Marine,Stabsbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Stabsbootsmann.png
-26,Marine,Oberstabsbootsmann,,,Unteroffiziere,"Unteroffiziere mit Portepee",,,Marine-Oberstabsbootsmann.png
-27,Marine,Leutnant zur See,,,Offiziere,Leutnante,,,Marine-Leutnant-zur-See.png
-28,Marine,Oberleutnant zur See,,,Offiziere,Leutnante,,,Marine-Oberleutnant-zur-See.png
-29,Marine,Kapitänleutnant,,,Offiziere,Kapitäne,,,Marine-Kapitaenleutnant.png
-30,Marine,Stabsarzt/Stabsapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Stabsarzt_Stabsapotheker.png
-31,Marine,Stabskapitänleutnant,,,Offiziere,Kapitäne,,,Marine-Stabskapitaenleutnant.png
-32,Marine,Korvettenkapitän,,,Offiziere,Kapitäne,,,Marine-Korvettenkapitaen.png
-33,Marine,Oberstabsarzt/Oberstabsapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Oberstbasarzt_Oberstabsapotheker.png
-34,Marine,Fregattenkapitän,,,Offiziere,Kapitäne,,,Marine-Fregattenkapitaen.png
-35,Marine,Flottillenarzt/Flottillenapotheker,,,Offiziere,Kapitäne,Sanitäter,,Marine-Flottillenarzt_Flottillenapotheker.png
-36,Marine,Kapitän zur See,,,Offiziere,Kapitäne,,,Marine-Kapitaen-zur-See.png
-37,Marine,Flottenarzt/Flottenapotheker,,,Offiziere,Admirale,Sanitäter,,Marine-Flottenarzt_Flottenapotheker.png
-38,Marine,Flottillenadmiral,,,Offiziere,Admirale,,,Marine-Flottillenadmiral.png
-39,Marine,Konteradmiral,,,Offiziere,Admirale,,,Marine-Konteradmiral.png
-40,Marine,Admiralarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiralarzt.png
-41,Marine,Admiralstabsarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiralstabsarzt.png
-42,Marine,Vizeadmiral,,,Offiziere,Admirale,,,Marine-Vizeadmiral.png
-43,Marine,Admiraloberstabsarzt,,,Offiziere,Admirale,Sanitäter,,Marine-Admiraloberstabsarzt.png
-44,Marine,Admiral,,,Offiziere,Admirale,,,Marine-Admiral.png
+1,Marine,Matrose,Mtr,OR-1,Mannschaften,Mannschaften,,"Einstiegsdienstgrad der Marine.","Marine-Matrose.png"
+2,Marine,Matrose (Unteroffizieranwärter),Mtr UA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Laufbahn der Unteroffiziere im niedrigsten Mannschaftsdienstgrad.","Marine-Matrose-Unteroffizieranwaerter.png"
+3,Marine,Matrose (Bootsmannanwärter),Mtr BA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Laufbahn der Bootsmänner im niedrigsten Mannschaftsdienstgrad.","Marine-Matrose-Bootsmannanwaerter.png"
+4,Marine,Matrose (Offizieranwärter),Mtr OA,OR-1,Mannschaften,Mannschaften,,"Anwärter für die Offizierslaufbahn im niedrigsten Mannschaftsdienstgrad.","Marine-Matrose-Offizieranwaerter.png"
+5,Marine,Gefreiter,Gefr,OR-2,Mannschaften,Mannschaften,,"Erster Beförderungsdienstgrad nach dem Matrosen; Kennzeichen für erste Erfahrung.","Marine-Gefreiter.png"
+6,Marine,Gefreiter (Unteroffizieranwärter),Gefr UA,OR-2,Mannschaften,Mannschaften,,"Gefreiter mit Ziel der Unteroffizierslaufbahn.","Marine-Gefreiter-Unteroffizieranwaerter.png"
+7,Marine,Gefreiter (Bootsmannanwärter),Gefr BA,OR-2,Mannschaften,Mannschaften,,"Gefreiter mit Ziel der Bootsmannlaufbahn.","Marine-Gefreiter-Bootsmannanwaerter.png"
+8,Marine,Gefreiter (Offizieranwärter),Gefr OA,OR-2,Mannschaften,Mannschaften,,"Gefreiter in der Offizierslaufbahn.","Marine-Gefreiter-Offizieranwaerter.png"
+9,Marine,Obergefreiter,OGefr,OR-3,Mannschaften,Mannschaften,,"Höherer Mannschaftsdienstgrad mit Erfahrung; häufig Assistent des Gruppenführers.","Marine-Obergefreiter.png"
+10,Marine,Hauptgefreiter,HptGefr,OR-3,Mannschaften,Mannschaften,,"Langjähriger Mannschaftsdienstgrad mit erweiterten Aufgaben.","Marine-Hauptgefreiter.png"
+11,Marine,Stabsgefreiter,StGefr,OR-4,Mannschaften,Mannschaften,,"Erfahrener Mannschaftssoldat mit Führungsverantwortung auf Truppenebene.","Marine-Stabsgefreiter.png"
+12,Marine,Oberstabsgefreiter,OStGefr,OR-4,Mannschaften,Mannschaften,,"Höchster klassischer Mannschaftsdienstgrad vor Korporal.","Marine-Oberstabsgefreiter.png"
+13,Marine,Korporal,Korp,OR-4,Mannschaften,Mannschaften,,"Seit 2021 neu eingeführter Mannschaftsdienstgrad zwischen Oberstabsgefreiter und Stabskorporal.","Marine-Korporal.png"
+14,Marine,Stabskorporal,StKorp,OR-4,Mannschaften,Mannschaften,,"Höchster Mannschaftsdienstgrad der Marine.","Marine-Stabskorporal.png"
+15,Marine,Maat,Maat,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Einstiegsdienstgrad in die Unteroffizierslaufbahn der Marine.","Marine-Maat.png"
+16,Marine,Maat (Bootsmannanwärter),Maat BA,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Maat mit Ziel der Bootsmannlaufbahn.","Marine-Maat-Bootsmannanwaerter.png"
+17,Marine,Seekadett (Offizieranwärter),Skt OA,OR-5,Unteroffiziere,"Unteroffiziere ohne Portepee",,"Erster Unteroffiziersdienstgrad für Offizieranwärter der Marine.","Marine-Seekadett-Offizieranwaerter.png"
+18,Marine,Obermaat,OMaat,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Erfahrener Unteroffizier mit größerem Verantwortungsbereich.","Marine-Obermaat.png"
+19,Marine,Obermaat (Bootsmannanwärter),OMaat BA,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Obermaat mit Ziel der Bootsmannlaufbahn.","Marine-Obermaat-Bootsmannanwaerter.png"
+20,Marine,Bootsmann,Btsm,OR-6,Unteroffiziere,"Unteroffiziere mit Portepee",,"Erster Portepee-Unteroffizier der Marine, Führungsaufgaben in der Besatzung.","Marine-Bootsmann.png"
+21,Marine,Fähnrich zur See (Offizieranwärter),Fähnr zS OA,OR-7,Unteroffiziere,"Unteroffiziere mit Portepee",,"Unteroffizier mit Portepee in Offiziersausbildung.","Marine-Faehnrich-zur-See-Offizieranwaerter.png"
+22,Marine,Oberbootsmann,OBtsm,OR-7,Unteroffiziere,"Unteroffiziere mit Portepee",,"Erfahrener Bootsmann, Führer kleiner Einheiten.","Marine-Oberbootsmann.png"
+23,Marine,Hauptbootsmann,HptBtsm,OR-8,Unteroffiziere,"Unteroffiziere mit Portepee",,"Langjähriger Portepee-Unteroffizier mit großer Erfahrung.","Marine-Hauptbootsmann.png"
+24,Marine,Oberfähnrich zur See (Offizieranwärter),OFähnr zS OA,OR-8,Unteroffiziere,"Unteroffiziere mit Portepee",,"Höchster Unteroffiziersgrad der Offizieranwärter.","Marine-Oberfaehnrich-zur-See-Offizieranwaerter.png"
+25,Marine,Stabsbootsmann,StBtsm,OR-8,Unteroffiziere,"Unteroffiziere mit Portepee",,"Langjähriger erfahrener Portepee-Unteroffizier der Marine.","Marine-Stabsbootsmann.png"
+26,Marine,Oberstabsbootsmann,OStBtsm,OR-9,Unteroffiziere,"Unteroffiziere mit Portepee",,"Höchster Unteroffiziersdienstgrad der Marine.","Marine-Oberstabsbootsmann.png"
+27,Marine,Leutnant zur See,Lt zS,OF-1,Offiziere,Leutnante,,"Einstiegsdienstgrad der Offiziere zur See.","Marine-Leutnant-zur-See.png"
+28,Marine,Oberleutnant zur See,OLt zS,OF-1,Offiziere,Leutnante,,"Zweiter Offiziersdienstgrad zur See.","Marine-Oberleutnant-zur-See.png"
+29,Marine,Kapitänleutnant,KptLt,OF-2,Offiziere,Kapitäne,,"Führt kleinere Boote oder Stabsverwendungen.","Marine-Kapitaenleutnant.png"
+30,Marine,Stabsarzt/Stabsapotheker,StArzt/StApoth,OF-2,Offiziere,Kapitäne,Sanität,"Ärztliche oder pharmazeutische Offiziere auf Kapitänleutnant-Ebene.","Marine-Stabsarzt_Stabsapotheker.png"
+31,Marine,Stabskapitänleutnant,StKptLt,OF-2,Offiziere,Kapitäne,,"Sonderdienstgrad zwischen Kapitänleutnant und Korvettenkapitän.","Marine-Stabskapitaenleutnant.png"
+32,Marine,Korvettenkapitän,KorvKpt,OF-3,Offiziere,Stabsoffiziere,,"Erster Stabsoffiziersdienstgrad der Marine.","Marine-Korvettenkapitaen.png"
+33,Marine,Oberstabsarzt/Oberstabsapotheker,OStArzt/OStApoth,OF-3,Offiziere,Stabsoffiziere,Sanität,"Sanitätsstabsoffiziere der Marine im Rang eines Korvettenkapitäns.","Marine-Oberstabsarzt_Oberstabsapotheker.png"
+34,Marine,Fregattenkapitän,FregKpt,OF-4,Offiziere,Stabsoffiziere,,"Kommandant einer Fregatte oder Stabsoffizier.","Marine-Fregattenkapitaen.png"
+35,Marine,Flottillenarzt/Flottillenapotheker,FlArzt/FlApoth,OF-4,Offiziere,Stabsoffiziere,Sanität,"Sanitätsstabsoffizier im Rang eines Fregattenkapitäns.","Marine-Flottillenarzt_Flottillenapotheker.png"
+36,Marine,Kapitän zur See,KzS,OF-5,Offiziere,Stabsoffiziere,,"Führt größere Verbände, z. B. Einsatzgruppenversorger oder Stabseinheiten.","Marine-Kapitaen-zur-See.png"
+37,Marine,Flottenarzt/Flottenapotheker,FltArzt/FltApoth,OF-5,Offiziere,Stabsoffiziere,Sanität,"Sanitätsoffizier im Rang eines Kapitäns zur See.","Marine-Flottenarzt_Flottenapotheker.png"
+38,Marine,Flottillenadmiral,FlAdm,OF-6,Offiziere,Admirale,,"Erster Admiralsdienstgrad der Marine, entspricht Brigadegeneral.","Marine-Flottillenadmiral.png"
+39,Marine,Admiralarzt,AdmArzt,OF-6,Offiziere,Admirale,Sanität,"Sanitätsoffizier im Rang eines Flottillenadmirals.","Marine-Admiralarzt.png"
+40,Marine,Konteradmiral,KAdm,OF-7,Offiziere,Admirale,,"Kommandeur größerer Verbände, entspricht Generalmajor.","Marine-Konteradmiral.png"
+41,Marine,Admiralstabsarzt,AdmStArzt,OF-7,Offiziere,Admirale,Sanität,"Sanitätsgeneral im Rang eines Konteradmirals.","Marine-Admiralstabsarzt.png"
+42,Marine,Vizeadmiral,VAdm,OF-8,Offiziere,Admirale,,"Kommandeur Flottenkommando, entspricht Generalleutnant.","Marine-Vizeadmiral.png"
+43,Marine,Admiraloberstabsarzt,AdmOStArzt,OF-8,Offiziere,Admirale,Sanität,"Höchster Sanitätsoffizier der Marine (entspricht Generaloberstabsarzt).","Marine-Admiraloberstabsarzt.png"
+44,Marine,Admiral,Adm,OF-9,Offiziere,Admirale,,"Höchster Dienstgrad der Marine, Inspekteur der Marine.","Marine-Admiral.png"
