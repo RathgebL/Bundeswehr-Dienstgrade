@@ -25,7 +25,8 @@
         </div>
     </div>
 
-    <div class="next-btn-wrapper">
+    <div class="flashcard-controls">
+        <button class="btn-prev" onclick="prevCard()">Vorherige Karte</button>
         <button class="btn-next" onclick="nextCard()">Nächste Karte</button>
     </div>
 </div>
@@ -52,5 +53,20 @@ function nextCard() {
     title.innerText = rank.title;
     desc.innerText = rank.description;
 }
+
+function prevCard() {
+    flipContainer.classList.remove("flipped");
+    currentIndex = (currentIndex - 1 + ranks.length) % ranks.length;
+    const rank = ranks[currentIndex];
+    img.src = `/static/images/${rank.image_filename}`;
+    img.alt = rank.title;
+    title.innerText = rank.title;
+    desc.innerText = rank.description;
+
+    document.getElementById("rank-abbr").innerText = rank.abbreviation || "-";
+    document.getElementById("rank-group").innerText = rank.rank_group || rank.rank_type || "-";
+    document.getElementById("rank-nato").innerText = rank.level_code || "-";
+}
+
 </script>
 {% endblock %}
