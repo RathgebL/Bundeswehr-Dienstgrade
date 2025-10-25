@@ -115,9 +115,23 @@ def quiz():
 # Karteikarten
 @bp.route("/flashcards")
 def flashcards():
-    ranks = Rank.query.order_by(Rank.branch, Rank.sort_order).all()
+    # Gewählten Branch aus Query-Param oder Session holen
+    branch = request.args.get("branch", "Alle")
 
-    # Konvertiere zu JSON-kompatiblen Dictionaries
+    # Basisabfrage
+    query = Rank.query
+
+    # Nur gefilterte Ränge, wenn Branch != Alle
+    if branch != "Alle":
+        query = query.filter_by(branch=branch)
+
+    ranks = query.order_by(Rank.branch, Rank.sort_order).all()
+
+    # Wenn keine Ergebnisse → Fallback
+    if not ranks:
+        ranks = Rank.query.order_by(Rank.sort_order).all()
+
+    # Für JSON im Template vorbereiten
     rank_data = [
         {
             "id": r.id,
@@ -127,11 +141,18 @@ def flashcards():
             "rank_type": r.rank_type,
             "level_code": r.level_code,
             "description": r.description,
-            "image_filename": r.image_filename
+            "image_filename": r.image_filename,
+            "branch": r.branch
         }
         for r in ranks
     ]
 
+    # Hintergrund dynamisch
     background = session.get("current_background", "Hintergrund-Heer-Wald.png")
 
-    return render_template("flashcards.html", ranks=rank_data, background=background)
+    return render_template(
+        "flashcards.html",
+        ranks=rank_data,
+        background=background,
+        selected_branch=branch
+    )

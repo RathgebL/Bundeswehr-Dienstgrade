@@ -117,10 +117,10 @@ a, button {
 .flashcards {
   text-align: center;
   color: var(--txt-light);
-  padding-top: 3rem;
+  padding-top: 0.5rem;
 }
 
-.flashcards h1 {
+h1 {
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--bw-gold);
@@ -168,7 +168,7 @@ a, button {
 /* Rückseite */
 .card-back {
   transform: rotateY(180deg);
-  background-color: var(--gray-dark);
+  background-color: var(--gray-mid);
 }
 
 .rank-meta-clean {

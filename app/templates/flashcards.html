@@ -1,9 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="flashcards">
-    <h1 class="flashcards-title">Karteikarten</h1>
+<h1 class="mb-4 text-center">Karteikarten</h1>
 
+<!-- Filterbereich -->
+<div class="ranks-filter">
+  <form method="get" action="{{ url_for('main.flashcards') }}">
+    <label for="branch">Truppenteil:</label>
+    <select name="branch" id="branch" onchange="this.form.submit()">
+      <option value="Alle" {% if selected_branch == 'Alle' %}selected{% endif %}>Alle</option>
+      <option value="Heer" {% if selected_branch == 'Heer' %}selected{% endif %}>Heer</option>
+      <option value="Luftwaffe" {% if selected_branch == 'Luftwaffe' %}selected{% endif %}>Luftwaffe</option>
+      <option value="Marine" {% if selected_branch == 'Marine' %}selected{% endif %}>Marine</option>
+    </select>
+  </form>
+</div>
+
+<!-- Karteikarten -->
+<div class="flashcards">
     <div id="flashcard" class="flashcard-container">
         <div class="card-flip" onclick="flipCard()">
             <div class="card-face card-front">
