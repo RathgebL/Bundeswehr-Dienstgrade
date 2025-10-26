@@ -1,46 +1,66 @@
 <!doctype html>
 <html lang="de">
 <head>
-    <meta charset="utf-8">
-    <title>Bundeswehr Dienstgrade</title>
+  <meta charset="utf-8">
+  <title>Bundeswehr Dienstgrade</title>
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  >
 
-    <!-- Eigene Styles -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Eigene Styles -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    {# Hintergrundlogik direkt im Template #}
-    {% set branch = request.args.get('branch') or session.get('default_branch', 'Heer') %}
-    {% set backgrounds = session.get('backgrounds', {
-        'Heer': 'Hintergrund-Heer-Wald.png',
-        'Luftwaffe': 'Hintergrund-Luftwaffe-Grau.png',
-        'Marine': 'Hintergrund-Marine-Hell.png'
-    }) %}
-    {% set background = backgrounds.get(branch, 'Hintergrund-Heer-Wald.png') %}
-    
-    <style>
-        body {
-            background-image: url('{{ url_for("static", filename="images/" + background) }}') !important;
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #f3f4f6;
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-        }
-    </style>
+  {# Hintergrundlogik direkt im Template #}
+  {% set branch = request.args.get('branch') or session.get('default_branch', 'Heer') %}
+  {% set backgrounds = session.get('backgrounds', {
+      'Heer': 'Hintergrund-Heer-Wald.png',
+      'Luftwaffe': 'Hintergrund-Luftwaffe-Grau.png',
+      'Marine': 'Hintergrund-Marine-Hell.png'
+  }) %}
+  {% set background = backgrounds.get(branch, 'Hintergrund-Heer-Wald.png') %}
+  
+  <style>
+    /* Dynamischer Seitenhintergrund je nach Truppengattung */
+    body {
+      background-image: url('{{ url_for("static", filename="images/" + background) }}') !important;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-repeat: no-repeat;
+      color: var(--txt-light);
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      font-family: var(--font-family-sans);
+    }
+  </style>
 </head>
-<body>
-    <nav class="navbar-main">
-        <div class="navbar-container">
-            <a class="navbar-brand" href="/">Startseite</a>
-            <a href="{{ url_for('main.settings', next=request.path) }}" class="navbar-settings">Einstellungen</a>
-        </div>
-    </nav>
 
-    <main class="container mt-4">
-        {% block content %}{% endblock %}
-    </main>
+<body>
+  <!-- =========================================================
+       NAVIGATIONSBEREICH
+       ========================================================= -->
+  <nav class="navbar">
+    <div class="navbar__inner">
+      <!-- Brand / Titel -->
+      <a class="navbar__brand" href="/">Startseite</a>
+
+      <!-- Einstellungs-Button -->
+      <a
+        href="{{ url_for('main.settings', next=request.path) }}"
+        class="navbar__settings-btn"
+      >
+        Einstellungen
+      </a>
+    </div>
+  </nav>
+
+  <!-- =========================================================
+       HAUPTINHALT
+       ========================================================= -->
+  <main class="container mt-4">
+    {% block content %}{% endblock %}
+  </main>
 </body>
 </html>

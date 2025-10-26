@@ -62,8 +62,8 @@ DESIGNSYSTEM – Farben, Schriften, Abstände
   /* ===== RADIUS ===== */
   --radius-xs: 4px;
   --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  --radius-m: 8px;
+  --radius-l: 12px;
   --radius-xl: 16px;
   --radius-full: 9999px;
 
@@ -82,57 +82,62 @@ DESIGNSYSTEM – Farben, Schriften, Abstände
 
 
 /*************************************************************
-NAVIGATIONSLEISTE
+NAVIGATIONSBEREICH
 *************************************************************/
 
-/* Hauptleiste */
-.navbar-main {
-  background-color: var(--bw-bg);
-  backdrop-filter: blur(4px);
-  padding: 0.6rem 1.4rem;
-  box-shadow: 0 2px 8px var(--shadows);
-  position: sticky;
+/* ===== Hauptleiste ===== */
+.navbar {
+  background-color: var(--bw-bg);           /* halbtransparenter dunkler Hintergrund */
+  backdrop-filter: blur(4px);               /* weicher Glas-Effekt */
+  padding: var(--space-2) var(--space-4);   /* vertikal 8px, horizontal 16px */
+  box-shadow: 0 2px 8px var(--shadows);     /* subtile Schattenkante */
+  position: sticky;                         /* fixiert oben beim Scrollen */
   top: 0;
   z-index: 1000;
 }
 
-/* Inhalt der Leiste */
-.navbar-container {
+/* ===== Innerer Container ===== */
+.navbar__inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;           /* Brand links, Button rechts */
   align-items: center;
   max-width: 1600px;
-  margin: 0 auto;
+  margin: 0 auto;                           /* zentriert auf der Seite */
+  width: 100%;
 }
 
-/* Titel / Brand */
-.navbar-brand {
-  font-size: 1.2rem;
-  font-weight: 600;
+/* ===== Brand / Titel ===== */
+.navbar__brand {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-m);            /* klar lesbare Titelgröße */
+  font-weight: var(--font-weight-semibold);
   color: var(--txt-light);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
-.navbar-brand:hover {
-  color: var(--bw-gold);
+.navbar__brand:hover {
+  color: var(--bw-gold);                    /* Akzentfarbe beim Hover */
 }
 
-/* Einstellungs-Button */
-.navbar-settings {
+/* ===== Einstellungs-Button ===== */
+.navbar__settings-btn {
   background-color: transparent;
   border: 1px solid var(--txt-light);
   color: var(--txt-light);
-  font-size: 0.9rem;
-  padding: 0.4rem 0.8rem;
-  border-radius: 6px;
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-3);   /* konsistent mit Spacing-System */
+  border-radius: var(--radius-button);
   text-decoration: none;
+  font-weight: var(--font-weight-medium);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.navbar-settings:hover {
-  background-color: var(--bw-gold);
-  transform: translateY(-1px);
+.navbar__settings-btn:hover {
+  background-color: var(--bw-gold);         /* optischer Fokus beim Hover */
+  color: var(--txt-light);
+  transform: translateY(-1px);              /* leichter Bewegungseffekt */
 }
 
 
