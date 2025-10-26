@@ -1,63 +1,63 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="settings-container">
-    <h2 class="settings-title">Einstellungen</h2>
+<div class="settings">
+  <h2 class="settings__title">Einstellungen</h2>
 
-    <form method="POST" class="settings-form">
-        <input type="hidden" name="next" value="{{ next_page }}">
+  <form method="POST" class="settings__form">
+    <input type="hidden" name="next" value="{{ next_page }}">
 
-        <!-- Standard-Truppenteil -->
-        <div class="settings-section">
-            <label class="settings-label">Standard-Truppenteil:</label>
-            <select name="default_branch" class="settings-select">
-                <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
-                <option value="Luftwaffe" {% if defaults.default_branch|lower == "luftwaffe" %}selected{% endif %}>Luftwaffe</option>
-                <option value="Marine" {% if defaults.default_branch|lower == "marine" %}selected{% endif %}>Marine</option>
-            </select>
-        </div>
+    <!-- Standard-Truppenteil -->
+    <div class="settings__section">
+      <label class="settings__label">Standard-Truppenteil:</label>
+      <select name="default_branch" class="settings__select">
+        <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
+        <option value="Luftwaffe" {% if defaults.default_branch|lower == "luftwaffe" %}selected{% endif %}>Luftwaffe</option>
+        <option value="Marine" {% if defaults.default_branch|lower == "marine" %}selected{% endif %}>Marine</option>
+      </select>
+    </div>
 
-        <!-- Hintergrundauswahl -->
-        <h5 class="settings-subtitle">Hintergründe:</h5>
+    <!-- Hintergrundauswahl -->
+    <h5 class="settings__subtitle">Hintergründe:</h5>
 
-        <!-- Heer -->
-        <div class="settings-section">
-            <label class="settings-label">Heer:</label>
-            <select name="bg_heer" class="settings-select">
-                <option value="Hintergrund-Heer-Wald.png" 
-                    {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wald.png" %}selected{% endif %}>Wald</option>
-                <option value="Hintergrund-Heer-Wüste.png" 
-                    {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wüste.png" %}selected{% endif %}>Wüste</option>
-            </select>
-        </div>
+    <!-- Heer -->
+    <div class="settings__section">
+      <label class="settings__label">Heer:</label>
+      <select name="bg_heer" class="settings__select">
+        <option value="Hintergrund-Heer-Wald.png" 
+          {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wald.png" %}selected{% endif %}>Wald</option>
+        <option value="Hintergrund-Heer-Wüste.png" 
+          {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wüste.png" %}selected{% endif %}>Wüste</option>
+      </select>
+    </div>
 
-        <!-- Luftwaffe -->
-        <div class="settings-section">
-            <label class="settings-label">Luftwaffe:</label>
-            <select name="bg_luftwaffe" class="settings-select">
-                <option value="Hintergrund-Luftwaffe-Grau.png" 
-                    {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Grau.png" %}selected{% endif %}>Grau</option>
-                <option value="Hintergrund-Luftwaffe-Blau.png" 
-                    {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Blau.png" %}selected{% endif %}>Blau</option>
-            </select>
-        </div>
+    <!-- Luftwaffe -->
+    <div class="settings__section">
+      <label class="settings__label">Luftwaffe:</label>
+      <select name="bg_luftwaffe" class="settings__select">
+        <option value="Hintergrund-Luftwaffe-Grau.png" 
+          {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Grau.png" %}selected{% endif %}>Grau</option>
+        <option value="Hintergrund-Luftwaffe-Blau.png" 
+          {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Blau.png" %}selected{% endif %}>Blau</option>
+      </select>
+    </div>
 
-        <!-- Marine -->
-        <div class="settings-section">
-            <label class="settings-label">Marine:</label>
-            <select name="bg_marine" class="settings-select">
-                <option value="Hintergrund-Marine-Hell.png" 
-                    {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Hell.png" %}selected{% endif %}>Hell</option>
-                <option value="Hintergrund-Marine-Dunkel.png" 
-                    {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Dunkel.png" %}selected{% endif %}>Dunkel</option>
-            </select>
-        </div>
+    <!-- Marine -->
+    <div class="settings__section">
+      <label class="settings__label">Marine:</label>
+      <select name="bg_marine" class="settings__select">
+        <option value="Hintergrund-Marine-Hell.png" 
+          {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Hell.png" %}selected{% endif %}>Hell</option>
+        <option value="Hintergrund-Marine-Dunkel.png" 
+          {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Dunkel.png" %}selected{% endif %}>Dunkel</option>
+      </select>
+    </div>
 
-        <!-- Buttons -->
-        <div class="settings-buttons">
-            <button type="submit" class="btn-save">Speichern</button>
-            <a href="{{ next_page }}" class="btn-cancel">Abbrechen</a>
-        </div>
-    </form>
+    <!-- Buttons -->
+    <div class="settings__buttons">
+      <button type="submit" class="btn--primary">Speichern</button>
+      <a href="{{ next_page }}" class="btn--secondary">Abbrechen</a>
+    </div>
+  </form>
 </div>
 {% endblock %}

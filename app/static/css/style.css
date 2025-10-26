@@ -209,114 +209,130 @@ SEITE: STARTSEITE
 
 
 /*************************************************************
-EINSTELLUNGEN
+SEITE: EINSTELLUNGEN
 *************************************************************/
 
-/* Hauptcontainer */
-.settings-container {
-  background-color: var(--bw-bg);
+/* ===== Hauptcontainer ===== */
+.settings {
+  background-color: var(--bw-bg);             /* halbtransparenter Hintergrund */
   color: var(--txt-light);
-  padding: 2rem 3rem;
-  border-radius: 1rem;
-  margin-top: 2rem;
+  padding: var(--space-6) var(--space-7);     /* innen gleichmäßig gepolstert */
+  border-radius: var(--radius-card);
   box-shadow: 0 6px 18px var(--shadows);
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: var(--space-7) auto 0;              /* zentriert mit Abstand nach oben */
+  text-align: left;
+  font-family: var(--font-family-sans);
 }
 
-/* Überschrift */
-.settings-title {
+/* ===== Haupttitel ===== */
+.settings__title {
   text-align: center;
   color: var(--bw-gold);
-  margin-bottom: 2rem;
-  font-weight: 700;
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
 }
 
-/* Abschnittsüberschrift */
-.settings-subtitle {
+/* ===== Untertitel (Abschnittsüberschriften) ===== */
+.settings__subtitle {
   color: var(--bw-gold);
-  font-size: 1.2rem;
-  margin-top: 2rem;
-  margin-bottom: 0.5rem;
+  font-size: var(--font-subheading);
+  font-weight: var(--font-weight-semibold);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-2);
   text-align: left;
 }
 
-/* Formular */
-.settings-form {
+/* ===== Formular ===== */
+.settings__form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
-/* Abschnitt (Label + Auswahl) */
-.settings-section {
+/* ===== Formularabschnitt (Label + Auswahl) ===== */
+.settings__section {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--space-2);
 }
 
-/* Label */
-.settings-label {
-  font-weight: 600;
+/* ===== Label ===== */
+.settings__label {
+  font-weight: var(--font-weight-semibold);
   color: var(--txt-light);
 }
 
-/* Auswahlfelder */
-.settings-select {
+/* ===== Auswahlfelder ===== */
+.settings__select {
   background-color: var(--gray-mid);
   color: var(--txt-light);
   border: 1px solid var(--gray-line);
-  border-radius: 6px;
-  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
   text-align: center;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
+  transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-.settings-select:focus {
+/* Hover- und Fokuszustände für Dropdowns */
+.settings__select:hover {
+  background-color: var(--gray-line);       /* etwas heller als normal */
+  border-color: var(--bw-gold);             /* goldene Kontur als Feedback */
+  cursor: pointer;                          /* zeigt Interaktivität */
+  transition: all 0.15s ease-in-out;
+}
+
+.settings__select:focus {
   outline: none;
-  border-color: var(--bw-gold);
-  box-shadow: 0 0 5px var(--bw-gold);
+  background-color: none;
+  border-color: none;
+  box-shadow: none;
 }
 
-/* Buttons */
-.settings-buttons {
+/* ===== Button-Gruppe ===== */
+.settings__buttons {
   display: flex;
   justify-content: center;
-  gap: 2rem;
-  margin-top: 1.5rem;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
 }
 
-.btn-save,
-.btn-cancel {
-  font-weight: 600;
+/* ===== Primärer Button (Speichern) ===== */
+.btn--primary {
+  background-color: var(--blue);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-semibold);
   border: none;
-  border-radius: 8px;
-  padding: 0.6rem 1.4rem;
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
   box-shadow: 0 2px 6px var(--shadows);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
   text-decoration: none;
 }
 
-/* Speichern-Button */
-.btn-save {
-  background-color: var(--blue);
-  color: var(--txt-light);
-}
-
-.btn-save:hover {
+.btn--primary:hover {
   background-color: var(--bw-gold);
+  color: var(--gray-dark);
   transform: translateY(-2px);
 }
 
-/* Abbrechen-Button */
-.btn-cancel {
+/* ===== Sekundärer Button (Abbrechen) ===== */
+.btn--secondary {
   background-color: var(--gray-mid);
   color: var(--txt-light);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  box-shadow: 0 2px 6px var(--shadows);
+  transition: all 0.2s ease-in-out;
+  text-decoration: none;
 }
 
-.btn-cancel:hover {
+.btn--secondary:hover {
   background-color: var(--hover);
   transform: translateY(-2px);
 }
@@ -408,6 +424,7 @@ SEITE: DIENSTGRAD-TABELLE
   font-weight: bold;
   color: var(--bw-gold);
 }
+
 
 /*************************************************************
 SEITE: QUIZ
