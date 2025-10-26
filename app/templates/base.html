@@ -32,10 +32,10 @@
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container d-flex justify-content-between">
-            <a class="navbar-brand" href="/">Bundeswehr Dienstgrade</a>
-            <a href="{{ url_for('main.settings', next=request.path) }}" class="btn btn-outline-light btn-sm">Einstellungen</a>
+    <nav class="navbar-main">
+        <div class="navbar-container">
+            <a class="navbar-brand" href="/">Startseite</a>
+            <a href="{{ url_for('main.settings', next=request.path) }}" class="navbar-settings">Einstellungen</a>
         </div>
     </nav>
 

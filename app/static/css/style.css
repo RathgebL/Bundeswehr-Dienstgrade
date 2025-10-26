@@ -27,10 +27,60 @@ a, button {
   text-decoration: none;
 }
 
-/* Navigationsleiste */
-.navbar {
-  background-color: var(--bw-bg-dark) !important;
+/*************************************************************
+NAVIGATIONSLEISTE
+*************************************************************/
+
+/* Hauptleiste */
+.navbar-main {
+  background-color: var(--bw-bg-dark);
+  backdrop-filter: blur(4px);
+  padding: 0.6rem 1.4rem;
+  box-shadow: 0 2px 8px var(--shadows);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
+
+/* Inhalt der Leiste */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Titel / Brand */
+.navbar-brand {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--txt-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.navbar-brand:hover {
+  color: var(--bw-gold);
+}
+
+/* Einstellungs-Button */
+.navbar-settings {
+  background-color: transparent;
+  border: 1px solid var(--txt-light);
+  color: var(--txt-light);
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.navbar-settings:hover {
+  background-color: var(--bw-gold);
+  transform: translateY(-1px);
+}
+
 
 /*************************************************************
 STARTSEITE
