@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h1 class="quiz-title">Schulterklappe finden</h1>
+
+    <div class="quiz-card">
+        <h4 class="mb-4 text-warning">{{ correct.title }}</h4>
+
+        <div class="quiz-grid">
+            {% for opt in options %}
+            <button id="{{ opt.id }}" data-id="{{ opt.id }}" onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
+                    class="btn bg-transparent border-0 p-0">
+                <img src="{{ url_for('static', filename='images/' + opt.image_filename) }}"
+                     alt="{{ opt.title }}" class="img-fluid rounded shadow quiz-image">
+            </button>
+            {% endfor %}
+        </div>
+
+        <p id="feedback" class="quiz-feedback"></p>
+
+        <a href="{{ url_for('main.quiz2') }}" id="next-btn"
+           class="quiz-next d-none">Nächste Frage</a>
+    </div>
+</div>
+
+<script>
+function checkAnswer(selected, correctId) {
+    const buttons = document.querySelectorAll("button[data-id]");
+    buttons.forEach(btn => btn.disabled = true);
+    if (selected === correctId) {
+        document.getElementById("feedback").innerText = "Richtig!";
+        document.getElementById(selected).querySelector("img").classList.add("border", "border-success", "shadow-lg");
+    } else {
+        document.getElementById("feedback").innerText = "Falsch!";
+        document.getElementById(selected).querySelector("img").classList.add("border", "border-danger", "shadow-lg");
+        document.getElementById(correctId).querySelector("img").classList.add("border", "border-success", "shadow-lg");
+    }
+    document.getElementById("next-btn").classList.remove("d-none");
+}
+</script>
+{% endblock %}

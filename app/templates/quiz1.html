@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="quiz-container">
-    <h1 class="quiz-title">Quiz: Schulterklappen erkennen</h1>
+    <h1 class="quiz-title">Dienstgrad erkennen</h1>
 
     <div class="quiz-card">
         <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
@@ -21,7 +21,7 @@
 
         <p id="feedback" class="quiz-feedback"></p>
 
-        <a href="{{ url_for('main.quiz') }}" id="next-btn" class="quiz-next d-none">
+        <a href="{{ url_for('main.quiz1') }}" id="next-btn" class="quiz-next d-none">
             Nächste Frage
         </a>
     </div>

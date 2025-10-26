@@ -335,11 +335,17 @@ SEITE: DIENSTGRAD-TABELLE
 SEITE: QUIZ
 *************************************************************/
 
+/*************************************************************
+Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden)
+*************************************************************/
+
+/* Container */
 .quiz-container {
   text-align: center;
-  padding: 0.5rem 2rem;
+  padding: 1rem 2rem;
 }
 
+/* Überschrift */
 .quiz-title {
   font-size: 2rem;
   font-weight: 700;
@@ -347,17 +353,19 @@ SEITE: QUIZ
   margin-bottom: 2rem;
 }
 
+/* Kartenbox für Fragen (gemeinsames Layout) */
 .quiz-card {
   background-color: var(--bw-bg-dark);
   color: var(--txt-light);
   max-width: 600px;
   margin: 0 auto;
-  padding: 3rem;
+  padding: 2.5rem;
   border-radius: 12px;
   box-shadow: 0 8px 24px var(--shadows);
 }
 
-.quiz-image {
+/* Bildanzeige */
+.quiz-card .quiz-image {
   max-height: 270px;
   width: auto;
   object-fit: contain;
@@ -366,6 +374,7 @@ SEITE: QUIZ
   margin-bottom: 2rem;
 }
 
+/* Antwort-Buttons (Textoptionen) */
 .quiz-options {
   display: flex;
   flex-direction: column;
@@ -382,6 +391,7 @@ SEITE: QUIZ
   font-size: 1rem;
   font-weight: 600;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .quiz-btn:hover {
@@ -389,20 +399,51 @@ SEITE: QUIZ
   transform: translateY(-2px);
 }
 
-.quiz-btn.correct {
-  background-color: var(--green);
+/* Richtig / Falsch Markierungen */
+.quiz-btn.correct { background-color: var(--green); }
+.quiz-btn.wrong   { background-color: var(--red); }
+
+/* Raster für 4 Abzeichen (2 × 2) */
+.quiz-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  justify-items: center;
 }
 
-.quiz-btn.wrong {
-  background-color: var(--red);
+/* Schulterklappen-Bilder */
+.quiz-grid .quiz-image {
+  max-height: 180px;
+  width: auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px var(--shadows);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.quiz-grid .quiz-image:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px var(--shadows);
+}
+
+/* Feedback-Text */
 .quiz-feedback {
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
+/* Richtig / Falsch Feedback bei Bild-Quiz */
+.quiz-image.border-success {
+  border: 5px solid var(--green) !important;
+  box-shadow: 0 0 12px var(--green);
+}
+
+.quiz-image.border-danger {
+  border: 5px solid var(--red) !important;
+  box-shadow: 0 0 12px var(--red);
+}
+
+/* Weiter-Button */
 .quiz-next {
   display: inline-block;
   margin-top: 1rem;
@@ -412,7 +453,9 @@ SEITE: QUIZ
   border-radius: 8px;
   padding: 0.6rem 1.4rem;
   text-decoration: none;
+  border: none;
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
 .quiz-next:hover {

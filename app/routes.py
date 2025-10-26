@@ -88,9 +88,9 @@ def ranks():
         background=background
     )
 
-# Quiz
-@bp.route("/quiz")
-def quiz():
+# Dienstgrad-Quiz
+@bp.route("/quiz1")
+def quiz1():
     # Alle Dienstgrade laden
     ranks = Rank.query.all()
 
@@ -104,7 +104,25 @@ def quiz():
     # Aktuellen Hintergrund übernehmen (aus Session)
     background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
 
-    return render_template("quiz.html", correct=correct, options=options, background=background)
+    return render_template("quiz1.html", correct=correct, options=options, background=background)
+
+# Schulterklappen-Quiz
+@bp.route("/quiz2")
+def quiz2():
+    ranks = Rank.query.all()
+
+    # Wähle eine zufällige "richtige" Antwort
+    correct = random.choice(ranks)
+
+    # Wähle 3 falsche Optionen
+    wrong = random.sample([r for r in ranks if r.id != correct.id], 3)
+
+    # Mische sie
+    options = [correct] + wrong
+    random.shuffle(options)
+
+    return render_template("quiz2.html", correct=correct, options=options)
+
 
 # Karteikarten
 @bp.route("/flashcards")
