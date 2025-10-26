@@ -169,6 +169,30 @@ def quiz2():
         selected_branch=data["branch"]
     )
 
+# Zeitmodus: Dienstgrad-Quiz
+@bp.route("/quiz1_timer")
+def quiz1_timer():
+    data = generate_quiz_data()
+    return render_template(
+        "quiz1_timer.html",
+        correct=data["correct"],
+        options=data["options"],
+        background=data["background"],
+        selected_branch=data["branch"]
+    )
+
+# Zeitmodus: Schulterklappen-Quiz
+@bp.route("/quiz2_timer")
+def quiz2_timer():
+    data = generate_quiz_data()
+    return render_template(
+        "quiz2_timer.html",
+        correct=data["correct"],
+        options=data["options"],
+        background=data["background"],
+        selected_branch=data["branch"]
+    )
+
 # Karteikarten
 @bp.route("/flashcards")
 def flashcards():

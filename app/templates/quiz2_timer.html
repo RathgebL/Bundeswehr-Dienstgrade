@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h1 class="quiz-title">Zeitmodus: Schulterklappe finden</h1>
+
+    <!-- Timer & Punktestand -->
+    <p id="timer" class="text-warning fs-5 fw-bold">Verbleibende Zeit: 60s</p>
+    <p id="score" class="text-light fs-5 mb-3">Punkte: 0</p>
+
+    <!-- Quizkarte -->
+    <div class="quiz-card">
+        <!-- Dienstgradname -->
+        <h4 class="mb-4 text-warning" id="rank-name">{{ correct.title }}</h4>
+
+        <!-- 4 Bilder (Antwortoptionen) -->
+        <div class="quiz-grid">
+            {% for opt in options %}
+            <button id="{{ opt.id }}" data-id="{{ opt.id }}" onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
+                    class="btn bg-transparent border-0 p-0 quiz-option">
+                <img src="{{ url_for('static', filename='images/' + opt.image_filename) }}"
+                     alt="{{ opt.title }}" class="img-fluid rounded shadow quiz-image">
+            </button>
+            {% endfor %}
+        </div>
+
+        <!-- Feedbacktext -->
+        <p id="feedback" class="quiz-feedback"></p>
+    </div>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 60;
+const timerDisplay = document.getElementById("timer");
+const scoreDisplay = document.getElementById("score");
+const feedback = document.getElementById("feedback");
+let countdown;
+
+// Timer starten
+startTimer();
+
+function startTimer() {
+    countdown = setInterval(() => {
+        timeLeft--;
+        timerDisplay.textContent = `Verbleibende Zeit: ${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(countdown);
+            endGame();
+        }
+    }, 1000);
+}
+
+function checkAnswer(selected, correctId) {
+    const buttons = document.querySelectorAll("button[data-id]");
+    buttons.forEach(btn => btn.disabled = true);
+
+    const selectedBtn = document.getElementById(selected);
+    const correctBtn = document.getElementById(correctId);
+
+    if (selected === correctId) {
+        score++;
+        feedback.textContent = "Richtig!";
+        selectedBtn.querySelector("img").classList.add("border", "border-success", "shadow-lg");
+    } else {
+        feedback.textContent = "Falsch!";
+        selectedBtn.querySelector("img").classList.add("border", "border-danger", "shadow-lg");
+        correctBtn.querySelector("img").classList.add("border", "border-success", "shadow-lg");
+    }
+
+    scoreDisplay.textContent = `Punkte: ${score}`;
+
+    // Nach kurzer Pause neue Frage laden
+    setTimeout(() => location.reload(), 600);
+}
+
+function endGame() {
+    document.querySelector(".quiz-card").innerHTML = `
+        <h2 class="text-warning">Zeit abgelaufen!</h2>
+        <p class="fs-4 text-light">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+        <a href="{{ url_for('main.quiz2_timer') }}" class="quiz-next">Erneut versuchen</a>
+        <a href="{{ url_for('main.quizmodes') }}" class="quiz-next" style="margin-left: 1rem;">Zurück</a>
+    `;
+}
+</script>
+{% endblock %}

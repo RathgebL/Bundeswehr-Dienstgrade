@@ -1,32 +1,54 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="quizmode-container">
-    <h1 class="mb-4 text-warning">Quiz-Modus</h1>
-    <p class="lead mb-5">Wähle ein Spielmodus</p>
+<div class="text-center mt-5 bg-dark bg-opacity-75 p-5 rounded shadow">
+    <h1 class="mb-4 text-warning">Quizmodus wählen</h1>
 
-    <!-- Truppenteil-Filter -->
-    <div class="ranks-filter mb-4">
-        <form method="get" action="{{ url_for('main.quizmodes') }}">
-            <label for="branch">Truppenteil:</label>
-            <select name="branch" id="branch" onchange="this.form.submit()">
+    <!-- Filterbereich -->
+    <div class="ranks-filter">
+        <form id="quizForm">
+            <!-- Truppenteil -->
+            <label for="branch" class="form-label">Truppenteil:</label>
+            <select name="branch" id="branch" class="form-select d-inline-block w-auto text-center">
                 {% for b in branches %}
                     <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
                 {% endfor %}
             </select>
+
+            <!-- Spielmodus -->
+            <label for="mode" class="form-label ms-3">Spielmodus:</label>
+            <select name="mode" id="mode" class="form-select d-inline-block w-auto text-center">
+                <option value="normal" selected>Unbegrenzt</option>
+                <option value="timer">Zeitspiel</option>
+            </select>
         </form>
     </div>
 
-    <div class="home-buttons">
-        <!-- Dienstgrad erkennen -->
-        <a href="{{ url_for('main.quiz1') }}" class="btn-home btn-quiz">
-            Dienstgrad erkennen
-        </a>
-
-        <!-- Schulterklappe finden -->
-        <a href="{{ url_for('main.quiz2') }}" class="btn-home btn-quiz">
-            Schulterklappe finden
-        </a>
+    <div class="home-buttons mt-5">
+        <button type="button" class="btn-home btn-quiz" onclick="startQuiz(1)">Dienstgrad erkennen</button>
+        <button type="button" class="btn-home btn-quiz" onclick="startQuiz(2)">Schulterklappe finden</button>
     </div>
 </div>
+
+<script>
+function startQuiz(type) {
+    const mode = document.getElementById("mode").value;
+
+    if (type === 1) {
+        // Dienstgrad erkennen
+        if (mode === "timer") {
+            window.location.href = "{{ url_for('main.quiz1_timer') }}";
+        } else {
+            window.location.href = "{{ url_for('main.quiz1') }}";
+        }
+    } else if (type === 2) {
+        // Schulterklappe finden
+        if (mode === "timer") {
+            window.location.href = "{{ url_for('main.quiz2_timer') }}";
+        } else {
+            window.location.href = "{{ url_for('main.quiz2') }}";
+        }
+    }
+}
+</script>
 {% endblock %}

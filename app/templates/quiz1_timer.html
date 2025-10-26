@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quiz-container">
+    <h1 class="quiz-title">Zeitmodus: Dienstgrad erkennen</h1>
+    <p id="timer" class="text-warning fs-5 fw-bold">Verbleibende Zeit: 60s</p>
+    <p id="score" class="text-light fs-5 mb-3">Punkte: 0</p>
+
+    <div class="quiz-card">
+        <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
+             alt="{{ correct.title }}" class="quiz-image" id="quiz-image">
+
+        <div class="quiz-options" id="quiz-options">
+            {% for opt in options %}
+            <button id="{{ opt.id }}" data-id="{{ opt.id }}" class="quiz-btn"
+                    onclick="checkAnswer({{ opt.id }}, {{ correct.id }})">
+                {{ opt.title }}
+            </button>
+            {% endfor %}
+        </div>
+        <p id="feedback" class="quiz-feedback"></p>
+    </div>
+</div>
+
+<script>
+let score = 0;
+let timeLeft = 60;
+const timerDisplay = document.getElementById("timer");
+const scoreDisplay = document.getElementById("score");
+const feedback = document.getElementById("feedback");
+
+const countdown = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = `Verbleibende Zeit: ${timeLeft}s`;
+    if (timeLeft <= 0) {
+        clearInterval(countdown);
+        endGame();
+    }
+}, 1000);
+
+function checkAnswer(selected, correctId) {
+    const buttons = document.querySelectorAll("button[data-id]");
+    buttons.forEach(btn => btn.disabled = true);
+    if (selected === correctId) {
+        score++;
+        feedback.textContent = "Richtig!";
+    } else {
+        feedback.textContent = "Falsch!";
+    }
+    scoreDisplay.textContent = `Punkte: ${score}`;
+    // Neue Frage laden
+    setTimeout(() => location.reload(), 500);
+}
+
+function endGame() {
+    document.querySelector(".quiz-card").innerHTML =
+        `<h2 class='text-warning'>Zeit abgelaufen!</h2>
+         <p class='fs-4 text-light'>Du hast ${score} Punkte erreicht.</p>
+         <a href='{{ url_for('main.quiz1_timer') }}' class='quiz-next'>Erneut versuchen</a>`;
+}
+</script>
+{% endblock %}

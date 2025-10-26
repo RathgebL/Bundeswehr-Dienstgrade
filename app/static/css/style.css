@@ -338,7 +338,7 @@ SEITE: QUIZ
 .quizmode-container {
   background-color: var(--bw-bg-dark);
   color: var(--txt-light);
-  padding: 3rem;
+  padding: 2rem;
   border-radius: 1rem;
   max-width: 600px;
   margin: 4rem auto;
@@ -348,7 +348,7 @@ SEITE: QUIZ
 
 
 /*************************************************************
-Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden)
+Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 *************************************************************/
 
 /* Container */
@@ -473,6 +473,18 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden)
 .quiz-next:hover {
   background-color: var(--bw-gold);
   transform: translateY(-2px);
+}
+
+#timer {
+  color: var(--txt-light);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+#score {
+  color: var(--txt-light);
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 
