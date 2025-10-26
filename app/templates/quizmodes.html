@@ -1,30 +1,31 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center mt-5 bg-dark bg-opacity-75 p-5 rounded shadow">
-    <h1 class="mb-4 text-warning">Quizmodus wählen</h1>
+<div class="quizmode-container">
+    <h1 class="quizmode-title">Quizmodus wählen</h1>
 
-    <!-- Filterbereich -->
-    <div class="ranks-filter">
-        <form id="quizForm">
-            <!-- Truppenteil -->
-            <label for="branch" class="form-label">Truppenteil:</label>
-            <select name="branch" id="branch" class="form-select d-inline-block w-auto text-center">
+    <form id="quizForm" class="quizmode-form">
+        <!-- Truppenteil -->
+        <div class="quizmode-section">
+            <label for="branch" class="quizmode-label">Truppenteil:</label>
+            <select name="branch" id="branch" class="quizmode-select">
                 {% for b in branches %}
                     <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
                 {% endfor %}
             </select>
+        </div>
 
-            <!-- Spielmodus -->
-            <label for="mode" class="form-label ms-3">Spielmodus:</label>
-            <select name="mode" id="mode" class="form-select d-inline-block w-auto text-center">
+        <!-- Spielmodus -->
+        <div class="quizmode-section">
+            <label for="mode" class="quizmode-label">Spielmodus:</label>
+            <select name="mode" id="mode" class="quizmode-select">
                 <option value="normal" selected>Unbegrenzt</option>
                 <option value="timer">Zeitspiel</option>
             </select>
-        </form>
-    </div>
+        </div>
+    </form>
 
-    <div class="home-buttons mt-5">
+    <div class="home-buttons mt-4">
         <button type="button" class="btn-home btn-quiz" onclick="startQuiz(1)">Dienstgrad erkennen</button>
         <button type="button" class="btn-home btn-quiz" onclick="startQuiz(2)">Schulterklappe finden</button>
     </div>

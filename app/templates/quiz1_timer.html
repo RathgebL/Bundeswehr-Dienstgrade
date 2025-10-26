@@ -3,60 +3,111 @@
 {% block content %}
 <div class="quiz-container">
     <h1 class="quiz-title">Zeitmodus: Dienstgrad erkennen</h1>
-    <p id="timer" class="text-warning fs-5 fw-bold">Verbleibende Zeit: 60s</p>
-    <p id="score" class="text-light fs-5 mb-3">Punkte: 0</p>
 
-    <div class="quiz-card">
-        <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
-             alt="{{ correct.title }}" class="quiz-image" id="quiz-image">
+    <!-- Timer und Score sind unsichtbar, aber aktiv -->
+    <p id="timer" class="text-warning fs-5 fw-bold d-none">Verbleibende Zeit: 60s</p>
+    <p id="score" class="text-light fs-5 mb-3 d-none">Punkte: 0</p>
 
-        <div class="quiz-options" id="quiz-options">
-            {% for opt in options %}
-            <button id="{{ opt.id }}" data-id="{{ opt.id }}" class="quiz-btn"
-                    onclick="checkAnswer({{ opt.id }}, {{ correct.id }})">
-                {{ opt.title }}
-            </button>
-            {% endfor %}
-        </div>
-        <p id="feedback" class="quiz-feedback"></p>
-    </div>
+    <!-- Leerer Container, wird per JS mit Inhalt gefüllt -->
+    <div class="quiz-card"></div>
 </div>
 
 <script>
-let score = 0;
+let allRanks = {{ ranks|tojson|safe }};
 let timeLeft = 60;
-const timerDisplay = document.getElementById("timer");
-const scoreDisplay = document.getElementById("score");
-const feedback = document.getElementById("feedback");
+let score = 0;
+let timerInterval;
 
-const countdown = setInterval(() => {
-    timeLeft--;
-    timerDisplay.textContent = `Verbleibende Zeit: ${timeLeft}s`;
-    if (timeLeft <= 0) {
-        clearInterval(countdown);
-        endGame();
-    }
-}, 1000);
+// Spielstart
+document.addEventListener("DOMContentLoaded", () => {
+    // Anzeigen sichtbar machen
+    document.getElementById("timer").classList.remove("d-none");
+    document.getElementById("score").classList.remove("d-none");
 
-function checkAnswer(selected, correctId) {
-    const buttons = document.querySelectorAll("button[data-id]");
-    buttons.forEach(btn => btn.disabled = true);
-    if (selected === correctId) {
-        score++;
-        feedback.textContent = "Richtig!";
-    } else {
-        feedback.textContent = "Falsch!";
-    }
-    scoreDisplay.textContent = `Punkte: ${score}`;
-    // Neue Frage laden
-    setTimeout(() => location.reload(), 500);
+    nextQuestion();
+    startTimer();
+});
+
+// ---------------------
+// TIMER
+// ---------------------
+function startTimer() {
+    document.getElementById("timer").innerText = "Verbleibende Zeit: " + timeLeft + "s";
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById("timer").innerText = "Verbleibende Zeit: " + timeLeft + "s";
+
+        // Farbe ändern, wenn Zeit knapp wird
+        if (timeLeft <= 10) {
+            document.getElementById("timer").style.color = "#ff4d4d";
+        }
+
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            endGame();
+        }
+    }, 1000);
 }
 
+// ---------------------
+// QUIZ-LOGIK
+// ---------------------
+function nextQuestion() {
+    const correct = allRanks[Math.floor(Math.random() * allRanks.length)];
+    const wrong = allRanks.filter(r => r.id !== correct.id);
+    const options = [correct, ...wrong.sort(() => 0.5 - Math.random()).slice(0, 3)];
+    options.sort(() => 0.5 - Math.random());
+
+    renderQuestion(correct, options);
+}
+
+function renderQuestion(correct, options) {
+    const container = document.querySelector(".quiz-card");
+    container.innerHTML = `
+        <img src="/static/images/${correct.image_filename}" alt="${correct.title}" class="quiz-image">
+        <div class="quiz-options">
+            ${options.map(opt => `
+                <button class="quiz-btn" onclick="checkAnswer(${opt.id}, ${correct.id})">${opt.title}</button>
+            `).join("")}
+        </div>
+        <p id="feedback" class="quiz-feedback"></p>
+    `;
+}
+
+function checkAnswer(selectedId, correctId) {
+    const buttons = document.querySelectorAll(".quiz-btn");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selectedId === correctId) {
+        score++;
+        document.getElementById("score").innerText = "Punkte: " + score;
+        document.getElementById("feedback").innerText = "Richtig!";
+    } else {
+        document.getElementById("feedback").innerText = "Falsch!";
+    }
+
+    setTimeout(nextQuestion, 700); // nächste Frage nach kurzer Pause
+}
+
+// ---------------------
+// ENDE DES SPIELS
+// ---------------------
 function endGame() {
-    document.querySelector(".quiz-card").innerHTML =
-        `<h2 class='text-warning'>Zeit abgelaufen!</h2>
-         <p class='fs-4 text-light'>Du hast ${score} Punkte erreicht.</p>
-         <a href='{{ url_for('main.quiz1_timer') }}' class='quiz-next'>Erneut versuchen</a>`;
+    clearInterval(timerInterval);
+
+    // Timer & Score ausblenden
+    document.getElementById("timer").classList.add("d-none");
+    document.getElementById("score").classList.add("d-none");
+
+    const container = document.querySelector(".quiz-card");
+    container.innerHTML = `
+        <div class="quiz-endcard">
+            <h2 class="text-warning mb-3">Zeit abgelaufen!</h2>
+            <p class="text-light mb-4">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+            <a href="/quiz1_timer" class="quiz-next">Erneut versuchen</a>
+        </div>
+    `;
 }
 </script>
 {% endblock %}

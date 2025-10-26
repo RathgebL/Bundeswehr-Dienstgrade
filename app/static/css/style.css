@@ -7,8 +7,9 @@ main.container {
   background: transparent !important;
 }
 
-/* Farbvariablen (Designsystem) */
+/* Designsystem */
 :root {
+  /* Farbvariablen */
   --bw-gold: #f2b330;                     /* Goldton aus Marine-Abzeichen */
   --bw-bg-dark: rgba(20, 20, 30, 0.75);   /* leicht transparenter dunkler Hintergrund */
   --gray-dark: #1f2937;                   /* Hintergrund / Grundfarbe */
@@ -20,7 +21,12 @@ main.container {
   --button: #0059cd;                      /* Knöpfe */
   --red: #dc3545;                         /* falsche Antorten */
   --green: #28a745;                       /* richtige Antorten */ 
+
+  /* Schriftvariablen */
+  --heading: 2rem;
+  --subheading: 1.5rem;
 }
+
 
 /* Links & Buttons (Standard) */
 a, button {
@@ -85,6 +91,15 @@ NAVIGATIONSLEISTE
 /*************************************************************
 STARTSEITE
 *************************************************************/
+
+/* Text*/
+.heading {
+  font-size: var(heading);
+}
+
+.subheading {
+  font-size: var(subheading);
+}
 
 /* Button-Container – alles zentriert und untereinander */
 .home-buttons {
@@ -338,12 +353,66 @@ SEITE: QUIZ
 .quizmode-container {
   background-color: var(--bw-bg-dark);
   color: var(--txt-light);
-  padding: 2rem;
+  padding: 2.5rem;
   border-radius: 1rem;
+  box-shadow: 0 6px 18px var(--shadows);
   max-width: 600px;
   margin: 4rem auto;
-  box-shadow: 0 6px 18px var(--shadows);
   text-align: center;
+}
+
+.quizmode-title {
+  color: var(--bw-gold);
+  font-weight: 700;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Formular allgemein */
+.quizmode-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Abschnitt: Label + Select */
+.quizmode-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+/* Label */
+.quizmode-label {
+  font-weight: 600;
+  color: var(--txt-light);
+  font-size: 1.1rem;
+}
+
+/* Auswahlfeld */
+.quizmode-select {
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+  border: 1px solid var(--gray-line);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  width: 200px;
+  text-align: center;
+  font-size: 1rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.quizmode-select:focus {
+  outline: none;
+  border-color: var(--bw-gold);
+  box-shadow: 0 0 5px var(--bw-gold);
+}
+
+/* Abstand zur Button-Gruppe */
+.quizmode-container .home-buttons {
+  margin-top: 2rem;
 }
 
 
@@ -485,6 +554,50 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
   color: var(--txt-light);
   font-weight: 600;
   margin-bottom: 1rem;
+}
+
+/* Zeitmodus - Endergebnis */
+.quiz-endbox {
+  background-color: var(--bw-bg-dark);
+  color: var(--txt-light);
+  padding: 2.5rem 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 24px var(--shadows);
+  text-align: center;
+}
+
+.quiz-endtitle {
+  color: var(--bw-gold);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.quiz-endtext {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: var(--txt-light);
+}
+
+.quiz-endbuttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.quiz-endbuttons .quiz-next {
+  background-color: var(--button);
+  color: var(--txt-light);
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.quiz-endbuttons .quiz-next:hover {
+  background-color: var(--bw-gold);
+  transform: translateY(-2px);
 }
 
 

@@ -172,13 +172,29 @@ def quiz2():
 # Zeitmodus: Dienstgrad-Quiz
 @bp.route("/quiz1_timer")
 def quiz1_timer():
-    data = generate_quiz_data()
+    ranks = Rank.query.all()
+
+    # Wir bereiten eine saubere JSON-kompatible Struktur vor
+    rank_data = []
+    for r in ranks:
+        rank_data.append({
+            "id": r.id,
+            "title": r.title or "",
+            "abbreviation": r.abbreviation or "",
+            "rank_group": r.rank_group or "",
+            "rank_type": r.rank_type or "",
+            "level_code": r.level_code or "",
+            "description": r.description or "",
+            "image_filename": r.image_filename or "",
+            "branch": r.branch or ""
+        })
+
+    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+
     return render_template(
         "quiz1_timer.html",
-        correct=data["correct"],
-        options=data["options"],
-        background=data["background"],
-        selected_branch=data["branch"]
+        ranks=rank_data,
+        background=background
     )
 
 # Zeitmodus: Schulterklappen-Quiz
