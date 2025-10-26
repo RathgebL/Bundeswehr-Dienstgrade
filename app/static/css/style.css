@@ -259,7 +259,7 @@ SEITE: DIENSTGRAD-TABELLE
 /* Tabellenzellen */
 .rank-table th,
 .rank-table td {
-  padding: 0.5rem;    /* Abstand zwischen Text und Trennlinie */
+  padding: 0.4rem;    /* Abstand zwischen Text und Trennlinie */
   border-bottom: 1px solid var(--gray-mid);
 }
 
@@ -312,7 +312,7 @@ SEITE: QUIZ
   width: auto;
   object-fit: contain;
   border-radius: 8px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 16px var(--shadows);
   margin-bottom: 2rem;
 }
 

@@ -35,7 +35,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container d-flex justify-content-between">
             <a class="navbar-brand" href="/">Bundeswehr Dienstgrade</a>
-            <a href="{{ url_for('main.settings') }}" class="btn btn-outline-light btn-sm">Einstellungen</a>
+            <a href="{{ url_for('main.settings', next=request.path) }}" class="btn btn-outline-light btn-sm">Einstellungen</a>
         </div>
     </nav>
 
