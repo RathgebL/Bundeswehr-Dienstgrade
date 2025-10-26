@@ -335,6 +335,18 @@ SEITE: DIENSTGRAD-TABELLE
 SEITE: QUIZ
 *************************************************************/
 
+.quizmode-container {
+  background-color: var(--bw-bg-dark);
+  color: var(--txt-light);
+  padding: 3rem;
+  border-radius: 1rem;
+  max-width: 600px;
+  margin: 4rem auto;
+  box-shadow: 0 6px 18px var(--shadows);
+  text-align: center;
+}
+
+
 /*************************************************************
 Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden)
 *************************************************************/

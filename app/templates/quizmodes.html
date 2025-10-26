@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="quizmode-container">
+    <h1 class="mb-4 text-warning">Quiz-Modus</h1>
+    <p class="lead mb-5">Wähle ein Spielmodus</p>
+
+    <div class="home-buttons">
+        <!-- Dienstgrad erkennen -->
+        <a href="{{ url_for('main.quiz1') }}" class="btn-home btn-quiz">
+            Dienstgrad erkennen
+        </a>
+
+        <!-- Schulterklappe finden -->
+        <a href="{{ url_for('main.quiz2') }}" class="btn-home btn-quiz">
+            Schulterklappe finden
+        </a>
+    </div>
+</div>
+{% endblock %}

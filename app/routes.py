@@ -88,6 +88,12 @@ def ranks():
         background=background
     )
 
+# Quiz (Modusauswahl)
+@bp.route("/quizmodes")
+def quizmodes():
+    background = session.get("current_background", "Hintergrund-Heer-Wald.png")
+    return render_template("quizmodes.html", background=background)
+
 # Dienstgrad-Quiz
 @bp.route("/quiz1")
 def quiz1():
