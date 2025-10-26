@@ -124,13 +124,13 @@ h1 {
   font-size: 2.2rem;
   font-weight: 600;
   color: var(--bw-gold);
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 /* Karten-Container */
 .flashcard-container {
   width: 380px;
-  height: 580px;
+  height: 560px;
   margin: 0 auto;
   perspective: 1200px;
   position: relative;
@@ -218,28 +218,52 @@ h1 {
   margin-top: 0.5rem;
 }
 
-/* Button */
-.flashcard-controls {
+/* Haupt-Button-Container */
+.flashcard-buttons {
   display: flex;
-  justify-content: center;
-  gap: 1.5rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem; /* Abstand zwischen den beiden Reihen */
   margin-top: 2rem;
 }
 
-.btn-next,
-.btn-prev {
+/* Jede Button-Reihe */
+.flashcard-controls {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+/* Primäre Buttons (Vorherige / Nächste Karte) */
+.btn-card {
   background-color: var(--bw-gold);
-  color: #222;
+  color: var(--txt-light);
   font-weight: 600;
   border: none;
   border-radius: 8px;
   padding: 0.6rem 1.4rem;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 2px 6px var(--shadows);
   transition: all 0.2s ease-in-out;
 }
 
-.btn-next:hover,
-.btn-prev:hover {
+.btn-card:hover {
+  background-color: #f0b94d;
+  transform: translateY(-2px);
+}
+
+/* Sekundäre Buttons (Mischen / Ordnen) */
+.btn-card-secondary {
+  background-color: var(--bw-gold);
+  color: var(--txt-light);
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  box-shadow: 0 2px 6px var(--shadows);
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-card-secondary:hover {
   background-color: #f0b94d;
   transform: translateY(-2px);
 }
