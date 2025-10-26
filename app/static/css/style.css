@@ -7,31 +7,79 @@ main.container {
   background: transparent !important;
 }
 
-/* Designsystem */
-:root {
-  /* Farbvariablen */
-  --bw-gold: #f2b330;                     /* Goldton aus Marine-Abzeichen */
-  --bw-bg-dark: rgba(20, 20, 30, 0.75);   /* leicht transparenter dunkler Hintergrund */
-  --gray-dark: #1f2937;                   /* Hintergrund / Grundfarbe */
-  --gray-mid: #374151;                    /* Mittelgrau für Kartenrückseite */
-  --txt-light: #f3f4f6;                   /* Helle Textfarbe */
-  --shadows: rgba(0, 0, 0, 0.5);          /* Schatten für bessere Lesbarkeit */
-  --gray-line: #4b5563;                   /* Linienfarbe */
-  --hover: #2d3748;                       /* Hover Hintergrund */
-  --button: #0059cd;                      /* Knöpfe */
-  --red: #dc3545;                         /* falsche Antorten */
-  --green: #28a745;                       /* richtige Antorten */ 
-
-  /* Schriftvariablen */
-  --heading: 2rem;
-  --subheading: 1.5rem;
-}
-
-
 /* Links & Buttons (Standard) */
 a, button {
   text-decoration: none;
 }
+
+
+/*************************************************************
+DESIGNSYSTEM – Farben, Schriften, Abstände
+*************************************************************/
+
+:root {
+  /* ===== COLORS ===== */
+  --bw-gold: rgba(242, 179, 48, 1);        /* Exakter Goldton aus Marine-Abzeichen */
+  --bw-bg: rgba(20, 20, 30, 0.75);         /* leicht transparenter dunkler Hintergrund */
+  --gray-dark: rgba(31, 41, 55, 1);        /* Dunkelgrau – Haupt-Hintergrund */
+  --gray-mid: rgba(55, 65, 81, 1);         /* Mittelgrau – Flächen & Kartenrückseiten */
+  --gray-line: rgba(75, 85, 99, 1);        /* Linienfarbe & Rahmen */
+  --txt-light: rgba(243, 244, 246, 1);     /* Helle Textfarbe für gute Lesbarkeit */
+  --shadows: rgba(0, 0, 0, 0.5);           /* Universeller Schatteneffekt */
+  --hover: rgba(45, 55, 72, 1);            /* Hover-Hintergrund (leicht dunkler) */
+  --blue: rgba(0, 89, 205, 1);             /* Primärfarbe – Blau für Buttons/Links */
+  --red: rgba(220, 53, 69, 1);             /* Fehler-/Warnfarbe – klassisches Rot */
+  --green: rgba(40, 167, 69, 1);           /* Erfolgsfarbe – grünes Feedback */
+
+  /* ===== TYPOGRAPHY ===== */
+  --font-family-sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-m: 1.125rem;
+  --font-size-l: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-xxl: 3rem;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.2;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+
+  /* ===== SPACING ===== */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --padding-section: var(--space-6);
+
+  /* ===== RADIUS ===== */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-full: 9999px;
+
+  /* SEMANTIC TOKENS */
+  --radius-button: var(--radius-m);
+  --radius-card: var(--radius-l);
+  --radius-modal: var(--radius-xl);
+
+  --space-section: var(--space-7);
+  --space-card: var(--space-5);
+
+  --font-heading: var(--font-size-xl);
+  --font-subheading: var(--font-size-m);
+  --font-body: var(--font-size-base);
+}
+
 
 /*************************************************************
 NAVIGATIONSLEISTE
@@ -39,7 +87,7 @@ NAVIGATIONSLEISTE
 
 /* Hauptleiste */
 .navbar-main {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   backdrop-filter: blur(4px);
   padding: 0.6rem 1.4rem;
   box-shadow: 0 2px 8px var(--shadows);
@@ -89,59 +137,45 @@ NAVIGATIONSLEISTE
 
 
 /*************************************************************
-STARTSEITE
+SEITE: STARTSEITE
 *************************************************************/
 
-/* Text*/
+/* Hauptcontainer (dunkle Box) */
+.home-container {
+  background-color: var(--bw-bg);
+  color: var(--txt-light);
+  padding: var(--padding-section);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 18px var(--shadows);
+  max-width: 700px;
+  margin: 5rem auto;
+  text-align: center;
+}
+
+/* Überschrift */
 .heading {
-  font-size: var(heading);
+  color: var(--bw-gold);
+  font-size: var(--heading-size);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family);
+  margin-bottom: 1.5rem;
 }
 
+/* Unterüberschrift */
 .subheading {
-  font-size: var(subheading);
+  font-size: var(--subheading-size);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-regular);
+  margin-bottom: 3rem;
+  font-family: var(--font-family);
 }
 
-/* Button-Container – alles zentriert und untereinander */
+/* Button-Container */
 .home-buttons {
   display: flex;
-  flex-direction: column; /* Buttons untereinander */
-  align-items: center;    /* horizontal zentrieren */
-  gap: 1.5rem;            /* Abstand zwischen Buttons */
-}
-
-/* Gemeinsamer Stil für alle Buttons */
-.btn-home {
-  display: inline-block;
-  width: 260px;                 /* Einheitliche Breite */
-  padding: 0.8rem 1rem;         /* Knopfhöhe, Text */
-  border-radius: 10px;
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-align: center;
-  text-decoration: none;
-  color: var(--txt-light);      /* Textfarbe */
-  box-shadow: 0 2px 6px var(--shadows);
-  transition: all 0.2s ease-in-out;
-}
-
-/* Hover-Effekt */
-.btn-home:hover {
-  transform: translateY(-2px);
-  filter: brightness(1.1);
-}
-
-/* Knopf-Farbe */
-.btn-tabelle,
-.btn-quiz,
-.btn-flashcards {
-  background-color: var(--button);
-}
-
-/* Hover-Farbe */
-.btn-tabelle:hover,
-.btn-quiz:hover,
-.btn-flashcards:hover {
-  background-color: var(--bw-gold);
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
 }
 
 
@@ -151,7 +185,7 @@ EINSTELLUNGEN
 
 /* Hauptcontainer */
 .settings-container {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   color: var(--txt-light);
   padding: 2rem 3rem;
   border-radius: 1rem;
@@ -238,7 +272,7 @@ EINSTELLUNGEN
 
 /* Speichern-Button */
 .btn-save {
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
 }
 
@@ -265,7 +299,7 @@ SEITE: DIENSTGRAD-TABELLE
 
 /* Container für Tabelle */
 .ranks-container {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   color: var(--txt-light);
   padding: 2rem;            /* Abstand Titel zu Box */
   border-radius: 1rem;
@@ -351,7 +385,7 @@ SEITE: QUIZ
 *************************************************************/
 
 .quizmode-container {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   color: var(--txt-light);
   padding: 2.5rem;
   border-radius: 1rem;
@@ -436,7 +470,7 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 
 /* Kartenbox für Fragen (gemeinsames Layout) */
 .quiz-card {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   color: var(--txt-light);
   max-width: 600px;
   margin: 0 auto;
@@ -464,7 +498,7 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 }
 
 .quiz-btn {
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
   border: none;
   border-radius: 8px;
@@ -528,7 +562,7 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 .quiz-next {
   display: inline-block;
   margin-top: 1rem;
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
   font-weight: 600;
   border-radius: 8px;
@@ -558,7 +592,7 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 
 /* Zeitmodus - Endergebnis */
 .quiz-endbox {
-  background-color: var(--bw-bg-dark);
+  background-color: var(--bw-bg);
   color: var(--txt-light);
   padding: 2.5rem 2rem;
   border-radius: 1rem;
@@ -586,7 +620,7 @@ Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
 }
 
 .quiz-endbuttons .quiz-next {
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
   font-weight: 600;
   border-radius: 8px;
@@ -731,7 +765,7 @@ h1 {
 
 /* Primäre Buttons (Vorherige / Nächste Karte) */
 .btn-card {
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
   font-weight: 600;
   border: none;
@@ -748,7 +782,7 @@ h1 {
 
 /* Sekundäre Buttons (Mischen / Ordnen) */
 .btn-card-secondary {
-  background-color: var(--button);
+  background-color: var(--blue);
   color: var(--txt-light);
   font-weight: 600;
   border: none;
