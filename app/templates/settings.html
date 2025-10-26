@@ -1,26 +1,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="bg-dark bg-opacity-75 text-light p-4 rounded mt-4">
-    <h2 class="mb-4">Einstellungen</h2>
+<div class="settings-container">
+    <h2 class="settings-title">Einstellungen</h2>
 
-    <form method="POST">
+    <form method="POST" class="settings-form">
         <!-- Standard-Truppenteil -->
-        <div class="mb-3">
-            <label class="form-label">Standard-Truppenteil:</label>
-            <select name="default_branch" class="form-select">
+        <div class="settings-section">
+            <label class="settings-label">Standard-Truppenteil:</label>
+            <select name="default_branch" class="settings-select">
                 <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
                 <option value="Luftwaffe" {% if defaults.default_branch|lower == "luftwaffe" %}selected{% endif %}>Luftwaffe</option>
                 <option value="Marine" {% if defaults.default_branch|lower == "marine" %}selected{% endif %}>Marine</option>
             </select>
         </div>
 
-        <h5 class="mt-4">Hintergründe:</h5>
+        <!-- Hintergrundauswahl -->
+        <h5 class="settings-subtitle">Hintergründe:</h5>
 
         <!-- Heer -->
-        <div class="mb-3">
-            <label class="form-label">Heer:</label>
-            <select name="bg_heer" class="form-select">
+        <div class="settings-section">
+            <label class="settings-label">Heer:</label>
+            <select name="bg_heer" class="settings-select">
                 <option value="Hintergrund-Heer-Wald.png" 
                     {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wald.png" %}selected{% endif %}>Wald</option>
                 <option value="Hintergrund-Heer-Wüste.png" 
@@ -29,9 +30,9 @@
         </div>
 
         <!-- Luftwaffe -->
-        <div class="mb-3">
-            <label class="form-label">Luftwaffe:</label>
-            <select name="bg_luftwaffe" class="form-select">
+        <div class="settings-section">
+            <label class="settings-label">Luftwaffe:</label>
+            <select name="bg_luftwaffe" class="settings-select">
                 <option value="Hintergrund-Luftwaffe-Grau.png" 
                     {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Grau.png" %}selected{% endif %}>Grau</option>
                 <option value="Hintergrund-Luftwaffe-Blau.png" 
@@ -40,9 +41,9 @@
         </div>
 
         <!-- Marine -->
-        <div class="mb-3">
-            <label class="form-label">Marine:</label>
-            <select name="bg_marine" class="form-select">
+        <div class="settings-section">
+            <label class="settings-label">Marine:</label>
+            <select name="bg_marine" class="settings-select">
                 <option value="Hintergrund-Marine-Hell.png" 
                     {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Hell.png" %}selected{% endif %}>Hell</option>
                 <option value="Hintergrund-Marine-Dunkel.png" 
@@ -51,8 +52,10 @@
         </div>
 
         <!-- Buttons -->
-        <button type="submit" class="btn btn-primary mt-3">Speichern</button>
-        <a href="{{ url_for('main.index') }}" class="btn btn-secondary mt-3 ms-2">Abbrechen</a>
+        <div class="settings-buttons">
+            <button type="submit" class="btn-save">Speichern</button>
+            <a href="{{ url_for('main.index') }}" class="btn-cancel">Abbrechen</a>
+        </div>
     </form>
 </div>
 {% endblock %}

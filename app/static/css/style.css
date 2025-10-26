@@ -81,6 +81,120 @@ STARTSEITE
 
 
 /*************************************************************
+EINSTELLUNGEN
+*************************************************************/
+
+/* Hauptcontainer */
+.settings-container {
+  background-color: var(--bw-bg-dark);
+  color: var(--txt-light);
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  margin-top: 2rem;
+  box-shadow: 0 6px 18px var(--shadows);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Überschrift */
+.settings-title {
+  text-align: center;
+  color: var(--bw-gold);
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/* Abschnittsüberschrift */
+.settings-subtitle {
+  color: var(--bw-gold);
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+/* Formular */
+.settings-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Abschnitt (Label + Auswahl) */
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Label */
+.settings-label {
+  font-weight: 600;
+  color: var(--txt-light);
+}
+
+/* Auswahlfelder */
+.settings-select {
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+  border: 1px solid var(--gray-line);
+  border-radius: 6px;
+  padding: 0.6rem 1.4rem;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.settings-select:focus {
+  outline: none;
+  border-color: var(--bw-gold);
+  box-shadow: 0 0 5px var(--bw-gold);
+}
+
+/* Buttons */
+.settings-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.btn-save,
+.btn-cancel {
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1.4rem;
+  box-shadow: 0 2px 6px var(--shadows);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+/* Speichern-Button */
+.btn-save {
+  background-color: var(--button);
+  color: var(--txt-light);
+}
+
+.btn-save:hover {
+  background-color: var(--bw-gold);
+  transform: translateY(-2px);
+}
+
+/* Abbrechen-Button */
+.btn-cancel {
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+}
+
+.btn-cancel:hover {
+  background-color: var(--hover);
+  transform: translateY(-2px);
+}
+
+
+/*************************************************************
 SEITE: DIENSTGRAD-TABELLE
 *************************************************************/
 
