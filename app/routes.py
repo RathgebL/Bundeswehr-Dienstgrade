@@ -91,44 +91,83 @@ def ranks():
 # Quiz (Modusauswahl)
 @bp.route("/quizmodes")
 def quizmodes():
+    # Gewählten Branch aus Query oder Session holen
+    branch = request.args.get("branch", session.get("default_branch", "Alle"))
+    branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
+
+    # Branch speichern, damit Quiz-Routen ihn verwenden können
+    session["quiz_branch"] = branch
+    session.modified = True
+
+    # Hintergrund (wie gehabt)
     background = session.get("current_background", "Hintergrund-Heer-Wald.png")
-    return render_template("quizmodes.html", background=background)
 
-# Dienstgrad-Quiz
-@bp.route("/quiz1")
-def quiz1():
-    # Alle Dienstgrade laden
-    ranks = Rank.query.all()
+    return render_template(
+        "quizmodes.html",
+        background=background,
+        branches=branches,
+        selected_branch=branch
+    )
 
-    # Einen richtigen und drei falsche auswählen
-    correct = random.choice(ranks)
-    wrong = random.sample([r for r in ranks if r.id != correct.id], 3)
+# Quiz-Data (Hilfsfunktion)
+def generate_quiz_data():
+    # Aktueller Truppenteil aus Session (vom Filter auf /quizmodes)
+    branch = session.get("quiz_branch", "Alle")
 
-    options = [correct] + wrong
-    random.shuffle(options)
+    # Dienstgrade laden – ggf. gefiltert
+    if branch == "Alle":
+        ranks = Rank.query.all()
+    else:
+        ranks = Rank.query.filter_by(branch=branch).all()
 
-    # Aktuellen Hintergrund übernehmen (aus Session)
-    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
-
-    return render_template("quiz1.html", correct=correct, options=options, background=background)
-
-# Schulterklappen-Quiz
-@bp.route("/quiz2")
-def quiz2():
-    ranks = Rank.query.all()
+    # Fallback, falls kein Ergebnis
+    if not ranks:
+        ranks = Rank.query.all()
 
     # Wähle eine zufällige "richtige" Antwort
     correct = random.choice(ranks)
 
-    # Wähle 3 falsche Optionen
-    wrong = random.sample([r for r in ranks if r.id != correct.id], 3)
+    # Wähle bis zu 3 falsche Optionen
+    wrong = random.sample([r for r in ranks if r.id != correct.id], min(3, len(ranks) - 1))
 
-    # Mische sie
+    # Optionen mischen
     options = [correct] + wrong
     random.shuffle(options)
 
-    return render_template("quiz2.html", correct=correct, options=options)
+    # Hintergrund übernehmen
+    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
 
+    return {
+        "branch": branch,
+        "background": background,
+        "correct": correct,
+        "options": options
+    }
+
+# Dienstgrad-Quiz (Text → Bild)
+@bp.route("/quiz1")
+def quiz1():
+    data = generate_quiz_data()
+    return render_template(
+        "quiz1.html",
+        correct=data["correct"],
+        options=data["options"],
+        background=data["background"],
+        selected_branch=data["branch"]
+    )
+
+
+# Schulterklappen-Quiz (Bild → Text)
+@bp.route("/quiz2")
+def quiz2():
+    data = generate_quiz_data()
+    return render_template(
+        "quiz2.html",
+        correct=data["correct"],
+        options=data["options"],
+        background=data["background"],
+        selected_branch=data["branch"]
+    )
 
 # Karteikarten
 @bp.route("/flashcards")
