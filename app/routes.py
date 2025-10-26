@@ -30,39 +30,33 @@ def index():
 # Einstellungen
 @bp.route("/settings", methods=["GET", "POST"])
 def settings():
-    # Aktuelle oder Standardwerte laden
     defaults = {
         "default_branch": session.get("default_branch", "Heer"),
         "backgrounds": session.get("backgrounds", DEFAULT_BACKGROUNDS)
     }
 
+    # Merke dir, von wo man kam
+    next_page = request.args.get("next") or url_for("main.index")
+
     if request.method == "POST":
-        # Ausgewählten Standard-Truppenteil speichern
         branch_input = request.form.get("default_branch", "Heer").strip().capitalize()
         session["default_branch"] = branch_input
 
-        # Benutzerdefinierte Hintergründe speichern (alle 3 Truppenteile)
         backgrounds = {
-            "Heer": request.form.get("bg_heer", defaults["backgrounds"].get("Heer")),
-            "Luftwaffe": request.form.get("bg_luftwaffe", defaults["backgrounds"].get("Luftwaffe")),
-            "Marine": request.form.get("bg_marine", defaults["backgrounds"].get("Marine"))
+            "Heer": request.form.get("bg_heer", defaults["backgrounds"]["Heer"]),
+            "Luftwaffe": request.form.get("bg_luftwaffe", defaults["backgrounds"]["Luftwaffe"]),
+            "Marine": request.form.get("bg_marine", defaults["backgrounds"]["Marine"])
         }
 
-        # Sicherheit: Alle Keys groß schreiben
-        backgrounds = {key.capitalize(): value for key, value in backgrounds.items()}
-
-        # Session aktualisieren
         session["backgrounds"] = backgrounds
         session.modified = True
 
-        # Debug-Ausgabe (zum Testen, später entfernen)
-        print("SESSION BACKGROUNDS:", session["backgrounds"])
-        print("DEFAULT BRANCH:", session["default_branch"])
+        # Nach dem Speichern zur Ausgangsseite zurückkehren
+        return redirect(request.form.get("next") or next_page)
 
-        return redirect(url_for("main.index"))
+    # GET: Seite anzeigen, mit verstecktem Feld für Rücksprung
+    return render_template("settings.html", defaults=defaults, next_page=next_page)
 
-    # Seite anzeigen
-    return render_template("settings.html", defaults=defaults)
 
 # Tabelle (Dienstgrade)
 @bp.route("/ranks")
