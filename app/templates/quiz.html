@@ -1,45 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="text-center py-5">
-    <h1 class="text-3xl fw-bold mb-4 text-light">Quiz: Schulterklappen erkennen</h1>
+<div class="quiz-container">
+    <h1 class="quiz-title">Quiz: Schulterklappen erkennen</h1>
 
-    <div class="card bg-dark bg-opacity-75 text-light p-4 mx-auto" style="max-width: 600px;">
+    <div class="quiz-card">
         <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
              alt="{{ correct.title }}"
-             class="d-block mx-auto mb-4 shadow-lg rounded"
-             style="max-height: 270px; width: auto; object-fit: contain;">
+             class="quiz-image">
 
-
-        <div class="d-grid gap-3">
+        <div class="quiz-options">
             {% for opt in options %}
-            <button id="{{ opt.id }}" data-id="{{ opt.id }}" onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-                    class="btn btn-primary">
+            <button id="{{ opt.id }}" data-id="{{ opt.id }}"
+                    onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
+                    class="quiz-btn">
                 {{ opt.title }}
             </button>
             {% endfor %}
         </div>
 
-        <p id="feedback" class="mt-4 fs-5 fw-semibold"></p>
+        <p id="feedback" class="quiz-feedback"></p>
 
-        <a href="{{ url_for('main.quiz') }}" id="next-btn"
-           class="btn btn-success mt-3 d-none">Nächste Frage</a>
+        <a href="{{ url_for('main.quiz') }}" id="next-btn" class="quiz-next d-none">
+            Nächste Frage
+        </a>
     </div>
 </div>
 
 <script>
-    function checkAnswer(selected, correctId) {
-        const buttons = document.querySelectorAll("button[data-id]");
-        buttons.forEach(btn => btn.disabled = true);
-        if (selected === correctId) {
-            document.getElementById("feedback").innerText = "Richtig!";
-            document.getElementById(selected).classList.replace("btn-primary", "btn-success");
-        } else {
-            document.getElementById("feedback").innerText = "Falsch!";
-            document.getElementById(selected).classList.replace("btn-primary", "btn-danger");
-            document.getElementById(correctId).classList.replace("btn-primary", "btn-success");
-        }
-        document.getElementById("next-btn").classList.remove("d-none");
+function checkAnswer(selected, correctId) {
+    const buttons = document.querySelectorAll("button[data-id]");
+    buttons.forEach(btn => btn.disabled = true);
+    if (selected === correctId) {
+        document.getElementById("feedback").innerText = "Richtig!";
+        document.getElementById(selected).classList.add("correct");
+    } else {
+        document.getElementById("feedback").innerText = "Falsch!";
+        document.getElementById(selected).classList.add("wrong");
+        document.getElementById(correctId).classList.add("correct");
     }
+    document.getElementById("next-btn").classList.remove("d-none");
+}
 </script>
 {% endblock %}

@@ -5,19 +5,19 @@
     <h1 class="mb-4">Bundeswehr Dienstgrade</h1>
     <p class="lead mb-5">Wähle einen Modus aus, um die Dienstgrade zu lernen:</p>
 
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
+    <div class="home-buttons">
         <!-- Dienstgrad-Tabelle -->
-        <a href="{{ url_for('main.ranks') }}" class="btn btn-primary btn-lg">
+        <a href="{{ url_for('main.ranks') }}" class="btn-home btn-tabelle">
             Dienstgrad-Tabelle
         </a>
 
         <!-- Quiz -->
-        <a href="{{ url_for('main.quiz') }}" class="btn btn-success btn-lg">
+        <a href="{{ url_for('main.quiz') }}" class="btn-home btn-quiz">
             Quiz starten
         </a>
 
         <!-- Karteikarten -->
-        <a href="{{ url_for('main.flashcards') }}" class="btn btn-warning btn-lg text-dark">
+        <a href="{{ url_for('main.flashcards') }}" class="btn-home btn-flashcards">
             Karteikarten
         </a>
     </div>
