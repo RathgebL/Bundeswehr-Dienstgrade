@@ -203,7 +203,7 @@ SEITE: STARTSEITE
 
 .btn-home:hover {
   background-color: var(--bw-gold);
-  color: var(--gray-dark);
+  color: var(--txt-light);
   transform: translateY(-2px);
 }
 
@@ -315,7 +315,7 @@ SEITE: EINSTELLUNGEN
 
 .btn--primary:hover {
   background-color: var(--bw-gold);
-  color: var(--gray-dark);
+  color: var(--txt-light);
   transform: translateY(-2px);
 }
 
