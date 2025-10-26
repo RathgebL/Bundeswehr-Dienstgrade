@@ -1,25 +1,19 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="home-container">
-    <h1 class="heading">Bundeswehr Dienstgrade</h1>
-    <p class="subheading">Wähle einen Modus aus, um die Dienstgrade zu lernen:</p>
+<div class="home">
+  <h1 class="home__title">Bundeswehr Dienstgrade</h1>
+  <p class="home__subtitle">Wähle einen Modus aus, um die Dienstgrade zu lernen:</p>
 
-    <div class="home-buttons">
-        <!-- Dienstgrad-Tabelle -->
-        <a href="{{ url_for('main.ranks') }}" class="btn-home btn-tabelle">
-            Dienstgrad-Tabelle
-        </a>
+  <div class="home__buttons">
+    <!-- Dienstgrad-Tabelle -->
+    <a href="{{ url_for('main.ranks') }}" class="btn-home">Dienstgrad-Tabelle</a>
 
-        <!-- Karteikarten -->
-        <a href="{{ url_for('main.flashcards') }}" class="btn-home btn-flashcards">
-            Karteikarten
-        </a>
+    <!-- Karteikarten -->
+    <a href="{{ url_for('main.flashcards') }}" class="btn-home">Karteikarten</a>
 
-        <!-- Quiz -->
-        <a href="{{ url_for('main.quizmodes') }}" class="btn-home btn-quiz">
-            Quiz
-        </a>
-    </div>
+    <!-- Quiz -->
+    <a href="{{ url_for('main.quizmodes') }}" class="btn-home">Quiz</a>
+  </div>
 </div>
 {% endblock %}
