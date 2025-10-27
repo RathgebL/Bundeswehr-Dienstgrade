@@ -172,6 +172,65 @@ NAVIGATIONSBEREICH
 }
 
 
+/* ===========================
+   HOMEPAGE
+   =========================== */
+
+.home {
+  text-align: center;
+  color: var(--txt-light);
+  padding: var(--space-7) var(--space-4);
+}
+
+.home__title {
+  color: var(--bw-gold);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+}
+
+.home__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.home__card {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadows);
+  width: 280px;
+  padding: var(--space-5);
+  text-decoration: none;
+  color: var(--txt-light);
+  transition: all 0.25s ease-in-out;
+}
+
+.home__card:hover {
+  transform: translateY(-6px);
+  background-color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 8px 22px var(--shadows);
+}
+
+.home__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.home__card-title {
+  color: var(--bw-gold);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-2);
+}
+
+.home__card-text {
+  font-size: 1rem;
+  color: var(--txt-light);
+  opacity: 0.85;
+}
+
+
 /*************************************************************
 SEITE: STARTSEITE
 *************************************************************/

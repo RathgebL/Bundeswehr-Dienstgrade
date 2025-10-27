@@ -4,16 +4,21 @@ import random
 
 bp = Blueprint("main", __name__)
 
-# Standardhintergründe (Fallback)
+# =====================================
+# STANDARDHINTERGRÜNDE
+# =====================================
 DEFAULT_BACKGROUNDS = {
     "Heer": "Hintergrund-Heer-Wald.png",
     "Luftwaffe": "Hintergrund-Luftwaffe-Grau.png",
     "Marine": "Hintergrund-Marine-Hell.png"
 }
 
-# Startseite
+
+# =====================================
+# STARTSEITE / LERNBEREICHE
+# =====================================
 @bp.route("/")
-def index():
+def home():
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
 
@@ -24,10 +29,12 @@ def index():
     if session.get("current_background") != background:
         session["current_background"] = background
         session.modified = True
+    return render_template("home/home.html", background=background)
 
-    return render_template("index.html", background=background)
 
-# Einstellungen
+# =====================================
+# EINSTELLUNGEN
+# =====================================
 @bp.route("/settings", methods=["GET", "POST"])
 def settings():
     defaults = {
@@ -58,9 +65,28 @@ def settings():
     return render_template("settings.html", defaults=defaults, next_page=next_page)
 
 
+# =====================================
+# DIENSTGRADE
+# =====================================
+@bp.route("/ranks")
+def ranks_menu():
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+
+    # Den passenden Hintergrund für den aktuellen Branch holen
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Aktuellen Hintergrund merken (für andere Templates)
+    if session.get("current_background") != background:
+        session["current_background"] = background
+        session.modified = True
+
+    return render_template("ranks/ranks_menu.html")
+
+
 # Tabelle (Dienstgrade)
 @bp.route("/ranks")
-def ranks():
+def ranks_table():
     # Aktueller Truppenteil aus Query oder Session
     branch = request.args.get("branch", session.get("default_branch", "Heer"))
     user_backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
@@ -81,7 +107,7 @@ def ranks():
     session["current_background"] = background
 
     return render_template(
-        "ranks.html",
+        "ranks/ranks_table.html",
         ranks=ranks,
         branches=branches,
         selected_branch=branch or "Alle",
@@ -89,7 +115,7 @@ def ranks():
     )
 
 @bp.route("/quizmodes")
-def quizmodes():
+def ranks_quizmodes():
     # Parameter aus URL oder Session lesen
     branch = request.args.get("branch") or session.get("quiz_branch") or "Alle"
     mode = request.args.get("mode") or session.get("quiz_mode") or "normal"
@@ -106,7 +132,7 @@ def quizmodes():
     session["current_background"] = background
 
     return render_template(
-        "quizmodes.html",
+        "ranks/ranks_quizmodes.html",
         background=background,
         branches=branches,
         selected_branch=branch,
@@ -320,3 +346,22 @@ def flashcards():
         background=background,
         selected_branch=branch
     )
+
+
+# =====================================
+# NATO-ALPHABET
+# =====================================
+@bp.route("/nato-alphabet")
+def ranks_menu():
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+
+    # Den passenden Hintergrund für den aktuellen Branch holen
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Aktuellen Hintergrund merken (für andere Templates)
+    if session.get("current_background") != background:
+        session["current_background"] = background
+        session.modified = True
+
+    return render_template("nato-alphabet/nato_menu.html")
