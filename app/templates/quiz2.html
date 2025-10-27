@@ -23,15 +23,21 @@
     {% endfor %}
   </div>
 
-  <p id="feedback" class="quiz__feedback"></p>
+    <!-- Feedback -->
+    <p id="feedback" class="quiz__feedback"></p>
 
-  <a
-    href="{{ url_for('main.quiz2') }}"
-    id="next-btn"
-    class="quiz__next d-none"
-  >
-    Nächste Frage
-  </a>
+    <!-- Button-Bereich -->
+    <div class="quiz__actions">
+        <a href="{{ url_for('main.quizmodes', branch=selected_branch, mode='normal') }}"
+            id="menu-btn"
+            class="quiz__next quiz__back">
+            Zurück zum Menü
+        </a>
+
+        <a href="{{ url_for('main.quiz1') }}" id="next-btn" class="quiz__next d-none">
+            Nächste Frage
+        </a>
+    </div>
 </div>
 
 <script>

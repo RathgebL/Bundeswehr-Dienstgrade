@@ -736,6 +736,66 @@ SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
   box-shadow: 0 4px 20px var(--shadows);
 }
 
+/* ===== Aktions-Buttons unter der Karte ===== */
+.quiz__actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: var(--space-5);
+  flex-wrap: wrap;
+}
+
+/* Beide Buttons gleich breit machen */
+.quiz__actions .quiz__next,
+.quiz__actions .quiz__back {
+  flex: 1 1 180px; /* gleiche Basisbreite, aber flexibel bei kleineren Screens */
+  max-width: 220px;
+  text-align: center;
+}
+
+/* Standardzustand: nur der Menü-Button sichtbar */
+.quiz__back {
+  background-color: var(--blue);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.quiz__back:hover {
+  background-color: var(--bw-gold);
+  transform: translateY(-2px);
+}
+
+/* Wenn die nächste Frage angezeigt werden soll */
+.quiz__next {
+  background-color: var(--blue);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.quiz__next:hover {
+  background-color: var(--bw-gold);
+  transform: translateY(-2px);
+}
+
+/* Wenn nur ein Button sichtbar ist, zentrieren */
+.quiz__actions.single {
+  justify-content: center;
+}
+
+/* Wenn zwei Buttons sichtbar sind, nebeneinander */
+.quiz__actions.double {
+  justify-content: center;
+  gap: var(--space-4);
+}
+
 /* ===== Feedback-Text ===== */
 .quiz__feedback {
   margin-top: var(--space-4);
