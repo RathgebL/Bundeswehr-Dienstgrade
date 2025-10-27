@@ -62,11 +62,11 @@ def settings():
         return redirect(request.form.get("next") or next_page)
 
     # GET: Seite anzeigen, mit verstecktem Feld für Rücksprung
-    return render_template("settings.html", defaults=defaults, next_page=next_page)
+    return render_template("settings/settings.html", defaults=defaults, next_page=next_page)
 
 
 # =====================================
-# DIENSTGRADE
+# DIENSTGRADE - MENÜ
 # =====================================
 @bp.route("/ranks")
 def ranks_menu():
@@ -84,8 +84,10 @@ def ranks_menu():
     return render_template("ranks/ranks_menu.html")
 
 
-# Tabelle (Dienstgrade)
-@bp.route("/ranks")
+# =====================================
+# DIENSTGRADE - TABELLE
+# =====================================
+@bp.route("/ranks/table")
 def ranks_table():
     # Aktueller Truppenteil aus Query oder Session
     branch = request.args.get("branch", session.get("default_branch", "Heer"))
@@ -114,7 +116,11 @@ def ranks_table():
         background=background
     )
 
-@bp.route("/quizmodes")
+
+# =====================================
+# DIENSTGRADE - QUIZMODUS
+# =====================================
+@bp.route("/ranks/quizmodes")
 def ranks_quizmodes():
     # Parameter aus URL oder Session lesen
     branch = request.args.get("branch") or session.get("quiz_branch") or "Alle"
@@ -139,7 +145,10 @@ def ranks_quizmodes():
         selected_mode=mode
     )
 
-# Quiz-Data (Hilfsfunktion)
+
+# =====================================
+# DIENSTGRADE - QUIZDATEN
+# =====================================
 def generate_quiz_data(branch=None):
     # Aktueller Truppenteil aus Parameter oder Session
     branch = branch or session.get("quiz_branch", "Alle")
@@ -175,9 +184,13 @@ def generate_quiz_data(branch=None):
     }
 
 
+# =====================================
+# DIENSTGRADE - QUIZSEITEN
+# =====================================
+
 # Dienstgrad-Quiz (Text → Bild)
-@bp.route("/quiz1")
-def quiz1():
+@bp.route("/ranks/quiz1")
+def ranks_quiz1():
     # Branch aus Query übernehmen (z. B. von /quizmodes?branch=Marine)
     branch = request.args.get("branch")
     if branch:
@@ -188,7 +201,7 @@ def quiz1():
     data = generate_quiz_data()
 
     return render_template(
-        "quiz1.html",
+        "ranks/ranks_quiz1.html",
         correct=data["correct"],
         options=data["options"],
         background=data["background"],
@@ -197,8 +210,8 @@ def quiz1():
 
 
 # Schulterklappen-Quiz (Bild → Text)
-@bp.route("/quiz2")
-def quiz2():
+@bp.route("/ranks/quiz2")
+def ranks_quiz2():
     # Branch aus Query übernehmen
     branch = request.args.get("branch")
     if branch:
@@ -209,7 +222,7 @@ def quiz2():
     data = generate_quiz_data()
 
     return render_template(
-        "quiz2.html",
+        "ranks/ranks_quiz2.html",
         correct=data["correct"],
         options=data["options"],
         background=data["background"],
@@ -217,9 +230,13 @@ def quiz2():
     )
 
 
+# =====================================
+# DIENSTGRADE - ZEITMODUS
+# =====================================
+
 # Zeitmodus: Dienstgrad-Quiz
-@bp.route("/quiz1_timer")
-def quiz1_timer():
+@bp.route("/ranks/quiz1_timer")
+def ranks_quiz1_timer():
     # Branch aus URL-Parameter oder Session
     branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
     session["quiz_branch"] = branch
@@ -254,15 +271,15 @@ def quiz1_timer():
     session["current_background"] = background
 
     return render_template(
-        "quiz1_timer.html",
+        "ranks/ranks_quiz1_timer.html",
         ranks=rank_data,
         background=background
     )
 
 
 # Zeitmodus: Schulterklappen-Quiz
-@bp.route("/quiz2_timer")
-def quiz2_timer():
+@bp.route("/ranks/quiz2_timer")
+def ranks_quiz2_timer():
     # Branch aus URL-Parameter oder Session
     branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
     session["quiz_branch"] = branch
@@ -297,14 +314,17 @@ def quiz2_timer():
     session["current_background"] = background
 
     return render_template(
-        "quiz2_timer.html",
+        "ranks/ranks_quiz2_timer.html",
         ranks=rank_data,
         background=background
     )
 
-# Karteikarten
-@bp.route("/flashcards")
-def flashcards():
+
+# =====================================
+# DIENSTGRADE - KARTEIKARTEN
+# =====================================
+@bp.route("ranks/cards")
+def ranks_cards():
     # Gewählten Branch aus Query-Param oder Session holen
     branch = request.args.get("branch", "Alle")
 
@@ -341,7 +361,7 @@ def flashcards():
     background = session.get("current_background", "Hintergrund-Heer-Wald.png")
 
     return render_template(
-        "flashcards.html",
+        "ranks/ranks_cards.html",
         ranks=rank_data,
         background=background,
         selected_branch=branch
@@ -351,8 +371,8 @@ def flashcards():
 # =====================================
 # NATO-ALPHABET
 # =====================================
-@bp.route("/nato-alphabet")
-def ranks_menu():
+@bp.route("/nato")
+def nato_menu():
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
 
@@ -364,4 +384,4 @@ def ranks_menu():
         session["current_background"] = background
         session.modified = True
 
-    return render_template("nato-alphabet/nato_menu.html")
+    return render_template("nato/nato_menu.html")

@@ -1,4 +1,12 @@
 import csv
+import os
+import sys
+
+# Absoluter Pfad zum Projektstamm ermitteln
+BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+sys.path.append(BASE_DIR)
+
+# --- Flask-App importieren ---
 from app import create_app, db
 from app.models import Rank
 
@@ -6,7 +14,7 @@ from app.models import Rank
 app = create_app()
 
 def import_ranks(csv_path="data/dienstgrade.csv"):
-    """Importiert Dienstgrade aus der CSV-Datei in die SQLite-Datenbank."""
+    # Importiert Dienstgrade aus der CSV-Datei in die SQLite-Datenbank
     with app.app_context():
         with open(csv_path, newline="", encoding="utf-8") as f:
             reader = csv.DictReader(f)
