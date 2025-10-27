@@ -1,0 +1,19 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="nato-menu">
+  <h1>NATO-Alphabet</h1>
+  <p>Wähle einen Lernmodus:</p>
+
+  <div class="menu-buttons">
+    <!-- NATO-Alphabet-Tabelle -->
+    <a href="{{ url_for('nato.nato_table') }}" class="btn-home">Tabelle</a>
+
+    <!-- Karteikarten -->
+    <a href="{{ url_for('nato.nato_cards') }}" class="btn-home">Karteikarten</a>
+
+    <!-- Quiz -->
+    <a href="{{ url_for('nato.nato_quizmodes') }}" class="btn-home">Quiz</a>
+  </div>
+</div>
+{% endblock %}
