@@ -276,7 +276,7 @@ SEITE: EINSTELLUNGEN
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Hover- und Fokuszustände für Dropdowns */
+/* ===== Hover- und Fokuszustände für Dropdowns ===== */
 .settings__select:hover {
   background-color: var(--gray-line);       /* etwas heller als normal */
   border-color: var(--bw-gold);             /* goldene Kontur als Feedback */
@@ -342,86 +342,111 @@ SEITE: EINSTELLUNGEN
 SEITE: DIENSTGRAD-TABELLE
 *************************************************************/
 
-/* Container für Tabelle */
-.ranks-container {
+/* ===== Hauptcontainer ===== */
+.ranks {
   background-color: var(--bw-bg);
   color: var(--txt-light);
-  padding: 2rem;            /* Abstand Titel zu Box */
-  border-radius: 1rem;
-  margin-top: 2rem;         /* Abstand Box zu Navigationsleiste */
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  margin: var(--space-6) auto;
   box-shadow: 0 6px 18px var(--shadows);
+  max-width: 1400px;          /* auf großen Screens angenehm breit */
+  width: 95%;
 }
 
-/* Tabellenüberschrift */
-.ranks-container h1 {
+/* ===== Titel ===== */
+.ranks__title {
   text-align: center;
   color: var(--bw-gold);
-  margin-bottom: 1.5rem;
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-5);
 }
 
-/* Filterbereich über der Tabelle */
-.ranks-filter {
+/* ===== Filterbereich ===== */
+.ranks__filter {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--space-5);
 }
 
-.ranks-filter label {
-  font-weight: bold;
-  margin-right: 0.5rem;
+.ranks__filter label {
+  font-weight: var(--font-weight-semibold);
+  margin-right: var(--space-2);
   color: var(--txt-light);
+  font-size: var(--font-size-base);
 }
 
-.ranks-filter select {
+.ranks__filter select {
   background-color: var(--gray-mid);
   color: var(--txt-light);
   border: 1px solid var(--gray-line);
-  border-radius: 6px;
-  padding: 0.4rem 1rem;     /* Text-höhe, -breite */
+  border-radius: var(--radius-sm);
+  padding: var(--space-2) var(--space-4);
   text-align: center;
+  font-size: var(--font-size-base);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-/* Tabellenlayout */
-.table-container {
+.ranks__filter select:hover {
+  background-color: var(--gray-line);
+  border-color: var(--bw-gold);
+}
+
+.ranks__filter select:focus {
+  outline: none;
+  border-color: var(--bw-gold);
+  box-shadow: 0 0 6px var(--bw-gold);
+}
+
+/* ===== Tabellen-Wrapper ===== */
+.ranks__table-wrapper {
   background-color: var(--gray-dark);
-  padding: 1rem;            /* Abstand Tabelle zu Box */
-  border-radius: 0.75rem;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
   box-shadow: 0 4px 12px var(--shadows);
+  overflow-x: auto;
 }
 
-.rank-table {
+/* ===== Tabelle ===== */
+.ranks__table {
   width: 100%;
+  min-width: 800px;
   border-collapse: collapse;
   color: var(--txt-light);
+  font-size: var(--font-size-base);
 }
 
-/* Tabellenkopf */
-.rank-table thead {
+/* ===== Tabellenkopf ===== */
+.ranks__table thead {
   background-color: var(--gray-mid);
   color: var(--bw-gold);
+  font-weight: var(--font-weight-semibold);
 }
 
-/* Tabellenzellen */
-.rank-table th,
-.rank-table td {
-  padding: 0.4rem;    /* Abstand zwischen Text und Trennlinie */
+.ranks__table th,
+.ranks__table td {
+  padding: var(--space-2);
   border-bottom: 1px solid var(--gray-mid);
+  text-align: left;
+  vertical-align: middle;
 }
 
-/* Hover-Effekt für Tabellenzeilen */
-.rank-table tr:hover {
+/* ===== Hover-Effekt für Tabellenzeilen ===== */
+.ranks__table tr:hover {
   background-color: var(--hover);
   transition: background 0.2s ease-in-out;
 }
 
-/* Rangbilder in Tabelle */
-.rank-table img {
+/* ===== Rangbilder ===== */
+.ranks__table img {
   height: 50px;
-  border-radius: 4px;
+  border-radius: var(--radius-xs);
 }
 
-/* Dienstgradtitel */
-.rank-title {
-  font-weight: bold;
+/* ===== Dienstgradtitel ===== */
+.ranks__title-cell {
+  font-weight: var(--font-weight-semibold);
   color: var(--bw-gold);
 }
 

@@ -1,45 +1,45 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="ranks-container">
-    <h1>Dienstgrad-Tabelle</h1>
+<div class="ranks">
+  <h1 class="ranks__title">Dienstgrad-Tabelle</h1>
 
-    <!-- Filter -->
-    <form method="get" action="{{ url_for('main.ranks') }}" class="ranks-filter">
-        <label for="branch">Truppenteil:</label>
-        <select name="branch" id="branch" onchange="this.form.submit()">
-            {% for b in branches %}
-            <option value="{{ b }}" {% if selected_branch == b %}selected{% endif %}>{{ b }}</option>
-            {% endfor %}
-        </select>
-    </form>
+  <!-- Filter -->
+  <form method="get" action="{{ url_for('main.ranks') }}" class="ranks__filter">
+    <label for="branch">Truppenteil:</label>
+    <select name="branch" id="branch" onchange="this.form.submit()">
+      {% for b in branches %}
+      <option value="{{ b }}" {% if selected_branch == b %}selected{% endif %}>{{ b }}</option>
+      {% endfor %}
+    </select>
+  </form>
 
-    <!-- Tabelle -->
-    <div class="table-container">
-    <table class="rank-table">
-        <thead>
+  <!-- Tabelle -->
+  <div class="ranks__table-wrapper">
+    <table class="ranks__table">
+      <thead>
         <tr>
-            <th>Bild</th>
-            <th>Dienstgrad</th>
-            <th>Abkürzung</th>
-            <th>NATO-Code</th>
-            <th>Ranggruppe</th>
-            <th>Beschreibung</th>
+          <th>Bild</th>
+          <th>Dienstgrad</th>
+          <th>Abkürzung</th>
+          <th>NATO-Code</th>
+          <th>Ranggruppe</th>
+          <th>Beschreibung</th>
         </tr>
-        </thead>
-        <tbody>
+      </thead>
+      <tbody>
         {% for rank in ranks %}
         <tr>
-            <td><img src="{{ url_for('static', filename='images/' + rank.image_filename) }}" alt=""></td>
-            <td class="rank-title">{{ rank.title }}</td>
-            <td>{{ rank.abbreviation or "–" }}</td>
-            <td>{{ rank.level_code or "–" }}</td>
-            <td>{{ rank.rank_group or rank.rank_type or "–" }}</td>
-            <td>{{ rank.description or "Keine Beschreibung" }}</td>
+          <td><img src="{{ url_for('static', filename='images/' + rank.image_filename) }}" alt=""></td>
+          <td class="ranks__title-cell">{{ rank.title }}</td>
+          <td>{{ rank.abbreviation or "–" }}</td>
+          <td>{{ rank.level_code or "–" }}</td>
+          <td>{{ rank.rank_group or rank.rank_type or "–" }}</td>
+          <td>{{ rank.description or "Keine Beschreibung" }}</td>
         </tr>
         {% endfor %}
-        </tbody>
+      </tbody>
     </table>
-    </div>
+  </div>
 </div>
 {% endblock %}
