@@ -1,62 +1,69 @@
 {% extends "base/base.html" %}
 
 {% block content %}
-<h1 class="mb-4 text-center">Karteikarten</h1>
+<div class="flashcards">
+  <h1 class="mb-4 text-center">Karteikarten</h1>
 
-<!-- Filterbereich -->
-<div class="ranks-filter">
+  <!-- Filterbereich -->
+  <div class="ranks-filter">
   <form method="get" action="{{ url_for('ranks.ranks_cards') }}">
-    <label for="branch">Truppenteil:</label>
-    <select name="branch" id="branch" onchange="this.form.submit()">
+      <label for="branch">Truppenteil:</label>
+      <select name="branch" id="branch" onchange="this.form.submit()">
       <option value="Alle" {% if selected_branch == 'Alle' %}selected{% endif %}>Alle</option>
       <option value="Heer" {% if selected_branch == 'Heer' %}selected{% endif %}>Heer</option>
       <option value="Luftwaffe" {% if selected_branch == 'Luftwaffe' %}selected{% endif %}>Luftwaffe</option>
       <option value="Marine" {% if selected_branch == 'Marine' %}selected{% endif %}>Marine</option>
-    </select>
+      </select>
   </form>
-</div>
+  </div>
 
-<!-- Karteikarten -->
-<div class="flashcards">
-    <div id="flashcard" class="flashcard-container">
-        <div class="card-flip" onclick="flipCard()">
-            <div class="card-face card-front">
-                <img id="rank-image" src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
-                     alt="{{ ranks[0].title }}" class="rank-image">
-                <p class="flip-hint">Klick zum Umdrehen</p>
-            </div>
-            <div class="card-face card-back">
-                <h4 id="rank-title">{{ ranks[0].title }}</h4>
+  <div id="flashcard" class="flashcard-container">
+    <div class="card-flip" onclick="flipCard()">
+      <div class="card-face card-front">
+        <img id="rank-image"
+             src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
+             alt="{{ ranks[0].title }}"
+             class="rank-image">
+        <p class="flip-hint">Klick zum Umdrehen</p>
+      </div>
+      <div class="card-face card-back">
+        <h4 id="rank-title">{{ ranks[0].title }}</h4>
 
-                <div id="rank-meta" class="rank-meta-clean">
-                    <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
-                    <p id="rank-group">{{ ranks[0].rank_group or ranks[0].rank_type or "-" }}</p>
-                    <p id="rank-nato">{{ ranks[0].level_code or "-" }}</p>
-                </div>
-
-                <p id="rank-desc" class="rank-desc">{{ ranks[0].description }}</p>
-            </div>
+        <div id="rank-meta" class="rank-meta-clean">
+          <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
+          <p id="rank-group">{{ ranks[0].rank_group or ranks[0].rank_type or "-" }}</p>
+          <p id="rank-nato">{{ ranks[0].level_code or "-" }}</p>
         </div>
+
+        <p id="rank-desc" class="rank-desc">{{ ranks[0].description }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steuerung -->
+  <div class="flashcard-buttons">
+    <div class="flashcard-controls">
+      <button class="btn-card" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn-card" onclick="nextCard()">Nächste Karte</button>
     </div>
 
-    <div class="flashcard-buttons">
-        <div class="flashcard-controls">
-            <button class="btn-card" onclick="prevCard()">Vorherige Karte</button>
-            <button class="btn-card" onclick="nextCard()">Nächste Karte</button>
-        </div>
-
-        <div class="flashcard-controls">
-            <button class="btn-card-secondary" onclick="shuffleCards()">Mischen</button>
-            <button class="btn-card-secondary" onclick="resetCards()">Ordnen</button>
-        </div>
+    <div class="flashcard-controls">
+      <button class="btn-card-secondary" onclick="shuffleCards()">Mischen</button>
+      <button class="btn-card-secondary" onclick="resetCards()">Ordnen</button>
     </div>
+  </div>
+
+  <!-- Zurück-Button -->
+  <div class="btn-back-container">
+    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn-back">Zurück zum Menü</a>
+  </div>
 </div>
 
 <script>
 const ranksInitial = {{ ranks|tojson|safe }}; // Originaldaten vom Server
-let ranks = [...ranksInitial];                // Aktuell sichtbare Karten
+let ranks = [...ranksInitial];
 let currentIndex = 0;
-let ranksOriginal = [...ranksInitial];        // Backup für "Ordnen"-Funktion
+let ranksOriginal = [...ranksInitial];
 
 const flipContainer = document.querySelector(".card-flip");
 const img = document.getElementById("rank-image");
@@ -64,56 +71,49 @@ const title = document.getElementById("rank-title");
 const desc = document.getElementById("rank-desc");
 
 function flipCard() {
-    flipContainer.classList.toggle("flipped");
+  flipContainer.classList.toggle("flipped");
 }
 
 function nextCard() {
-    flipContainer.classList.remove("flipped");
-    currentIndex = (currentIndex + 1) % ranks.length;
-    updateCard();
+  flipContainer.classList.remove("flipped");
+  currentIndex = (currentIndex + 1) % ranks.length;
+  updateCard();
 }
 
 function prevCard() {
-    flipContainer.classList.remove("flipped");
-    currentIndex = (currentIndex - 1 + ranks.length) % ranks.length;
-    updateCard();
+  flipContainer.classList.remove("flipped");
+  currentIndex = (currentIndex - 1 + ranks.length) % ranks.length;
+  updateCard();
 }
 
 function shuffleCards() {
-    // Fisher-Yates-Shuffle
-    for (let i = ranks.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [ranks[i], ranks[j]] = [ranks[j], ranks[i]];
-    }
-    currentIndex = 0;
-    updateCard();
-
-    // Optional: kleine visuelle Bestätigung (Karte kurz wackeln)
-    flipContainer.classList.add("shake");
-    setTimeout(() => flipContainer.classList.remove("shake"), 400);
+  for (let i = ranks.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ranks[i], ranks[j]] = [ranks[j], ranks[i]];
+  }
+  currentIndex = 0;
+  updateCard();
+  flipContainer.classList.add("shake");
+  setTimeout(() => flipContainer.classList.remove("shake"), 400);
 }
 
 function resetCards() {
-    // Wiederherstellen der Originalreihenfolge
-    ranks = [...ranksOriginal];
-    currentIndex = 0;
-    updateCard();
-
-    // Optional: kleines Feedback
-    flipContainer.classList.add("reset-glow");
-    setTimeout(() => flipContainer.classList.remove("reset-glow"), 400);
+  ranks = [...ranksOriginal];
+  currentIndex = 0;
+  updateCard();
+  flipContainer.classList.add("reset-glow");
+  setTimeout(() => flipContainer.classList.remove("reset-glow"), 400);
 }
 
-// Karte aktualisieren
 function updateCard() {
-    const rank = ranks[currentIndex];
-    img.src = `/static/images/${rank.image_filename}`;
-    img.alt = rank.title;
-    title.innerText = rank.title;
-    desc.innerText = rank.description;
-    document.getElementById("rank-abbr").innerText = rank.abbreviation || "-";
-    document.getElementById("rank-group").innerText = rank.rank_group || rank.rank_type || "-";
-    document.getElementById("rank-nato").innerText = rank.level_code || "-";
+  const rank = ranks[currentIndex];
+  img.src = `/static/images/${rank.image_filename}`;
+  img.alt = rank.title;
+  title.innerText = rank.title;
+  desc.innerText = rank.description;
+  document.getElementById("rank-abbr").innerText = rank.abbreviation || "-";
+  document.getElementById("rank-group").innerText = rank.rank_group || rank.rank_type || "-";
+  document.getElementById("rank-nato").innerText = rank.level_code || "-";
 }
 </script>
 {% endblock %}
