@@ -318,7 +318,7 @@ def nato_menu():
         session["current_background"] = background
         session.modified = True
 
-    return render_template("nato-alphabet/nato_menu.html", background=background)
+    return render_template("nato/nato_menu.html", background=background)
 
 
 # =====================================
@@ -333,4 +333,83 @@ def nato_table():
 
     nato_entries = NATO.query.order_by(NATO.letter.asc()).all()
 
-    return render_template("nato-alphabet/nato_table.html", entries=nato_entries, background=background)
+    return render_template("nato/nato_table.html", entries=nato_entries, background=background)
+
+
+# =====================================
+# NATO-ALPHABET — Karteikarten
+# =====================================
+@bp_nato.route("/cards")
+def nato_cards():
+    """Karteikartenansicht des NATO-Alphabets"""
+    # Hintergrund dynamisch nach Standard-Branch
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Alle Buchstaben aus der DB laden (A–Z)
+    nato_entries = NATO.query.order_by(NATO.letter.asc()).all()
+
+    # JSON-kompatible Struktur für Template
+    entries_data = [
+        {
+            "id": e.id,
+            "letter": e.letter,
+            "correct": e.correct,
+            "wrongs": [
+                e.wrong1, e.wrong2, e.wrong3, e.wrong4,
+                e.wrong5, e.wrong6, e.wrong7, e.wrong8, e.wrong9
+            ]
+        }
+        for e in nato_entries
+    ]
+
+    return render_template(
+        "nato/nato_cards.html",
+        entries=entries_data,
+        background=background
+    )
+
+
+# =====================================
+# NATO-ALPHABET — Quiz
+# =====================================
+@bp_nato.route("/quiz")
+def nato_quiz():
+    """Einfaches Quiz: Welches Wort gehört zu diesem Buchstaben?"""
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Alle Einträge laden
+    nato_entries = NATO.query.all()
+    if not nato_entries:
+        return "Keine Daten gefunden – bitte CSV importieren.", 500
+
+    # Zufälligen Buchstaben wählen
+    correct_entry = random.choice(nato_entries)
+
+    # Falschantworten aus den wrong-Feldern + evtl. andere zufällige Einträge
+    all_wrongs = [getattr(correct_entry, f"wrong{i}") for i in range(1, 10)]
+    all_wrongs = [w for w in all_wrongs if w]  # Nur vorhandene nehmen
+
+    # Falls zu wenige falsche Antworten, aus anderen Zeilen auffüllen
+    if len(all_wrongs) < 3:
+        others = [e.correct for e in nato_entries if e.id != correct_entry.id]
+        extra = random.sample(others, min(3 - len(all_wrongs), len(others)))
+        all_wrongs.extend(extra)
+
+    # Drei zufällige falsche Antworten auswählen
+    wrong_answers = random.sample(all_wrongs, min(3, len(all_wrongs)))
+
+    # Antwortoptionen zusammenstellen und mischen
+    options = [correct_entry.correct] + wrong_answers
+    random.shuffle(options)
+
+    return render_template(
+        "nato/nato_quiz.html",
+        letter=correct_entry.letter,
+        correct=correct_entry.correct,
+        options=options,
+        background=background
+    )

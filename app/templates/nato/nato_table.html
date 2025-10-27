@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "base/base.html" %}
 {% block content %}
 <div class="table-container">
   <h1 class="page-title">NATO-Alphabet</h1>
@@ -8,7 +8,6 @@
       <tr>
         <th>Buchstabe</th>
         <th>Bezeichnung</th>
-        <th>Alternative Begriffe</th>
       </tr>
     </thead>
     <tbody>
@@ -16,12 +15,6 @@
       <tr>
         <td>{{ entry.letter }}</td>
         <td class="highlight">{{ entry.correct }}</td>
-        <td>
-          {{ entry.wrong1 }}
-          {% for wrong in [entry.wrong2, entry.wrong3, entry.wrong4, entry.wrong5, entry.wrong6, entry.wrong7, entry.wrong8, entry.wrong9] if wrong %}
-            , {{ wrong }}
-          {% endfor %}
-        </td>
       </tr>
       {% endfor %}
     </tbody>

@@ -29,37 +29,47 @@
     <button type="button" class="quiz__button" onclick="startQuiz(1)">Dienstgrad erkennen</button>
     <button type="button" class="quiz__button" onclick="startQuiz(2)">Schulterklappe finden</button>
   </div>
+
+  <!-- Zurück-Button -->
+  <div class="quiz__back-container" style="margin-top: var(--space-6); text-align: center;">
+    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn-back">Zurück zum Dienstgrad-Menü</a>
+  </div>
 </div>
 
 <script>
-function changeBranch() {
-  const branch = document.getElementById("branch").value;
-  const mode = document.getElementById("mode").value;
-  window.location.href = `/quizmodes?branch=${branch}&mode=${mode}`;
-}
+  const quiz1Url = "{{ url_for('ranks.ranks_quiz1') }}";
+  const quiz1TimerUrl = "{{ url_for('ranks.ranks_quiz1_timer') }}";
+  const quiz2Url = "{{ url_for('ranks.ranks_quiz2') }}";
+  const quiz2TimerUrl = "{{ url_for('ranks.ranks_quiz2_timer') }}";
 
-function changeMode() {
-  const branch = document.getElementById("branch").value;
-  const mode = document.getElementById("mode").value;
-  window.location.href = `/quizmodes?branch=${branch}&mode=${mode}`;
-}
-
-function startQuiz(type) {
-  const mode = document.getElementById("mode").value;
-  const branch = document.getElementById("branch").value;
-
-  let url = "";
-  if (type === 1) {
-    url = mode === "timer"
-      ? `/quiz1_timer?branch=${branch}`
-      : `/quiz1?branch=${branch}`;
-  } else if (type === 2) {
-    url = mode === "timer"
-      ? `/quiz2_timer?branch=${branch}`
-      : `/quiz2?branch=${branch}`;
+  function changeBranch() {
+    const branch = document.getElementById("branch").value;
+    const mode = document.getElementById("mode").value;
+    window.location.href = `/ranks/quizmodes?branch=${branch}&mode=${mode}`;
   }
 
-  window.location.href = url;
-}
+  function changeMode() {
+    const branch = document.getElementById("branch").value;
+    const mode = document.getElementById("mode").value;
+    window.location.href = `/ranks/quizmodes?branch=${branch}&mode=${mode}`;
+  }
+
+  function startQuiz(type) {
+    const mode = document.getElementById("mode").value;
+    const branch = document.getElementById("branch").value;
+
+    let url = "";
+    if (type === 1) {
+      url = mode === "timer"
+        ? `${quiz1TimerUrl}?branch=${branch}`
+        : `${quiz1Url}?branch=${branch}`;
+    } else if (type === 2) {
+      url = mode === "timer"
+        ? `${quiz2TimerUrl}?branch=${branch}`
+        : `${quiz2Url}?branch=${branch}`;
+    }
+
+    window.location.href = url;
+  }
 </script>
 {% endblock %}

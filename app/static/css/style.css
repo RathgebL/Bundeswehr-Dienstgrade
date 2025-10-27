@@ -83,9 +83,10 @@ DESIGNSYSTEM – Farben, Schriften, Abstände
 
 
 /*************************************************************
-BASISSTIL: SELECT-FELDER (global einheitlich)
+BASISSTIL
 *************************************************************/
 
+/* SELECT-FELDER (global einheitlich) */
 .select-base {
   background-color: var(--gray-mid);
   color: var(--txt-light);
@@ -109,6 +110,37 @@ BASISSTIL: SELECT-FELDER (global einheitlich)
   outline: none;
   border-color: none;
   box-shadow: none;
+}
+
+/* ZURÜCK-BUTTON (universell für Menüs & Unterseiten) */
+.btn-back {
+  display: inline-block;
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-button);
+  box-shadow: 0 3px 8px var(--shadows);
+  transition: all 0.2s ease-in-out;
+  text-align: center;
+  margin-top: var(--space-6);
+  width: 100%;
+  max-width: 300px;
+}
+
+/* Hover-Effekt */
+.btn-back:hover {
+  background-color: var(--hover);
+  transform: translateY(-2px);
+}
+
+/* Optionale zentrierte Platzierung */
+.btn-back-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
@@ -169,132 +201,6 @@ NAVIGATIONSBEREICH
   background-color: var(--bw-gold);         /* optischer Fokus beim Hover */
   color: var(--txt-light);
   transform: translateY(-1px);              /* leichter Bewegungseffekt */
-}
-
-
-/* ===========================
-   HOMEPAGE
-   =========================== */
-
-.home {
-  text-align: center;
-  color: var(--txt-light);
-  padding: var(--space-7) var(--space-4);
-}
-
-.home__title {
-  color: var(--bw-gold);
-  font-size: 2rem;
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-6);
-}
-
-.home__cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-6);
-}
-
-.home__card {
-  background-color: rgba(0, 0, 0, 0.5);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadows);
-  width: 280px;
-  padding: var(--space-5);
-  text-decoration: none;
-  color: var(--txt-light);
-  transition: all 0.25s ease-in-out;
-}
-
-.home__card:hover {
-  transform: translateY(-6px);
-  background-color: rgba(0, 0, 0, 0.65);
-  box-shadow: 0 8px 22px var(--shadows);
-}
-
-.home__icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-3);
-}
-
-.home__card-title {
-  color: var(--bw-gold);
-  font-size: 1.4rem;
-  margin-bottom: var(--space-2);
-}
-
-.home__card-text {
-  font-size: 1rem;
-  color: var(--txt-light);
-  opacity: 0.85;
-}
-
-
-/*************************************************************
-SEITE: STARTSEITE
-*************************************************************/
-
-/* ===== Hauptcontainer ===== */
-.home {
-  background-color: var(--bw-bg);                 /* halbtransparente Box */
-  color: var(--txt-light);
-  padding: var(--space-8);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadows);
-  max-width: 768px;
-  margin: var(--space-8) auto;                    /* zentriert mit großzügigem Abstand */
-  text-align: center;
-}
-
-/* ===== Überschrift ===== */
-.home__title {
-  color: var(--bw-gold);
-  font-size: var(--font-size-xxxl);
-  font-weight: var(--font-weight-bold);
-  font-family: var(--font-family-sans);
-  margin-bottom: var(--space-6);
-  line-height: var(--line-height-tight);
-}
-
-/* ===== Beschreibung ===== */
-.home__subtitle {
-  font-size: var(--font-size-m);
-  color: var(--txt-light);
-  font-weight: var(--font-weight-regular);
-  margin-bottom: var(--space-7);
-  font-family: var(--font-family-sans);
-  line-height: var(--line-height-normal);
-}
-
-/* ===== Button-Container ===== */
-.home__buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--space-5);
-}
-
-/* ===== Hauptbuttons ===== */
-.btn-home {
-  background-color: var(--blue);
-  color: var(--txt-light);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-  text-decoration: none;
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-button);
-  box-shadow: 0 3px 8px var(--shadows);
-  transition: all 0.2s ease-in-out;
-  width: 100%;
-  max-width: 300px;
-  text-align: center;
-}
-
-.btn-home:hover {
-  background-color: var(--bw-gold);
-  color: var(--txt-light);
-  transform: translateY(-2px);
 }
 
 
@@ -424,6 +330,132 @@ SEITE: EINSTELLUNGEN
 
 .btn--secondary:hover {
   background-color: var(--hover);
+  transform: translateY(-2px);
+}
+
+
+/* ===========================
+   HOMEPAGE
+   =========================== */
+
+.home {
+  text-align: center;
+  color: var(--txt-light);
+  padding: var(--space-7) var(--space-4);
+}
+
+.home__title {
+  color: var(--bw-gold);
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+}
+
+.home__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+.home__card {
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadows);
+  width: 280px;
+  padding: var(--space-5);
+  text-decoration: none;
+  color: var(--txt-light);
+  transition: all 0.25s ease-in-out;
+}
+
+.home__card:hover {
+  transform: translateY(-6px);
+  background-color: rgba(0, 0, 0, 0.65);
+  box-shadow: 0 8px 22px var(--shadows);
+}
+
+.home__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-3);
+}
+
+.home__card-title {
+  color: var(--bw-gold);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-2);
+}
+
+.home__card-text {
+  font-size: 1rem;
+  color: var(--txt-light);
+  opacity: 0.85;
+}
+
+
+/*************************************************************
+SEITE: DIENSTGRADE MENÜ
+*************************************************************/
+
+/* ===== Hauptcontainer ===== */
+.home {
+  background-color: var(--bw-bg);                 /* halbtransparente Box */
+  color: var(--txt-light);
+  padding: var(--space-8);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadows);
+  max-width: 768px;
+  margin: var(--space-8) auto;                    /* zentriert mit großzügigem Abstand */
+  text-align: center;
+}
+
+/* ===== Überschrift ===== */
+.home__title {
+  color: var(--bw-gold);
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-sans);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-height-tight);
+}
+
+/* ===== Beschreibung ===== */
+.home__subtitle {
+  font-size: var(--font-size-m);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-regular);
+  margin-bottom: var(--space-7);
+  font-family: var(--font-family-sans);
+  line-height: var(--line-height-normal);
+}
+
+/* ===== Button-Container ===== */
+.home__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+/* ===== Hauptbuttons ===== */
+.btn-home {
+  background-color: var(--blue);
+  color: var(--txt-light);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-button);
+  box-shadow: 0 3px 8px var(--shadows);
+  transition: all 0.2s ease-in-out;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+}
+
+.btn-home:hover {
+  background-color: var(--bw-gold);
+  color: var(--txt-light);
   transform: translateY(-2px);
 }
 

@@ -5,7 +5,7 @@
 
 <!-- Filterbereich -->
 <div class="ranks-filter">
-  <form method="get" action="{{ url_for('ranks.cards') }}">
+  <form method="get" action="{{ url_for('ranks.ranks_cards') }}">
     <label for="branch">Truppenteil:</label>
     <select name="branch" id="branch" onchange="this.form.submit()">
       <option value="Alle" {% if selected_branch == 'Alle' %}selected{% endif %}>Alle</option>
