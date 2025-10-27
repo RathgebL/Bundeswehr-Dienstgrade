@@ -1,27 +1,31 @@
 {% extends "base/base.html" %}
 {% block content %}
-<div class="table-container">
-  <h1 class="page-title">NATO-Alphabet</h1>
+<div class="nato">
+  <h1 class="nato__title">NATO-Alphabet</h1>
 
-  <table class="styled-table">
-    <thead>
-      <tr>
-        <th>Buchstabe</th>
-        <th>Bezeichnung</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for entry in entries %}
-      <tr>
-        <td>{{ entry.letter }}</td>
-        <td class="highlight">{{ entry.correct }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+  <!-- Tabellen-Wrapper -->
+  <div class="nato__table-wrapper">
+    <table class="nato__table">
+      <thead>
+        <tr>
+          <th>Buchstabe</th>
+          <th>Bezeichnung</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for entry in entries %}
+        <tr>
+          <td class="nato__letter">{{ entry.letter }}</td>
+          <td class="nato__word">{{ entry.correct }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 
-  <div class="table-actions">
-    <a href="/nato-alphabet" class="quiz__next">Zurück zum Menü</a>
+  <!-- Zurück-Button -->
+  <div class="btn-back-container">
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
   </div>
 </div>
 {% endblock %}

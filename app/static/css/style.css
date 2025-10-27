@@ -1151,31 +1151,87 @@ h1 {
 
 
 /*************************************************************
-SEITE: NATO-TABALLE
+SEITE: NATO-ALPHABET-TABELLE
 *************************************************************/
 
-.table-container {
-  text-align: center;
-  max-width: 800px;
-  margin: 2rem auto;
-  background-color: var(--bw-bg);
-  padding: var(--space-6);
+/* ===== Hauptcontainer ===== */
+.nato {
+  background-color: var(--bw-bg);                /* halbtransparente Fläche über dem Hintergrund */
+  color: var(--txt-light);
+  padding: var(--space-7);
   border-radius: var(--radius-card);
-  box-shadow: 0 8px 24px var(--shadows);
+  margin: var(--space-8) auto;
+  box-shadow: 0 6px 18px var(--shadows);
+  max-width: 900px;                              /* etwas kompakter als Dienstgrad-Tabelle */
+  width: 95%;
+  text-align: center;
 }
 
-.styled-table {
+/* ===== Titel ===== */
+.nato__title {
+  text-align: center;
+  color: var(--bw-gold);
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-5);
+}
+
+/* ===== Tabellen-Wrapper ===== */
+.nato__table-wrapper {
+  background-color: var(--gray-dark);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px var(--shadows);
+  overflow-x: auto;                              /* für kleinere Bildschirme scrollbar */
+}
+
+/* ===== Tabelle ===== */
+.nato__table {
   width: 100%;
   border-collapse: collapse;
   color: var(--txt-light);
+  font-size: var(--font-size-base);
 }
 
-.styled-table th, .styled-table td {
-  padding: 12px;
-  border-bottom: 1px solid rgba(255,255,255,0.2);
-}
-
-.highlight {
+/* ===== Tabellenkopf ===== */
+.nato__table thead {
+  background-color: var(--gray-mid);
   color: var(--bw-gold);
+  font-weight: var(--font-weight-semibold);
+}
+
+.nato__table th,
+.nato__table td {
+  padding: var(--space-3);
+  border-bottom: 1px solid var(--gray-mid);
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* ===== Hover-Effekt für Tabellenzeilen ===== */
+.nato__table tr:hover {
+  background-color: var(--hover);
+  transition: background 0.2s ease-in-out;
+}
+
+/* ===== Buchstaben-Spalte ===== */
+.nato__letter {
+  font-weight: var(--font-weight-semibold);
+  color: var(--txt-light);
+  width: 30%;
+}
+
+/* ===== Wort-Spalte (Hervorhebung) ===== */
+.nato__word {
   font-weight: var(--font-weight-bold);
+  color: var(--bw-gold);
+  width: 70%;
+}
+
+/* ===== Button-Bereich (Zurück zum Menü) ===== */
+.btn-back-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--space-6);
 }
