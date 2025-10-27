@@ -1,55 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="quizmode-container">
-    <h1 class="quizmode-title">Quizmodus wählen</h1>
+<div class="quiz">
+  <h1 class="quiz__title">Quizmodus</h1>
 
-    <form id="quizForm" class="quizmode-form">
-        <!-- Truppenteil -->
-        <div class="quizmode-section">
-            <label for="branch" class="quizmode-label">Truppenteil:</label>
-            <select name="branch" id="branch" class="quizmode-select">
-                {% for b in branches %}
-                    <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
-                {% endfor %}
-            </select>
-        </div>
-
-        <!-- Spielmodus -->
-        <div class="quizmode-section">
-            <label for="mode" class="quizmode-label">Spielmodus:</label>
-            <select name="mode" id="mode" class="quizmode-select">
-                <option value="normal" selected>Unbegrenzt</option>
-                <option value="timer">Zeitspiel</option>
-            </select>
-        </div>
-    </form>
-
-    <div class="home-buttons mt-4">
-        <button type="button" class="btn-home btn-quiz" onclick="startQuiz(1)">Dienstgrad erkennen</button>
-        <button type="button" class="btn-home btn-quiz" onclick="startQuiz(2)">Schulterklappe finden</button>
+  <form id="quizForm" class="quiz__form">
+    <!-- Spielmodus -->
+    <div class="quiz__section">
+      <label for="mode" class="quiz__label">Spielmodus:</label>
+      <select name="mode" id="mode" class="select-base">
+        <option value="normal" selected>Unbegrenzt</option>
+        <option value="timer">Zeitspiel</option>
+      </select>
     </div>
+
+    <!-- Truppenteil -->
+    <div class="quiz__section">
+      <label for="branch" class="quiz__label">Truppenteil:</label>
+      <select name="branch" id="branch" class="select-base">
+        {% for b in branches %}
+          <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
+        {% endfor %}
+      </select>
+    </div>
+  </form>
+
+  <div class="quiz__buttons">
+    <button type="button" class="quiz__button" onclick="startQuiz(1)">Dienstgrad erkennen</button>
+    <button type="button" class="quiz__button" onclick="startQuiz(2)">Schulterklappe finden</button>
+  </div>
 </div>
 
 <script>
 function startQuiz(type) {
-    const mode = document.getElementById("mode").value;
+  const mode = document.getElementById("mode").value;
 
-    if (type === 1) {
-        // Dienstgrad erkennen
-        if (mode === "timer") {
-            window.location.href = "{{ url_for('main.quiz1_timer') }}";
-        } else {
-            window.location.href = "{{ url_for('main.quiz1') }}";
-        }
-    } else if (type === 2) {
-        // Schulterklappe finden
-        if (mode === "timer") {
-            window.location.href = "{{ url_for('main.quiz2_timer') }}";
-        } else {
-            window.location.href = "{{ url_for('main.quiz2') }}";
-        }
-    }
+  if (type === 1) {
+    window.location.href = mode === "timer"
+      ? "{{ url_for('main.quiz1_timer') }}"
+      : "{{ url_for('main.quiz1') }}";
+  } else if (type === 2) {
+    window.location.href = mode === "timer"
+      ? "{{ url_for('main.quiz2_timer') }}"
+      : "{{ url_for('main.quiz2') }}";
+  }
 }
 </script>
 {% endblock %}

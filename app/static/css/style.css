@@ -39,7 +39,8 @@ DESIGNSYSTEM – Farben, Schriften, Abstände
   --font-size-m: 1.125rem;
   --font-size-l: 1.5rem;
   --font-size-xl: 2rem;
-  --font-size-xxl: 3rem;
+  --font-size-xxl: 2.5rem;
+  --font-size-xxxl: 3rem;
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
@@ -75,9 +76,39 @@ DESIGNSYSTEM – Farben, Schriften, Abstände
   --space-section: var(--space-7);
   --space-card: var(--space-5);
 
-  --font-heading: var(--font-size-xl);
-  --font-subheading: var(--font-size-m);
+  --font-heading: var(--font-size-xxl);
+  --font-subheading: var(--font-size-l);
   --font-body: var(--font-size-base);
+}
+
+
+/*************************************************************
+BASISSTIL: SELECT-FELDER (global einheitlich)
+*************************************************************/
+
+.select-base {
+  background-color: var(--gray-mid);
+  color: var(--txt-light);
+  border: 1px solid var(--gray-line);
+  border-radius: var(--radius-sm);
+  padding: var(--space-1) var(--space-4);
+  text-align: center;
+  font-size: var(--font-size-base);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  appearance: none; /* entfernt Browser-Standard-Stile */
+}
+
+.select-base:hover {
+  background-color: var(--gray-line);
+  border-color: var(--bw-gold);
+}
+
+/* Optional */
+.select-base:focus {
+  outline: none;
+  border-color: none;
+  box-shadow: none;
 }
 
 
@@ -160,16 +191,16 @@ SEITE: STARTSEITE
 /* ===== Überschrift ===== */
 .home__title {
   color: var(--bw-gold);
-  font-size: var(--font-size-xxl);
+  font-size: var(--font-size-xxxl);
   font-weight: var(--font-weight-bold);
   font-family: var(--font-family-sans);
   margin-bottom: var(--space-6);
   line-height: var(--line-height-tight);
 }
 
-/* ===== Unterüberschrift ===== */
+/* ===== Beschreibung ===== */
 .home__subtitle {
-  font-size: var(--font-subheading);
+  font-size: var(--font-size-m);
   color: var(--txt-light);
   font-weight: var(--font-weight-regular);
   margin-bottom: var(--space-7);
@@ -216,11 +247,11 @@ SEITE: EINSTELLUNGEN
 .settings {
   background-color: var(--bw-bg);             /* halbtransparenter Hintergrund */
   color: var(--txt-light);
-  padding: var(--space-6) var(--space-7);     /* innen gleichmäßig gepolstert */
+  padding: var(--space-7);                    /* innen gleichmäßig gepolstert */
   border-radius: var(--radius-card);
   box-shadow: 0 6px 18px var(--shadows);
   max-width: 600px;
-  margin: var(--space-7) auto 0;              /* zentriert mit Abstand nach oben */
+  margin: var(--space-8) auto 0;              /* zentriert mit Abstand nach oben */
   text-align: left;
   font-family: var(--font-family-sans);
 }
@@ -346,9 +377,9 @@ SEITE: DIENSTGRAD-TABELLE
 .ranks {
   background-color: var(--bw-bg);
   color: var(--txt-light);
-  padding: var(--space-6);
+  padding: var(--space-7);
   border-radius: var(--radius-card);
-  margin: var(--space-6) auto;
+  margin: var(--space-8) auto;
   box-shadow: 0 6px 18px var(--shadows);
   max-width: 1400px;          /* auf großen Screens angenehm breit */
   width: 95%;
@@ -395,8 +426,8 @@ SEITE: DIENSTGRAD-TABELLE
 
 .ranks__filter select:focus {
   outline: none;
-  border-color: var(--bw-gold);
-  box-shadow: 0 0 6px var(--bw-gold);
+  border-color: none;
+  box-shadow: none;
 }
 
 /* ===== Tabellen-Wrapper ===== */
@@ -452,72 +483,106 @@ SEITE: DIENSTGRAD-TABELLE
 
 
 /*************************************************************
-SEITE: QUIZ
+SEITE: QUIZMODUS
 *************************************************************/
 
-.quizmode-container {
+/* ===== Hauptcontainer ===== */
+.quiz {
   background-color: var(--bw-bg);
   color: var(--txt-light);
-  padding: 2.5rem;
-  border-radius: 1rem;
+  padding: var(--space-7);
+  border-radius: var(--radius-card);
   box-shadow: 0 6px 18px var(--shadows);
   max-width: 600px;
-  margin: 4rem auto;
+  margin: var(--space-8) auto;
   text-align: center;
+  font-family: var(--font-family-sans);
 }
 
-.quizmode-title {
+/* ===== Titel ===== */
+.quiz__title {
   color: var(--bw-gold);
-  font-weight: 700;
-  font-size: 2rem;
-  margin-bottom: 2rem;
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
 }
 
-/* Formular allgemein */
-.quizmode-form {
+/* ===== Formular ===== */
+.quiz__form {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: var(--space-5);
   align-items: center;
 }
 
-/* Abschnitt: Label + Select */
-.quizmode-section {
+/* ===== Formularabschnitt (Label + Select) ===== */
+.quiz__section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.4rem;
+  gap: var(--space-2);
 }
 
-/* Label */
-.quizmode-label {
-  font-weight: 600;
+/* ===== Label ===== */
+.quiz__label {
+  font-weight: var(--font-weight-semibold);
   color: var(--txt-light);
-  font-size: 1.1rem;
+  font-size: var(--font-size-base);
 }
 
-/* Auswahlfeld */
-.quizmode-select {
+/* ===== Auswahlfelder ===== */
+.quiz__select {
   background-color: var(--gray-mid);
   color: var(--txt-light);
   border: 1px solid var(--gray-line);
-  border-radius: 8px;
-  padding: 0.6rem 1rem;
-  width: 200px;
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-5);
+  width: 220px;
   text-align: center;
-  font-size: 1rem;
+  font-size: var(--font-size-base);
   transition: all 0.2s ease-in-out;
+  cursor: pointer;
 }
 
-.quizmode-select:focus {
+/* Hover/Fokus-Zustände */
+.quiz__select:hover {
+  background-color: var(--gray-line);
+  border-color: var(--bw-gold);
+}
+
+.quiz__select:focus {
   outline: none;
   border-color: var(--bw-gold);
-  box-shadow: 0 0 5px var(--bw-gold);
+  box-shadow: 0 0 6px var(--bw-gold);
 }
 
-/* Abstand zur Button-Gruppe */
-.quizmode-container .home-buttons {
-  margin-top: 2rem;
+/* ===== Button-Bereich ===== */
+.quiz__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+
+/* ===== Buttons (nutzen globales .btn--primary Styling) ===== */
+.quiz__button {
+  background-color: var(--blue);
+  color: var(--txt-light);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  box-shadow: 0 2px 6px var(--shadows);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  width: 220px;
+}
+
+.quiz__button:hover {
+  background-color: var(--bw-gold);
+  color: var(--txt-light);
+  transform: translateY(-2px);
 }
 
 
