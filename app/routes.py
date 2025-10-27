@@ -323,7 +323,7 @@ def ranks_quiz2_timer():
 # =====================================
 # DIENSTGRADE - KARTEIKARTEN
 # =====================================
-@bp.route("ranks/cards")
+@bp.route("/ranks/cards")
 def ranks_cards():
     # Gewählten Branch aus Query-Param oder Session holen
     branch = request.args.get("branch", "Alle")
@@ -385,3 +385,25 @@ def nato_menu():
         session.modified = True
 
     return render_template("nato/nato_menu.html")
+
+
+# =====================================
+# NATO-ALPHABET — Tabelle
+# =====================================
+from app.models import NATO
+
+@bp.route("/nato/table")
+def nato_table():
+    # Hintergrund wie gewohnt laden
+    branch = session.get("default_branch", "Heer")
+    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
+    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Datenbankeinträge abrufen
+    nato_entries = NATO.query.order_by(NATO.letter.asc()).all()
+
+    return render_template(
+        "nato-alphabet/nato_table.html",
+        entries=nato_entries,
+        background=background
+    )

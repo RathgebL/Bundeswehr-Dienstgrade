@@ -1,13 +1,36 @@
+"""
+Erstellt die SQLite-Datenbank (dienstgrade.db) mit allen Tabellen.
+Diese Datei kann einmalig beim Setup oder nach Schemaänderungen ausgeführt werden.
+"""
+
+import os
 from app import create_app, db
-from app.models import Rank
+from app.models import Rank, NATO  # wichtig: alle Models importieren, damit sie registriert werden
 
-# print("db id in create_db:", id(db)) #debug
 
-app = create_app()
-# print("DB path:", app.config["SQLALCHEMY_DATABASE_URI"]) #debug
+def create_database():
+    """Erstellt die SQLite-Datenbank mit allen Tabellen."""
+    app = create_app()
 
-with app.app_context():
-    # print("Registrierte Tabellen:", db.Model.metadata.tables.keys()) #debug
-    db.create_all()
-    # print("Nach create_all():", db.Model.metadata.tables.keys()) #debug
-    print("SQLite-Datenbank 'dienstgrade.db' wurde erfolgreich angelegt!")
+    # Absoluten Pfad zur Datenbank anzeigen (zur Kontrolle)
+    db_path = app.config["SQLALCHEMY_DATABASE_URI"].replace("sqlite:///", "")
+    print(f"→ Datenbankpfad: {db_path}")
+
+    # Sicherstellen, dass der Ordner existiert
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
+
+    # Tabellen anlegen
+    with app.app_context():
+        db.create_all()
+        print("Alle Tabellen erfolgreich erstellt bzw. überprüft.")
+
+        # Kontrolle: welche Tabellen existieren
+        print("Registrierte Tabellen:")
+        for table in db.metadata.tables.keys():
+            print(f"   - {table}")
+
+    print("SQLite-Datenbank wurde erfolgreich initialisiert!")
+
+
+if __name__ == "__main__":
+    create_database()
