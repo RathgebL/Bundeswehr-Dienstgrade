@@ -587,186 +587,216 @@ SEITE: QUIZMODUS
 
 
 /*************************************************************
-Quiz 1 – Dienstgrad erkennen & Quiz 2 – Schulterklappe finden
+SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
 *************************************************************/
 
-/* Container */
-.quiz-container {
+/* ===== Hauptcontainer ===== */
+.quiz {
   text-align: center;
-  padding: 1rem 2rem;
-}
-
-/* Überschrift */
-.quiz-title {
-  font-size: 2rem;
-  font-weight: 700;
-  color: var(--bw-gold);
-  margin-bottom: 2rem;
-}
-
-/* Kartenbox für Fragen (gemeinsames Layout) */
-.quiz-card {
-  background-color: var(--bw-bg);
+  padding: var(--space-6);
+  font-family: var(--font-family-sans);
   color: var(--txt-light);
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 2.5rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 24px var(--shadows);
+  margin: var(--space-8) auto;
 }
 
-/* Bildanzeige */
-.quiz-card .quiz-image {
-  max-height: 270px;
+/* ===== Überschrift ===== */
+.quiz__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--bw-gold);
+  margin-bottom: var(--space-6);
+}
+
+/* ===== Bildanzeige ===== */
+.quiz__image {
+  max-height: 200px;
   width: auto;
   object-fit: contain;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   box-shadow: 0 4px 16px var(--shadows);
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Antwort-Buttons (Textoptionen) */
-.quiz-options {
+.quiz__image:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 20px var(--shadows);
+}
+
+/* ===== Antwortoptionen ===== */
+.quiz__options {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-bottom: 1rem;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
 }
 
-.quiz-btn {
+/* ===== Buttons ===== */
+.quiz__button {
   background-color: var(--blue);
   color: var(--txt-light);
   border: none;
-  border-radius: 8px;
-  padding: 0.8rem 1rem;
-  font-size: 1rem;
-  font-weight: 600;
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
   transition: all 0.2s ease-in-out;
   cursor: pointer;
+  text-decoration: none;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
-.quiz-btn:hover {
+/* ===== Hover-Effekt nur, wenn nicht gesperrt ===== */
+.quiz__button:hover:not(.is-locked) {
   background-color: var(--bw-gold);
   transform: translateY(-2px);
 }
 
-/* Richtig / Falsch Markierungen */
-.quiz-btn.correct { background-color: var(--green); }
-.quiz-btn.wrong   { background-color: var(--red); }
+/* ===== Gesperrte Buttons nach Auswahl ===== */
+.quiz__button.is-locked {
+  pointer-events: none;     /* verhindert Hover und Klick */
+  transform: none;
+  transition: none;
+}
 
-/* Raster für 4 Abzeichen (2 × 2) */
-.quiz-grid {
+/* Wichtig: Farben der gewählten / richtigen / falschen bleiben erhalten */
+.quiz__button--correct {
+  background-color: var(--green) !important;
+}
+
+.quiz__button--wrong {
+  background-color: var(--red) !important;
+}
+
+/* ===== Zustände (richtig / falsch) ===== */
+.quiz__button--correct {
+  background-color: var(--green);
+  color: var(--txt-light);
+}
+
+.quiz__button--wrong {
+  background-color: var(--red);
+  color: var(--txt-light);
+}
+
+/* ===== Raster für 4 Schulterklappen (2 × 2) ===== */
+.quiz__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: var(--space-4);
   justify-items: center;
 }
 
-/* Schulterklappen-Bilder */
-.quiz-grid .quiz-image {
+.quiz__grid .quiz__image {
   max-height: 180px;
   width: auto;
-  border-radius: 8px;
+  border-radius: var(--radius-md);
   box-shadow: 0 4px 12px var(--shadows);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.quiz-grid .quiz-image:hover {
+.quiz__grid .quiz__image:hover {
   transform: scale(1.05);
   box-shadow: 0 4px 20px var(--shadows);
 }
 
-/* Feedback-Text */
-.quiz-feedback {
-  margin-top: 1rem;
-  font-size: 1.2rem;
-  font-weight: 600;
+/* ===== Feedback-Text ===== */
+.quiz__feedback {
+  margin-top: var(--space-4);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
 }
 
-/* Richtig / Falsch Feedback bei Bild-Quiz */
-.quiz-image.border-success {
+/* ===== Richtig/Falsch Rahmen ===== */
+.quiz__image--correct {
   border: 5px solid var(--green) !important;
   box-shadow: 0 0 12px var(--green);
 }
 
-.quiz-image.border-danger {
+.quiz__image--wrong {
   border: 5px solid var(--red) !important;
   box-shadow: 0 0 12px var(--red);
 }
 
-/* Weiter-Button */
-.quiz-next {
+/* ===== Weiter-Button ===== */
+.quiz__next {
   display: inline-block;
-  margin-top: 1rem;
+  margin-top: var(--space-4);
   background-color: var(--blue);
   color: var(--txt-light);
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 0.6rem 1.4rem;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
   text-decoration: none;
   border: none;
   transition: all 0.2s ease-in-out;
   cursor: pointer;
 }
 
-.quiz-next:hover {
+.quiz__next:hover {
   background-color: var(--bw-gold);
+  color: var(--txt-light);
   transform: translateY(-2px);
 }
 
+/* ===== Timer & Punktestand ===== */
 #timer {
   color: var(--txt-light);
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-2);
 }
 
 #score {
   color: var(--txt-light);
-  font-weight: 600;
-  margin-bottom: 1rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
 }
 
-/* Zeitmodus - Endergebnis */
-.quiz-endbox {
+/* ===== Endbox (Zeitmodus) ===== */
+.quiz__end {
   background-color: var(--bw-bg);
   color: var(--txt-light);
-  padding: 2.5rem 2rem;
-  border-radius: 1rem;
+  padding: var(--space-6) var(--space-5);
+  border-radius: var(--radius-card);
   box-shadow: 0 8px 24px var(--shadows);
   text-align: center;
+  max-width: 600px;
+  margin: var(--space-7) auto;
 }
 
-.quiz-endtitle {
+.quiz__end-title {
   color: var(--bw-gold);
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
 }
 
-.quiz-endtext {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+.quiz__end-text {
+  font-size: var(--font-size-m);
+  margin-bottom: var(--space-6);
   color: var(--txt-light);
 }
 
-.quiz-endbuttons {
+.quiz__end-buttons {
   display: flex;
   justify-content: center;
-  gap: 1rem;
+  gap: var(--space-4);
 }
 
-.quiz-endbuttons .quiz-next {
+.quiz__end-buttons .quiz__next {
   background-color: var(--blue);
   color: var(--txt-light);
-  font-weight: 600;
-  border-radius: 8px;
-  padding: 0.6rem 1.4rem;
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 
-.quiz-endbuttons .quiz-next:hover {
+.quiz__end-buttons .quiz__next:hover {
   background-color: var(--bw-gold);
+  color: var(--gray-dark);
   transform: translateY(-2px);
 }
 

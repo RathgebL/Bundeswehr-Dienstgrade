@@ -1,45 +1,60 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="quiz-container">
-    <h1 class="quiz-title">Dienstgrad erkennen</h1>
+<div class="quiz">
+  <h1 class="quiz__title">Dienstgrad erkennen</h1>
 
-    <div class="quiz-card">
-        <img src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
-             alt="{{ correct.title }}"
-             class="quiz-image">
+  <!-- Bild -->
+  <img
+    src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
+    alt="{{ correct.title }}"
+    class="quiz__image"
+  >
 
-        <div class="quiz-options">
-            {% for opt in options %}
-            <button id="{{ opt.id }}" data-id="{{ opt.id }}"
-                    onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-                    class="quiz-btn">
-                {{ opt.title }}
-            </button>
-            {% endfor %}
-        </div>
+  <!-- Antwortoptionen -->
+  <div class="quiz__options">
+    {% for opt in options %}
+    <button
+      id="{{ opt.id }}"
+      data-id="{{ opt.id }}"
+      onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
+      class="quiz__button"
+    >
+      {{ opt.title }}
+    </button>
+    {% endfor %}
+  </div>
 
-        <p id="feedback" class="quiz-feedback"></p>
+  <!-- Feedback -->
+  <p id="feedback" class="quiz__feedback"></p>
 
-        <a href="{{ url_for('main.quiz1') }}" id="next-btn" class="quiz-next d-none">
-            Nächste Frage
-        </a>
-    </div>
+  <!-- Weiter-Button -->
+  <a
+    href="{{ url_for('main.quiz1') }}"
+    id="next-btn"
+    class="quiz__next d-none"
+  >
+    Nächste Frage
+  </a>
 </div>
 
 <script>
 function checkAnswer(selected, correctId) {
-    const buttons = document.querySelectorAll("button[data-id]");
-    buttons.forEach(btn => btn.disabled = true);
-    if (selected === correctId) {
-        document.getElementById("feedback").innerText = "Richtig!";
-        document.getElementById(selected).classList.add("correct");
-    } else {
-        document.getElementById("feedback").innerText = "Falsch!";
-        document.getElementById(selected).classList.add("wrong");
-        document.getElementById(correctId).classList.add("correct");
-    }
-    document.getElementById("next-btn").classList.remove("d-none");
+  const buttons = document.querySelectorAll("button[data-id]");
+  buttons.forEach(btn => {
+    btn.classList.add("is-locked"); // verhindert Hover
+  });
+
+  if (selected === correctId) {
+    document.getElementById("feedback").innerText = "Richtig!";
+    document.getElementById(selected).classList.add("quiz__button--correct");
+  } else {
+    document.getElementById("feedback").innerText = "Falsch!";
+    document.getElementById(selected).classList.add("quiz__button--wrong");
+    document.getElementById(correctId).classList.add("quiz__button--correct");
+  }
+
+  document.getElementById("next-btn").classList.remove("d-none");
 }
 </script>
 {% endblock %}
