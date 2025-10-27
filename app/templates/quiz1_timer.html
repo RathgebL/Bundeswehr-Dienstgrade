@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="quiz-container">
-    <h1 class="quiz-title">Zeitmodus: Dienstgrad erkennen</h1>
+<div class="quiz">
+  <h1 class="quiz__title">Zeitmodus: Dienstgrad erkennen</h1>
 
-    <!-- Timer und Score sind unsichtbar, aber aktiv -->
-    <p id="timer" class="text-warning fs-5 fw-bold d-none">Verbleibende Zeit: 60s</p>
-    <p id="score" class="text-light fs-5 mb-3 d-none">Punkte: 0</p>
+  <!-- Timer & Punktestand -->
+  <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
+  <p id="score" class="quiz__score d-none">Punkte: 0</p>
 
-    <!-- Leerer Container, wird per JS mit Inhalt gefüllt -->
-    <div class="quiz-card"></div>
+  <!-- Dynamischer Container -->
+  <div class="quiz__content"></div>
 </div>
 
 <script>
@@ -18,96 +18,108 @@ let timeLeft = 60;
 let score = 0;
 let timerInterval;
 
-// Spielstart
+// ---------------------
+// SPIELSTART
+// ---------------------
 document.addEventListener("DOMContentLoaded", () => {
-    // Anzeigen sichtbar machen
-    document.getElementById("timer").classList.remove("d-none");
-    document.getElementById("score").classList.remove("d-none");
+  document.getElementById("timer").classList.remove("d-none");
+  document.getElementById("score").classList.remove("d-none");
 
-    nextQuestion();
-    startTimer();
+  nextQuestion();
+  startTimer();
 });
 
 // ---------------------
 // TIMER
 // ---------------------
 function startTimer() {
-    document.getElementById("timer").innerText = "Verbleibende Zeit: " + timeLeft + "s";
+  const timer = document.getElementById("timer");
+  timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-    timerInterval = setInterval(() => {
-        timeLeft--;
-        document.getElementById("timer").innerText = "Verbleibende Zeit: " + timeLeft + "s";
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-        // Farbe ändern, wenn Zeit knapp wird
-        if (timeLeft <= 10) {
-            document.getElementById("timer").style.color = "#ff4d4d";
-        }
+    if (timeLeft <= 10) {
+      timer.style.color = "var(--red)";
+    }
 
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            endGame();
-        }
-    }, 1000);
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
+  }, 1000);
 }
 
 // ---------------------
 // QUIZ-LOGIK
 // ---------------------
 function nextQuestion() {
-    const correct = allRanks[Math.floor(Math.random() * allRanks.length)];
-    const wrong = allRanks.filter(r => r.id !== correct.id);
-    const options = [correct, ...wrong.sort(() => 0.5 - Math.random()).slice(0, 3)];
-    options.sort(() => 0.5 - Math.random());
+  const correct = allRanks[Math.floor(Math.random() * allRanks.length)];
+  const wrong = allRanks.filter(r => r.id !== correct.id);
+  const options = [correct, ...wrong.sort(() => 0.5 - Math.random()).slice(0, 3)];
+  options.sort(() => 0.5 - Math.random());
 
-    renderQuestion(correct, options);
+  renderQuestion(correct, options);
 }
 
 function renderQuestion(correct, options) {
-    const container = document.querySelector(".quiz-card");
-    container.innerHTML = `
-        <img src="/static/images/${correct.image_filename}" alt="${correct.title}" class="quiz-image">
-        <div class="quiz-options">
-            ${options.map(opt => `
-                <button class="quiz-btn" onclick="checkAnswer(${opt.id}, ${correct.id})">${opt.title}</button>
-            `).join("")}
-        </div>
-        <p id="feedback" class="quiz-feedback"></p>
-    `;
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <img src="/static/images/${correct.image_filename}" alt="${correct.title}" class="quiz__image">
+
+    <div class="quiz__options">
+      ${options.map(opt => `
+        <button class="quiz__button" data-id="${opt.id}" onclick="checkAnswer(${opt.id}, ${correct.id})">
+          ${opt.title}
+        </button>
+      `).join("")}
+    </div>
+
+    <p id="feedback" class="quiz__feedback"></p>
+  `;
 }
 
 function checkAnswer(selectedId, correctId) {
-    const buttons = document.querySelectorAll(".quiz-btn");
-    buttons.forEach(b => b.disabled = true);
+  const buttons = document.querySelectorAll(".quiz__button");
+  buttons.forEach(btn => {
+    btn.classList.add("is-locked"); // deaktiviert Hover
+  });
 
-    if (selectedId === correctId) {
-        score++;
-        document.getElementById("score").innerText = "Punkte: " + score;
-        document.getElementById("feedback").innerText = "Richtig!";
-    } else {
-        document.getElementById("feedback").innerText = "Falsch!";
-    }
+  const feedback = document.getElementById("feedback");
 
-    setTimeout(nextQuestion, 700); // nächste Frage nach kurzer Pause
+  if (selectedId === correctId) {
+    score++;
+    document.getElementById("score").innerText = "Punkte: " + score;
+    feedback.innerText = "Richtig!";
+    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("quiz__button--correct");
+  } else {
+    feedback.innerText = "Falsch!";
+    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("quiz__button--wrong");
+    document.querySelector(`button[data-id="${correctId}"]`).classList.add("quiz__button--correct");
+  }
+
+  // Nächste Frage nach kurzer Pause
+  setTimeout(nextQuestion, 700);
 }
 
 // ---------------------
-// ENDE DES SPIELS
+// SPIEL ENDE
 // ---------------------
 function endGame() {
-    clearInterval(timerInterval);
+  clearInterval(timerInterval);
 
-    // Timer & Score ausblenden
-    document.getElementById("timer").classList.add("d-none");
-    document.getElementById("score").classList.add("d-none");
+  document.getElementById("timer").classList.add("d-none");
+  document.getElementById("score").classList.add("d-none");
 
-    const container = document.querySelector(".quiz-card");
-    container.innerHTML = `
-        <div class="quiz-endcard">
-            <h2 class="text-warning mb-3">Zeit abgelaufen!</h2>
-            <p class="text-light mb-4">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-            <a href="/quiz1_timer" class="quiz-next">Erneut versuchen</a>
-        </div>
-    `;
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <div class="quiz__end">
+      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
+      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+      <a href="/quiz1_timer" class="quiz__next">Erneut versuchen</a>
+    </div>
+  `;
 }
 </script>
 {% endblock %}
