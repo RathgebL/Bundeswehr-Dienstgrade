@@ -8,16 +8,16 @@
     <!-- Spielmodus -->
     <div class="quiz__section">
       <label for="mode" class="quiz__label">Spielmodus:</label>
-      <select name="mode" id="mode" class="select-base">
-        <option value="normal" selected>Unbegrenzt</option>
-        <option value="timer">Zeitspiel</option>
+      <select name="mode" id="mode" class="select-base" onchange="changeMode()">
+        <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
+        <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitspiel</option>
       </select>
     </div>
 
     <!-- Truppenteil -->
     <div class="quiz__section">
       <label for="branch" class="quiz__label">Truppenteil:</label>
-      <select name="branch" id="branch" class="select-base">
+      <select name="branch" id="branch" class="select-base" onchange="changeBranch()">
         {% for b in branches %}
           <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
         {% endfor %}
@@ -32,18 +32,34 @@
 </div>
 
 <script>
+function changeBranch() {
+  const branch = document.getElementById("branch").value;
+  const mode = document.getElementById("mode").value;
+  window.location.href = `/quizmodes?branch=${branch}&mode=${mode}`;
+}
+
+function changeMode() {
+  const branch = document.getElementById("branch").value;
+  const mode = document.getElementById("mode").value;
+  window.location.href = `/quizmodes?branch=${branch}&mode=${mode}`;
+}
+
 function startQuiz(type) {
   const mode = document.getElementById("mode").value;
+  const branch = document.getElementById("branch").value;
 
+  let url = "";
   if (type === 1) {
-    window.location.href = mode === "timer"
-      ? "{{ url_for('main.quiz1_timer') }}"
-      : "{{ url_for('main.quiz1') }}";
+    url = mode === "timer"
+      ? `/quiz1_timer?branch=${branch}`
+      : `/quiz1?branch=${branch}`;
   } else if (type === 2) {
-    window.location.href = mode === "timer"
-      ? "{{ url_for('main.quiz2_timer') }}"
-      : "{{ url_for('main.quiz2') }}";
+    url = mode === "timer"
+      ? `/quiz2_timer?branch=${branch}`
+      : `/quiz2?branch=${branch}`;
   }
+
+  window.location.href = url;
 }
 </script>
 {% endblock %}

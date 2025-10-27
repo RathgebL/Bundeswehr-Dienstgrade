@@ -88,31 +88,35 @@ def ranks():
         background=background
     )
 
-# Quiz (Modusauswahl)
 @bp.route("/quizmodes")
 def quizmodes():
-    # Gewählten Branch aus Query oder Session holen
-    branch = request.args.get("branch", session.get("default_branch", "Alle"))
+    # Parameter aus URL oder Session lesen
+    branch = request.args.get("branch") or session.get("quiz_branch") or "Alle"
+    mode = request.args.get("mode") or session.get("quiz_mode") or "normal"
+
     branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
 
-    # Branch speichern, damit Quiz-Routen ihn verwenden können
+    # Auswahl speichern
     session["quiz_branch"] = branch
+    session["quiz_mode"] = mode
     session.modified = True
 
-    # Hintergrund (wie gehabt)
-    background = session.get("current_background", "Hintergrund-Heer-Wald.png")
+    # Hintergrund an Branch anpassen
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+    session["current_background"] = background
 
     return render_template(
         "quizmodes.html",
         background=background,
         branches=branches,
-        selected_branch=branch
+        selected_branch=branch,
+        selected_mode=mode
     )
 
 # Quiz-Data (Hilfsfunktion)
-def generate_quiz_data():
-    # Aktueller Truppenteil aus Session (vom Filter auf /quizmodes)
-    branch = session.get("quiz_branch", "Alle")
+def generate_quiz_data(branch=None):
+    # Aktueller Truppenteil aus Parameter oder Session
+    branch = branch or session.get("quiz_branch", "Alle")
 
     # Dienstgrade laden – ggf. gefiltert
     if branch == "Alle":
@@ -135,7 +139,7 @@ def generate_quiz_data():
     random.shuffle(options)
 
     # Hintergrund übernehmen
-    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+    background = session.get("current_background", DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"]))
 
     return {
         "branch": branch,
@@ -144,10 +148,19 @@ def generate_quiz_data():
         "options": options
     }
 
+
 # Dienstgrad-Quiz (Text → Bild)
 @bp.route("/quiz1")
 def quiz1():
+    # Branch aus Query übernehmen (z. B. von /quizmodes?branch=Marine)
+    branch = request.args.get("branch")
+    if branch:
+        session["quiz_branch"] = branch
+        session["current_background"] = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Quizdaten generieren
     data = generate_quiz_data()
+
     return render_template(
         "quiz1.html",
         correct=data["correct"],
@@ -160,7 +173,15 @@ def quiz1():
 # Schulterklappen-Quiz (Bild → Text)
 @bp.route("/quiz2")
 def quiz2():
+    # Branch aus Query übernehmen
+    branch = request.args.get("branch")
+    if branch:
+        session["quiz_branch"] = branch
+        session["current_background"] = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    # Quizdaten generieren
     data = generate_quiz_data()
+
     return render_template(
         "quiz2.html",
         correct=data["correct"],
@@ -169,10 +190,23 @@ def quiz2():
         selected_branch=data["branch"]
     )
 
+
 # Zeitmodus: Dienstgrad-Quiz
 @bp.route("/quiz1_timer")
 def quiz1_timer():
-    ranks = Rank.query.all()
+    # Branch aus URL-Parameter oder Session
+    branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
+    session["quiz_branch"] = branch
+
+    # Ränge nach Truppenteil filtern
+    if branch == "Alle":
+        ranks = Rank.query.all()
+    else:
+        ranks = Rank.query.filter_by(branch=branch).all()
+
+    # Fallback
+    if not ranks:
+        ranks = Rank.query.all()
 
     # JSON-kompatible Struktur
     rank_data = []
@@ -189,8 +223,9 @@ def quiz1_timer():
             "branch": r.branch or ""
         })
 
-    # Hintergrund aus Session oder Standardwert
-    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+    # Hintergrund an Branch anpassen
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+    session["current_background"] = background
 
     return render_template(
         "quiz1_timer.html",
@@ -198,10 +233,23 @@ def quiz1_timer():
         background=background
     )
 
+
 # Zeitmodus: Schulterklappen-Quiz
 @bp.route("/quiz2_timer")
 def quiz2_timer():
-    ranks = Rank.query.all()
+    # Branch aus URL-Parameter oder Session
+    branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
+    session["quiz_branch"] = branch
+
+    # Ränge nach Truppenteil filtern
+    if branch == "Alle":
+        ranks = Rank.query.all()
+    else:
+        ranks = Rank.query.filter_by(branch=branch).all()
+
+    # Fallback
+    if not ranks:
+        ranks = Rank.query.all()
 
     # JSON-kompatible Struktur
     rank_data = []
@@ -218,8 +266,9 @@ def quiz2_timer():
             "branch": r.branch or ""
         })
 
-    # Hintergrund aus Session oder Standardwert
-    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+    # Hintergrund an Branch anpassen
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+    session["current_background"] = background
 
     return render_template(
         "quiz2_timer.html",
