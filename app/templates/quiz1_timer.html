@@ -115,9 +115,12 @@ function endGame() {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <div class="quiz__end">
-      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
-      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-      <a href="/quiz1_timer" class="quiz__next">Erneut versuchen</a>
+        <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
+        <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+        <div class="quiz__end-buttons">
+        <a href="/quiz1_timer" class="quiz__next">Erneut versuchen</a>
+        <a href="{{ url_for('main.quizmodes') }}" class="quiz__next">Zurück</a>
+        </div>
     </div>
   `;
 }

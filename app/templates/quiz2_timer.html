@@ -1,86 +1,136 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="quiz-container">
-    <h1 class="quiz-title">Zeitmodus: Schulterklappe finden</h1>
+<div class="quiz">
+  <h1 class="quiz__title">Zeitmodus: Schulterklappe finden</h1>
 
-    <!-- Timer & Punktestand -->
-    <p id="timer" class="text-warning fs-5 fw-bold">Verbleibende Zeit: 60s</p>
-    <p id="score" class="text-light fs-5 mb-3">Punkte: 0</p>
+  <!-- Timer & Punktestand -->
+  <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
+  <p id="score" class="quiz__score d-none">Punkte: 0</p>
 
-    <!-- Quizkarte -->
-    <div class="quiz-card">
-        <!-- Dienstgradname -->
-        <h4 class="mb-4 text-warning" id="rank-name">{{ correct.title }}</h4>
-
-        <!-- 4 Bilder (Antwortoptionen) -->
-        <div class="quiz-grid">
-            {% for opt in options %}
-            <button id="{{ opt.id }}" data-id="{{ opt.id }}" onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-                    class="btn bg-transparent border-0 p-0 quiz-option">
-                <img src="{{ url_for('static', filename='images/' + opt.image_filename) }}"
-                     alt="{{ opt.title }}" class="img-fluid rounded shadow quiz-image">
-            </button>
-            {% endfor %}
-        </div>
-
-        <!-- Feedbacktext -->
-        <p id="feedback" class="quiz-feedback"></p>
-    </div>
+  <!-- Dynamischer Container -->
+  <div class="quiz__content" id="quiz-content"></div>
 </div>
 
 <script>
-let score = 0;
+let allRanks = {{ ranks|tojson|safe }};
 let timeLeft = 60;
-const timerDisplay = document.getElementById("timer");
-const scoreDisplay = document.getElementById("score");
-const feedback = document.getElementById("feedback");
-let countdown;
+let score = 0;
+let timerInterval;
+let questionLocked = false;
+let gameEnded = false;
 
-// Timer starten
-startTimer();
+// ---------------------
+// SPIELSTART
+// ---------------------
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("timer").classList.remove("d-none");
+  document.getElementById("score").classList.remove("d-none");
+  nextQuestion();
+  startTimer();
+});
 
+// ---------------------
+// TIMER
+// ---------------------
 function startTimer() {
-    countdown = setInterval(() => {
-        timeLeft--;
-        timerDisplay.textContent = `Verbleibende Zeit: ${timeLeft}s`;
-        if (timeLeft <= 0) {
-            clearInterval(countdown);
-            endGame();
-        }
-    }, 1000);
-}
+  const timer = document.getElementById("timer");
+  timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-function checkAnswer(selected, correctId) {
-    const buttons = document.querySelectorAll("button[data-id]");
-    buttons.forEach(btn => btn.disabled = true);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-    const selectedBtn = document.getElementById(selected);
-    const correctBtn = document.getElementById(correctId);
-
-    if (selected === correctId) {
-        score++;
-        feedback.textContent = "Richtig!";
-        selectedBtn.querySelector("img").classList.add("border", "border-success", "shadow-lg");
-    } else {
-        feedback.textContent = "Falsch!";
-        selectedBtn.querySelector("img").classList.add("border", "border-danger", "shadow-lg");
-        correctBtn.querySelector("img").classList.add("border", "border-success", "shadow-lg");
+    if (timeLeft <= 10) timer.style.color = "var(--red)";
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame();
     }
-
-    scoreDisplay.textContent = `Punkte: ${score}`;
-
-    // Nach kurzer Pause neue Frage laden
-    setTimeout(() => location.reload(), 600);
+  }, 1000);
 }
 
+// ---------------------
+// QUIZ-LOGIK
+// ---------------------
+function nextQuestion() {
+  if (gameEnded) return;
+  questionLocked = false;
+
+  const correct = allRanks[Math.floor(Math.random() * allRanks.length)];
+  const wrong = allRanks.filter(r => r.id !== correct.id);
+  const options = [correct, ...wrong.sort(() => 0.5 - Math.random()).slice(0, 3)];
+  options.sort(() => 0.5 - Math.random());
+
+  renderQuestion(correct, options);
+}
+
+function renderQuestion(correct, options) {
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <h4 class="quiz__subtitle">${correct.title}</h4>
+    <div class="quiz__grid">
+      ${options.map(opt => `
+        <button class="quiz__image-button" data-id="${opt.id}"
+                onclick="checkAnswer(${opt.id}, ${correct.id})">
+          <img src="/static/images/${opt.image_filename}" alt="${opt.title}" class="quiz__image">
+        </button>
+      `).join("")}
+    </div>
+    <p id="feedback" class="quiz__feedback"></p>
+  `;
+}
+
+// ---------------------
+// ANTWORT PRÜFEN
+// ---------------------
+function checkAnswer(selectedId, correctId) {
+  if (questionLocked || gameEnded) return;
+  questionLocked = true;
+
+  const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll(".quiz__image-button");
+  buttons.forEach(btn => btn.classList.add("is-locked"));
+
+  const selectedBtn = document.querySelector(`button[data-id="${selectedId}"]`);
+  const correctBtn = document.querySelector(`button[data-id="${correctId}"]`);
+
+  if (selectedId === correctId) {
+    score++;
+    document.getElementById("score").innerText = "Punkte: " + score;
+    feedback.innerText = "Richtig!";
+    selectedBtn.querySelector("img").classList.add("quiz__image--correct");
+  } else {
+    feedback.innerText = "Falsch!";
+    selectedBtn.querySelector("img").classList.add("quiz__image--wrong");
+    correctBtn.querySelector("img").classList.add("quiz__image--correct");
+  }
+
+  if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 700);
+}
+
+// ---------------------
+// SPIEL ENDE
+// ---------------------
 function endGame() {
-    document.querySelector(".quiz-card").innerHTML = `
-        <h2 class="text-warning">Zeit abgelaufen!</h2>
-        <p class="fs-4 text-light">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-        <a href="{{ url_for('main.quiz2_timer') }}" class="quiz-next">Erneut versuchen</a>
-        <a href="{{ url_for('main.quizmodes') }}" class="quiz-next" style="margin-left: 1rem;">Zurück</a>
-    `;
+  if (gameEnded) return;
+  gameEnded = true;
+  clearInterval(timerInterval);
+
+  // Timer & Score ausblenden (wie bei quiz1_timer)
+  document.getElementById("timer").classList.add("d-none");
+  document.getElementById("score").classList.add("d-none");
+
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <div class="quiz__end">
+      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
+      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+      <div class="quiz__end-buttons">
+        <a href="{{ url_for('main.quiz2_timer') }}" class="quiz__next">Erneut versuchen</a>
+        <a href="{{ url_for('main.quizmodes') }}" class="quiz__next">Zurück</a>
+      </div>
+    </div>
+  `;
 }
 </script>
 {% endblock %}

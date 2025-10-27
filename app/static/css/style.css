@@ -607,6 +607,12 @@ SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
   margin-bottom: var(--space-6);
 }
 
+.quiz__subtitle {
+  color: var(--bw-gold);
+  font-weight: var(--font-weight-semibold);
+  margin: var(--space-6);
+}
+
 /* ===== Bildanzeige ===== */
 .quiz__image {
   max-height: 200px;
@@ -621,6 +627,35 @@ SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
 .quiz__image:hover {
   transform: scale(1.02);
   box-shadow: 0 6px 20px var(--shadows);
+}
+
+/* ===== Entfernt Hintergrund, Umrandung und Klick-Hervorhebung ===== */
+.quiz__image-button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  appearance: none;          /* entfernt Browser-Standardstyle */
+  -webkit-appearance: none;  /* Safari Fix */
+  box-shadow: none;
+}
+
+/* Kein Fokusrahmen bei Klick */
+.quiz__image-button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Kein Hintergrund oder Border beim aktiven Zustand */
+.quiz__image-button:active {
+  background: none;
+  box-shadow: none;
+}
+
+/* Entfernt helle Webkit-Highlight-Box auf Mobile */
+.quiz__image-button:focus-visible {
+  outline: none;
 }
 
 /* ===== Antwortoptionen ===== */

@@ -174,7 +174,7 @@ def quiz2():
 def quiz1_timer():
     ranks = Rank.query.all()
 
-    # Wir bereiten eine saubere JSON-kompatible Struktur vor
+    # JSON-kompatible Struktur
     rank_data = []
     for r in ranks:
         rank_data.append({
@@ -189,6 +189,7 @@ def quiz1_timer():
             "branch": r.branch or ""
         })
 
+    # Hintergrund aus Session oder Standardwert
     background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
 
     return render_template(
@@ -200,13 +201,30 @@ def quiz1_timer():
 # Zeitmodus: Schulterklappen-Quiz
 @bp.route("/quiz2_timer")
 def quiz2_timer():
-    data = generate_quiz_data()
+    ranks = Rank.query.all()
+
+    # JSON-kompatible Struktur
+    rank_data = []
+    for r in ranks:
+        rank_data.append({
+            "id": r.id,
+            "title": r.title or "",
+            "abbreviation": r.abbreviation or "",
+            "rank_group": r.rank_group or "",
+            "rank_type": r.rank_type or "",
+            "level_code": r.level_code or "",
+            "description": r.description or "",
+            "image_filename": r.image_filename or "",
+            "branch": r.branch or ""
+        })
+
+    # Hintergrund aus Session oder Standardwert
+    background = session.get("current_background", DEFAULT_BACKGROUNDS["Heer"])
+
     return render_template(
         "quiz2_timer.html",
-        correct=data["correct"],
-        options=data["options"],
-        background=data["background"],
-        selected_branch=data["branch"]
+        ranks=rank_data,
+        background=background
     )
 
 # Karteikarten
