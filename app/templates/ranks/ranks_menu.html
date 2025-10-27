@@ -7,13 +7,13 @@
 
   <div class="home__buttons">
     <!-- Dienstgrad-Tabelle -->
-    <a href="{{ url_for('main.ranks') }}" class="btn-home">Dienstgrad-Tabelle</a>
+    <a href="{{ url_for('ranks.table') }}" class="btn-home">Dienstgrad-Tabelle</a>
 
     <!-- Karteikarten -->
-    <a href="{{ url_for('main.flashcards') }}" class="btn-home">Karteikarten</a>
+    <a href="{{ url_for('ranks.cards') }}" class="btn-home">Karteikarten</a>
 
     <!-- Quiz -->
-    <a href="{{ url_for('main.quizmodes') }}" class="btn-home">Quiz</a>
+    <a href="{{ url_for('ranks.quizmodes') }}" class="btn-home">Quiz</a>
   </div>
 </div>
 {% endblock %}

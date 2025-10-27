@@ -1,8 +1,21 @@
+# =====================================
+# IMPORTS
+# =====================================
 from flask import Blueprint, render_template, request, redirect, url_for, session
-from .models import Rank
+from .models import Rank, NATO
 import random
 
-bp = Blueprint("main", __name__)
+
+# =====================================
+# BLUEPRINTS
+# =====================================
+# Haupt-Blueprint (Startseite, Einstellungen, generelle Logik)
+bp_main = Blueprint("main", __name__)
+
+# Separate Blueprints für Themenbereiche
+bp_ranks = Blueprint("ranks", __name__, url_prefix="/ranks")
+bp_nato = Blueprint("nato", __name__, url_prefix="/nato")
+
 
 # =====================================
 # STANDARDHINTERGRÜNDE
@@ -17,33 +30,34 @@ DEFAULT_BACKGROUNDS = {
 # =====================================
 # STARTSEITE / LERNBEREICHE
 # =====================================
-@bp.route("/")
+@bp_main.route("/")
 def home():
+    """Startseite mit aktuellem Standardhintergrund"""
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
-
-    # Den passenden Hintergrund für den aktuellen Branch holen
     background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Aktuellen Hintergrund merken (für andere Templates)
+    # Aktuellen Hintergrund merken
     if session.get("current_background") != background:
         session["current_background"] = background
         session.modified = True
+
     return render_template("home/home.html", background=background)
 
 
 # =====================================
 # EINSTELLUNGEN
 # =====================================
-@bp.route("/settings", methods=["GET", "POST"])
+@bp_main.route("/settings", methods=["GET", "POST"])
 def settings():
+    """Einstellungen für Standardbranch & Hintergründe"""
     defaults = {
         "default_branch": session.get("default_branch", "Heer"),
         "backgrounds": session.get("backgrounds", DEFAULT_BACKGROUNDS)
     }
 
-    # Merke dir, von wo man kam
-    next_page = request.args.get("next") or url_for("main.index")
+    # Rücksprungziel
+    next_page = request.args.get("next") or url_for("main.home")
 
     if request.method == "POST":
         branch_input = request.form.get("default_branch", "Heer").strip().capitalize()
@@ -58,42 +72,38 @@ def settings():
         session["backgrounds"] = backgrounds
         session.modified = True
 
-        # Nach dem Speichern zur Ausgangsseite zurückkehren
         return redirect(request.form.get("next") or next_page)
 
-    # GET: Seite anzeigen, mit verstecktem Feld für Rücksprung
     return render_template("settings/settings.html", defaults=defaults, next_page=next_page)
 
 
 # =====================================
 # DIENSTGRADE - MENÜ
 # =====================================
-@bp.route("/ranks")
+@bp_ranks.route("/")
 def ranks_menu():
+    """Menü für den Bereich 'Dienstgrade'"""
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
-
-    # Den passenden Hintergrund für den aktuellen Branch holen
     background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Aktuellen Hintergrund merken (für andere Templates)
+    # Hintergrund aktualisieren
     if session.get("current_background") != background:
         session["current_background"] = background
         session.modified = True
 
-    return render_template("ranks/ranks_menu.html")
+    return render_template("ranks/ranks_menu.html", background=background)
 
 
 # =====================================
 # DIENSTGRADE - TABELLE
 # =====================================
-@bp.route("/ranks/table")
+@bp_ranks.route("/table")
 def ranks_table():
-    # Aktueller Truppenteil aus Query oder Session
+    """Tabelle mit allen Dienstgraden (filterbar nach Truppenteil)"""
     branch = request.args.get("branch", session.get("default_branch", "Heer"))
     user_backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
 
-    # Falls "Alle" gewählt wurde → Standardbranch verwenden
     if not branch or branch == "Alle":
         active_branch = session.get("default_branch", "Heer")
         background = user_backgrounds.get(active_branch, DEFAULT_BACKGROUNDS[active_branch])
@@ -104,8 +114,6 @@ def ranks_table():
         ranks = Rank.query.filter_by(branch=branch).order_by(Rank.sort_order).all()
 
     branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
-
-    # Hintergrund speichern für Template
     session["current_background"] = background
 
     return render_template(
@@ -120,20 +128,17 @@ def ranks_table():
 # =====================================
 # DIENSTGRADE - QUIZMODUS
 # =====================================
-@bp.route("/ranks/quizmodes")
+@bp_ranks.route("/quizmodes")
 def ranks_quizmodes():
-    # Parameter aus URL oder Session lesen
+    """Auswahl des Quizmodus für Dienstgrade"""
     branch = request.args.get("branch") or session.get("quiz_branch") or "Alle"
     mode = request.args.get("mode") or session.get("quiz_mode") or "normal"
 
     branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
-
-    # Auswahl speichern
     session["quiz_branch"] = branch
     session["quiz_mode"] = mode
     session.modified = True
 
-    # Hintergrund an Branch anpassen
     background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
     session["current_background"] = background
 
@@ -150,54 +155,39 @@ def ranks_quizmodes():
 # DIENSTGRADE - QUIZDATEN
 # =====================================
 def generate_quiz_data(branch=None):
-    # Aktueller Truppenteil aus Parameter oder Session
+    """Hilfsfunktion für Dienstgrad-Quizfragen"""
     branch = branch or session.get("quiz_branch", "Alle")
 
-    # Dienstgrade laden – ggf. gefiltert
     if branch == "Alle":
         ranks = Rank.query.all()
     else:
         ranks = Rank.query.filter_by(branch=branch).all()
 
-    # Fallback, falls kein Ergebnis
     if not ranks:
         ranks = Rank.query.all()
 
-    # Wähle eine zufällige "richtige" Antwort
     correct = random.choice(ranks)
-
-    # Wähle bis zu 3 falsche Optionen
     wrong = random.sample([r for r in ranks if r.id != correct.id], min(3, len(ranks) - 1))
 
-    # Optionen mischen
     options = [correct] + wrong
     random.shuffle(options)
 
-    # Hintergrund übernehmen
     background = session.get("current_background", DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"]))
 
-    return {
-        "branch": branch,
-        "background": background,
-        "correct": correct,
-        "options": options
-    }
+    return {"branch": branch, "background": background, "correct": correct, "options": options}
 
 
 # =====================================
 # DIENSTGRADE - QUIZSEITEN
 # =====================================
-
-# Dienstgrad-Quiz (Text → Bild)
-@bp.route("/ranks/quiz1")
+@bp_ranks.route("/quiz1")
 def ranks_quiz1():
-    # Branch aus Query übernehmen (z. B. von /quizmodes?branch=Marine)
+    """Quiz: Text → Bild"""
     branch = request.args.get("branch")
     if branch:
         session["quiz_branch"] = branch
         session["current_background"] = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Quizdaten generieren
     data = generate_quiz_data()
 
     return render_template(
@@ -209,16 +199,14 @@ def ranks_quiz1():
     )
 
 
-# Schulterklappen-Quiz (Bild → Text)
-@bp.route("/ranks/quiz2")
+@bp_ranks.route("/quiz2")
 def ranks_quiz2():
-    # Branch aus Query übernehmen
+    """Quiz: Bild → Text"""
     branch = request.args.get("branch")
     if branch:
         session["quiz_branch"] = branch
         session["current_background"] = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Quizdaten generieren
     data = generate_quiz_data()
 
     return render_template(
@@ -233,177 +221,116 @@ def ranks_quiz2():
 # =====================================
 # DIENSTGRADE - ZEITMODUS
 # =====================================
-
-# Zeitmodus: Dienstgrad-Quiz
-@bp.route("/ranks/quiz1_timer")
+@bp_ranks.route("/quiz1_timer")
 def ranks_quiz1_timer():
-    # Branch aus URL-Parameter oder Session
+    """Zeitmodus für Quiz 1"""
     branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
     session["quiz_branch"] = branch
 
-    # Ränge nach Truppenteil filtern
-    if branch == "Alle":
-        ranks = Rank.query.all()
-    else:
-        ranks = Rank.query.filter_by(branch=branch).all()
-
-    # Fallback
+    ranks = Rank.query.filter_by(branch=branch).all() if branch != "Alle" else Rank.query.all()
     if not ranks:
         ranks = Rank.query.all()
 
-    # JSON-kompatible Struktur
-    rank_data = []
-    for r in ranks:
-        rank_data.append({
-            "id": r.id,
-            "title": r.title or "",
-            "abbreviation": r.abbreviation or "",
-            "rank_group": r.rank_group or "",
-            "rank_type": r.rank_type or "",
-            "level_code": r.level_code or "",
-            "description": r.description or "",
-            "image_filename": r.image_filename or "",
-            "branch": r.branch or ""
-        })
+    rank_data = [{
+        "id": r.id,
+        "title": r.title or "",
+        "abbreviation": r.abbreviation or "",
+        "rank_group": r.rank_group or "",
+        "rank_type": r.rank_type or "",
+        "level_code": r.level_code or "",
+        "description": r.description or "",
+        "image_filename": r.image_filename or "",
+        "branch": r.branch or ""
+    } for r in ranks]
 
-    # Hintergrund an Branch anpassen
     background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
     session["current_background"] = background
 
-    return render_template(
-        "ranks/ranks_quiz1_timer.html",
-        ranks=rank_data,
-        background=background
-    )
+    return render_template("ranks/ranks_quiz1_timer.html", ranks=rank_data, background=background)
 
 
-# Zeitmodus: Schulterklappen-Quiz
-@bp.route("/ranks/quiz2_timer")
+@bp_ranks.route("/quiz2_timer")
 def ranks_quiz2_timer():
-    # Branch aus URL-Parameter oder Session
+    """Zeitmodus für Quiz 2"""
     branch = request.args.get("branch", session.get("quiz_branch", "Heer"))
     session["quiz_branch"] = branch
 
-    # Ränge nach Truppenteil filtern
-    if branch == "Alle":
-        ranks = Rank.query.all()
-    else:
-        ranks = Rank.query.filter_by(branch=branch).all()
-
-    # Fallback
+    ranks = Rank.query.filter_by(branch=branch).all() if branch != "Alle" else Rank.query.all()
     if not ranks:
         ranks = Rank.query.all()
 
-    # JSON-kompatible Struktur
-    rank_data = []
-    for r in ranks:
-        rank_data.append({
-            "id": r.id,
-            "title": r.title or "",
-            "abbreviation": r.abbreviation or "",
-            "rank_group": r.rank_group or "",
-            "rank_type": r.rank_type or "",
-            "level_code": r.level_code or "",
-            "description": r.description or "",
-            "image_filename": r.image_filename or "",
-            "branch": r.branch or ""
-        })
+    rank_data = [{
+        "id": r.id,
+        "title": r.title or "",
+        "abbreviation": r.abbreviation or "",
+        "rank_group": r.rank_group or "",
+        "rank_type": r.rank_type or "",
+        "level_code": r.level_code or "",
+        "description": r.description or "",
+        "image_filename": r.image_filename or "",
+        "branch": r.branch or ""
+    } for r in ranks]
 
-    # Hintergrund an Branch anpassen
     background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
     session["current_background"] = background
 
-    return render_template(
-        "ranks/ranks_quiz2_timer.html",
-        ranks=rank_data,
-        background=background
-    )
+    return render_template("ranks/ranks_quiz2_timer.html", ranks=rank_data, background=background)
 
 
 # =====================================
 # DIENSTGRADE - KARTEIKARTEN
 # =====================================
-@bp.route("/ranks/cards")
+@bp_ranks.route("/cards")
 def ranks_cards():
-    # Gewählten Branch aus Query-Param oder Session holen
+    """Interaktive Karteikarten für Dienstgrade"""
     branch = request.args.get("branch", "Alle")
+    query = Rank.query.filter_by(branch=branch) if branch != "Alle" else Rank.query
+    ranks = query.order_by(Rank.branch, Rank.sort_order).all() or Rank.query.order_by(Rank.sort_order).all()
 
-    # Basisabfrage
-    query = Rank.query
+    rank_data = [{
+        "id": r.id,
+        "title": r.title,
+        "abbreviation": r.abbreviation,
+        "rank_group": r.rank_group,
+        "rank_type": r.rank_type,
+        "level_code": r.level_code,
+        "description": r.description,
+        "image_filename": r.image_filename,
+        "branch": r.branch
+    } for r in ranks]
 
-    # Nur gefilterte Ränge, wenn Branch != Alle
-    if branch != "Alle":
-        query = query.filter_by(branch=branch)
-
-    ranks = query.order_by(Rank.branch, Rank.sort_order).all()
-
-    # Wenn keine Ergebnisse → Fallback
-    if not ranks:
-        ranks = Rank.query.order_by(Rank.sort_order).all()
-
-    # Für JSON im Template vorbereiten
-    rank_data = [
-        {
-            "id": r.id,
-            "title": r.title,
-            "abbreviation": r.abbreviation,
-            "rank_group": r.rank_group,
-            "rank_type": r.rank_type,
-            "level_code": r.level_code,
-            "description": r.description,
-            "image_filename": r.image_filename,
-            "branch": r.branch
-        }
-        for r in ranks
-    ]
-
-    # Hintergrund dynamisch
     background = session.get("current_background", "Hintergrund-Heer-Wald.png")
 
-    return render_template(
-        "ranks/ranks_cards.html",
-        ranks=rank_data,
-        background=background,
-        selected_branch=branch
-    )
+    return render_template("ranks/ranks_cards.html", ranks=rank_data, background=background, selected_branch=branch)
 
 
 # =====================================
 # NATO-ALPHABET
 # =====================================
-@bp.route("/nato")
+@bp_nato.route("/")
 def nato_menu():
+    """Menüseite für den NATO-Alphabet-Bereich"""
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
-
-    # Den passenden Hintergrund für den aktuellen Branch holen
     background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Aktuellen Hintergrund merken (für andere Templates)
     if session.get("current_background") != background:
         session["current_background"] = background
         session.modified = True
 
-    return render_template("nato/nato_menu.html")
+    return render_template("nato-alphabet/nato_menu.html", background=background)
 
 
 # =====================================
 # NATO-ALPHABET — Tabelle
 # =====================================
-from app.models import NATO
-
-@bp.route("/nato/table")
+@bp_nato.route("/table")
 def nato_table():
-    # Hintergrund wie gewohnt laden
+    """Tabellarische Darstellung des NATO-Alphabets"""
     branch = session.get("default_branch", "Heer")
     backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
     background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
-    # Datenbankeinträge abrufen
     nato_entries = NATO.query.order_by(NATO.letter.asc()).all()
 
-    return render_template(
-        "nato-alphabet/nato_table.html",
-        entries=nato_entries,
-        background=background
-    )
+    return render_template("nato-alphabet/nato_table.html", entries=nato_entries, background=background)

@@ -1116,3 +1116,34 @@ h1 {
   background-color: var(--bw-gold);
   transform: translateY(-2px);
 }
+
+
+/*************************************************************
+SEITE: NATO-TABALLE
+*************************************************************/
+
+.table-container {
+  text-align: center;
+  max-width: 800px;
+  margin: 2rem auto;
+  background-color: var(--bw-bg);
+  padding: var(--space-6);
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 24px var(--shadows);
+}
+
+.styled-table {
+  width: 100%;
+  border-collapse: collapse;
+  color: var(--txt-light);
+}
+
+.styled-table th, .styled-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.highlight {
+  color: var(--bw-gold);
+  font-weight: var(--font-weight-bold);
+}

@@ -22,8 +22,10 @@ def create_app():
     from app import models
 
     # Blueprints
-    from app.routes import bp as main_bp
-    app.register_blueprint(main_bp)
+    from app.routes import bp_main, bp_ranks, bp_nato
+    app.register_blueprint(bp_main)
+    app.register_blueprint(bp_ranks)
+    app.register_blueprint(bp_nato)
 
     # Debug-Ausgabe
     if app.debug:
