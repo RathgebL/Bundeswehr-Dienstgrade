@@ -1285,3 +1285,43 @@ SEITE: NATO-ALPHABET-TABELLE
   align-items: center;
   margin-top: var(--space-6);
 }
+
+
+/*************************************************************
+SEITE: NATO-ALPHABET — KARTEIKARTEN
+*************************************************************/
+
+/* ===== Buchstabe (Vorderseite) ===== */
+.nato-letter {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  color: var(--bw-gold);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+  margin: 8rem;
+  line-height: 1;
+}
+
+/* ===== Hinweis „Klick zum Umdrehen“ ===== */
+.nato-flip-hint {
+  font-size: var(--font-size-base);
+  color: var(--txt-light);
+  opacity: 0.75;
+  margin-top: var(--space-8);
+}
+
+/* ===== Wort (Rückseite) ===== */
+.nato-word {
+  font-size: var(--font-size-xxl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--bw-gold);
+  text-align: center;
+}
+
+/* ===== Karte leicht dunkler, damit der Buchstabe hervorsticht ===== */
+.card-face.card-front {
+  background-color: var(--gray-dark);
+}
+
+.card-face.card-back {
+  background-color: var(--gray-mid);
+}

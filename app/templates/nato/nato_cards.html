@@ -1,0 +1,93 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="flashcards">
+  <h1 class="nato__title">Karteikarten</h1>
+
+  <!-- Kartenbereich -->
+  <div id="flashcard" class="flashcard-container">
+    <div class="card-flip" onclick="flipCard()">
+      <!-- Vorderseite: Buchstabe -->
+      <div class="card-face card-front">
+        <h1 id="nato-letter" class="nato-letter">{{ entries[0].letter }}</h1>
+        <p class="nato-flip-hint">Klicke zum Umdrehen</p>
+      </div>
+
+      <!-- Rückseite: Wort -->
+      <div class="card-face card-back">
+        <h2 id="nato-word" class="nato-word">{{ entries[0].correct }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steuerung -->
+  <div class="flashcard-buttons">
+    <div class="flashcard-controls">
+      <button class="btn-card" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn-card" onclick="nextCard()">Nächste Karte</button>
+    </div>
+
+    <div class="flashcard-controls">
+      <button class="btn-card-secondary" onclick="shuffleCards()">Mischen</button>
+      <button class="btn-card-secondary" onclick="resetCards()">Ordnen</button>
+    </div>
+  </div>
+
+  <!-- Zurück-Button -->
+  <div class="btn-back-container">
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
+  </div>
+</div>
+
+<script>
+const entriesInitial = {{ entries|tojson|safe }}; // Daten vom Server
+let entries = [...entriesInitial];
+let currentIndex = 0;
+let entriesOriginal = [...entriesInitial];
+
+const flipContainer = document.querySelector(".card-flip");
+const letterEl = document.getElementById("nato-letter");
+const wordEl = document.getElementById("nato-word");
+
+function flipCard() {
+  flipContainer.classList.toggle("flipped");
+}
+
+function nextCard() {
+  flipContainer.classList.remove("flipped");
+  currentIndex = (currentIndex + 1) % entries.length;
+  updateCard();
+}
+
+function prevCard() {
+  flipContainer.classList.remove("flipped");
+  currentIndex = (currentIndex - 1 + entries.length) % entries.length;
+  updateCard();
+}
+
+function shuffleCards() {
+  for (let i = entries.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [entries[i], entries[j]] = [entries[j], entries[i]];
+  }
+  currentIndex = 0;
+  updateCard();
+  flipContainer.classList.add("shake");
+  setTimeout(() => flipContainer.classList.remove("shake"), 400);
+}
+
+function resetCards() {
+  entries = [...entriesOriginal];
+  currentIndex = 0;
+  updateCard();
+  flipContainer.classList.add("reset-glow");
+  setTimeout(() => flipContainer.classList.remove("reset-glow"), 400);
+}
+
+function updateCard() {
+  const entry = entries[currentIndex];
+  letterEl.innerText = entry.letter;
+  wordEl.innerText = entry.correct;
+}
+</script>
+{% endblock %}
