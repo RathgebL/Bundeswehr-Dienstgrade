@@ -411,6 +411,25 @@ def generate_nato_quiz_data():
 # =====================================
 # NATO-ALPHABET - QUIZSEITE
 # =====================================
+@bp_nato.route("/quizmodes")
+def nato_quizmodes():
+    """Menü zur Auswahl des Quizmodus (Unbegrenzt / Zeitmodus)"""
+    mode = request.args.get("mode", "normal")
+    session["nato_quiz_mode"] = mode
+
+    branch = session.get("default_branch", "Heer")
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    return render_template(
+        "nato/nato_quizmodes.html",
+        selected_mode=mode,
+        background=background
+    )
+
+
+# =====================================
+# NATO-ALPHABET - QUIZSEITE
+# =====================================
 @bp_nato.route("/quiz")
 def nato_quiz():
     """Quiz: Welches Wort gehört zu diesem Buchstaben?"""

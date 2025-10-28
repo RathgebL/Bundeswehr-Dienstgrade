@@ -1,0 +1,44 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="quiz">
+  <h1 class="quiz__title">Quizmodus</h1>
+
+  <!-- Formular: Auswahl des Spielmodus -->
+  <form id="quizForm" class="quiz__form">
+    <div class="quiz__section">
+      <label for="mode" class="quiz__label">Spielmodus:</label>
+      <select name="mode" id="mode" class="quiz__select" onchange="changeMode()">
+        <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
+        <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitmodus</option>
+      </select>
+    </div>
+  </form>
+
+  <!-- Button zum Starten -->
+  <div class="quiz__buttons">
+    <button type="button" class="quiz__button" onclick="startQuiz()">Quiz starten</button>
+  </div>
+
+  <!-- Zurück-Button -->
+  <div class="quiz__back-container" style="margin-top: var(--space-6); text-align: center;">
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
+  </div>
+</div>
+
+<script>
+  const quizNormalUrl = "{{ url_for('nato.nato_quiz') }}";
+  const quizTimerUrl = "{{ url_for('nato.nato_quiz_timer') }}";
+
+  function changeMode() {
+    const mode = document.getElementById("mode").value;
+    window.location.href = `/nato/quizmodes?mode=${mode}`;
+  }
+
+  function startQuiz() {
+    const mode = document.getElementById("mode").value;
+    let url = mode === "timer" ? quizTimerUrl : quizNormalUrl;
+    window.location.href = url;
+  }
+</script>
+{% endblock %}
