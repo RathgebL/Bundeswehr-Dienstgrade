@@ -1,12 +1,13 @@
 {% extends "base/base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/styles/pages/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles/layouts/_tables.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/styles/pages/ranks_table.css') }}">
 {% endblock %}
 
 {% block content %}
-<div class="ranks page-box">
-  <h1 class="ranks__title heading-primary">Dienstgrad-Tabelle</h1>
+<div class="table-page table-page--wide ranks">
+  <h1 class="table-page__title">Dienstgrad-Tabelle</h1>
 
   <!-- Filter -->
   <form method="get" action="{{ url_for('ranks.ranks_table') }}" class="ranks__filter">
@@ -19,8 +20,8 @@
   </form>
 
   <!-- Tabelle -->
-  <div class="ranks__table-wrapper">
-    <table class="ranks__table">
+  <div class="table-wrapper">
+    <table class="table ranks__table">
       <thead>
         <tr>
           <th>Bild</th>
@@ -35,7 +36,7 @@
         {% for rank in ranks %}
         <tr>
           <td><img src="{{ url_for('static', filename='images/' + rank.image_filename) }}" alt="{{ rank.title }}"></td>
-          <td class="ranks__title-cell">{{ rank.title }}</td>
+          <td class="table__highlight">{{ rank.title }}</td>
           <td>{{ rank.abbreviation or "–" }}</td>
           <td>{{ rank.level_code or "–" }}</td>
           <td>{{ rank.rank_group or rank.rank_type or "–" }}</td>
