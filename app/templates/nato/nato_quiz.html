@@ -1,0 +1,57 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="quiz">
+  <h1 class="quiz__title">NATO-Alphabet Quiz</h1>
+
+  <!-- Buchstabe -->
+  <div class="quiz__letter-box">
+    <h1 class="quiz__letter">{{ letter }}</h1>
+  </div>
+
+  <!-- Antwortoptionen -->
+  <div class="quiz__options">
+    {% for opt in options %}
+    <button
+      data-value="{{ opt }}"
+      onclick="checkAnswer('{{ opt }}', '{{ correct }}')"
+      class="quiz__button"
+    >
+      {{ opt }}
+    </button>
+    {% endfor %}
+  </div>
+
+  <!-- Feedback -->
+  <p id="feedback" class="quiz__feedback"></p>
+
+  <!-- Aktionen -->
+  <div class="quiz__actions">
+    <a href="{{ url_for('nato.nato_menu') }}" class="quiz__next quiz__back">
+      Zurück zum Menü
+    </a>
+
+    <a href="{{ url_for('nato.nato_quiz') }}" id="next-btn" class="quiz__next d-none">
+      Nächste Frage
+    </a>
+  </div>
+</div>
+
+<script>
+function checkAnswer(selected, correct) {
+  const buttons = document.querySelectorAll("button[data-value]");
+  buttons.forEach(btn => btn.classList.add("is-locked"));
+
+  if (selected === correct) {
+    document.getElementById("feedback").innerText = "Richtig!";
+    document.querySelector(`button[data-value='${selected}']`).classList.add("quiz__button--correct");
+  } else {
+    document.getElementById("feedback").innerText = "Falsch!";
+    document.querySelector(`button[data-value='${selected}']`).classList.add("quiz__button--wrong");
+    document.querySelector(`button[data-value='${correct}']`).classList.add("quiz__button--correct");
+  }
+
+  document.getElementById("next-btn").classList.remove("d-none");
+}
+</script>
+{% endblock %}

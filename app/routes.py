@@ -1,9 +1,9 @@
 # =====================================
 # IMPORTS
 # =====================================
-from flask import Blueprint, render_template, request, redirect, url_for, session
+import random, csv, os
+from flask import Blueprint, render_template, request, redirect, url_for, session, current_app
 from .models import Rank, NATO
-import random
 
 
 # =====================================
@@ -322,7 +322,7 @@ def nato_menu():
 
 
 # =====================================
-# NATO-ALPHABET — Tabelle
+# NATO-ALPHABET — TABELLE
 # =====================================
 @bp_nato.route("/table")
 def nato_table():
@@ -337,7 +337,7 @@ def nato_table():
 
 
 # =====================================
-# NATO-ALPHABET — Karteikarten
+# NATO-ALPHABET — KARTEIKARTEN
 # =====================================
 @bp_nato.route("/cards")
 def nato_cards():
@@ -372,44 +372,76 @@ def nato_cards():
 
 
 # =====================================
-# NATO-ALPHABET — Quiz
+# NATO-ALPHABET — QUIZDATEN
+# =====================================
+def generate_nato_quiz_data():
+    """Hilfsfunktion für NATO-Alphabet-Quizfragen (Daten aus DB)"""
+    branch = session.get("default_branch", "Heer")
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    entries = NATO.query.all()
+    if not entries:
+        return None
+
+    # zufällige Zeile auswählen
+    correct = random.choice(entries)
+
+    # falsche Antworten aus derselben Zeile nehmen
+    wrong_fields = [correct.wrong1, correct.wrong2, correct.wrong3,
+                    correct.wrong4, correct.wrong5, correct.wrong6,
+                    correct.wrong7, correct.wrong8, correct.wrong9]
+    wrongs = [w for w in wrong_fields if w]
+
+    # zufällig drei falsche auswählen
+    wrong_selected = random.sample(wrongs, min(3, len(wrongs)))
+
+    # Antwortoptionen zusammenstellen
+    options = [correct.correct] + wrong_selected
+    random.shuffle(options)
+
+    return {
+        "branch": branch,
+        "background": background,
+        "correct": correct.correct,
+        "letter": correct.letter,
+        "options": options
+    }
+
+
+# =====================================
+# NATO-ALPHABET - QUIZSEITE
 # =====================================
 @bp_nato.route("/quiz")
 def nato_quiz():
-    """Einfaches Quiz: Welches Wort gehört zu diesem Buchstaben?"""
-    branch = session.get("default_branch", "Heer")
-    backgrounds = session.get("backgrounds", DEFAULT_BACKGROUNDS)
-    background = backgrounds.get(branch, DEFAULT_BACKGROUNDS["Heer"])
-
-    # Alle Einträge laden
-    nato_entries = NATO.query.all()
-    if not nato_entries:
-        return "Keine Daten gefunden – bitte CSV importieren.", 500
-
-    # Zufälligen Buchstaben wählen
-    correct_entry = random.choice(nato_entries)
-
-    # Falschantworten aus den wrong-Feldern + evtl. andere zufällige Einträge
-    all_wrongs = [getattr(correct_entry, f"wrong{i}") for i in range(1, 10)]
-    all_wrongs = [w for w in all_wrongs if w]  # Nur vorhandene nehmen
-
-    # Falls zu wenige falsche Antworten, aus anderen Zeilen auffüllen
-    if len(all_wrongs) < 3:
-        others = [e.correct for e in nato_entries if e.id != correct_entry.id]
-        extra = random.sample(others, min(3 - len(all_wrongs), len(others)))
-        all_wrongs.extend(extra)
-
-    # Drei zufällige falsche Antworten auswählen
-    wrong_answers = random.sample(all_wrongs, min(3, len(all_wrongs)))
-
-    # Antwortoptionen zusammenstellen und mischen
-    options = [correct_entry.correct] + wrong_answers
-    random.shuffle(options)
+    """Quiz: Welches Wort gehört zu diesem Buchstaben?"""
+    data = generate_nato_quiz_data()
+    if not data:
+        return "Keine NATO-Daten in der Datenbank.", 500
 
     return render_template(
         "nato/nato_quiz.html",
-        letter=correct_entry.letter,
-        correct=correct_entry.correct,
-        options=options,
+        letter=data["letter"],
+        correct=data["correct"],
+        options=data["options"],
+        background=data["background"]
+    )
+
+
+# =====================================
+# NATO-ALPHABET - ZEITMODUS
+# =====================================
+@bp_nato.route("/quiz_timer")
+def nato_quiz_timer():
+    """Zeitmodus für NATO-Alphabet-Quiz"""
+    nato_entries = NATO.query.all()
+    if not nato_entries:
+        return "Keine NATO-Daten gefunden.", 500
+
+    branch = session.get("default_branch", "Heer")
+    background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
+
+    return render_template(
+        "nato/nato_quiz_timer.html",
+        nato_entries=nato_entries,
         background=background
     )

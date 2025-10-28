@@ -1,0 +1,141 @@
+{% extends "base/base.html" %}
+
+{% block content %}
+<div class="quiz">
+  <h1 class="quiz__title">Zeitmodus: NATO-Alphabet</h1>
+
+  <!-- Timer & Punktestand -->
+  <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
+  <p id="score" class="quiz__score d-none">Punkte: 0</p>
+
+  <!-- Dynamischer Inhalt -->
+  <div class="quiz__content"></div>
+</div>
+
+<script>
+let allNato = {{ nato_entries|tojson|safe }};
+let timeLeft = 60;
+let score = 0;
+let timerInterval;
+
+// ---------------------
+// SPIELSTART
+// ---------------------
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById("timer").classList.remove("d-none");
+  document.getElementById("score").classList.remove("d-none");
+
+  nextQuestion();
+  startTimer();
+});
+
+// ---------------------
+// TIMER
+// ---------------------
+function startTimer() {
+  const timer = document.getElementById("timer");
+  timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
+
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
+
+    if (timeLeft <= 10) {
+      timer.style.color = "var(--red)";
+    }
+
+    if (timeLeft <= 0) {
+      clearInterval(timerInterval);
+      endGame();
+    }
+  }, 1000);
+}
+
+// ---------------------
+// FRAGE GENERIEREN
+// ---------------------
+function nextQuestion() {
+  const correct = allNato[Math.floor(Math.random() * allNato.length)];
+  const wrongs = [
+    correct.wrong1, correct.wrong2, correct.wrong3,
+    correct.wrong4, correct.wrong5, correct.wrong6,
+    correct.wrong7, correct.wrong8, correct.wrong9
+  ].filter(w => w);
+
+  const wrongSelected = wrongs.sort(() => 0.5 - Math.random()).slice(0, 3);
+  const options = [correct.correct, ...wrongSelected].sort(() => 0.5 - Math.random());
+
+  renderQuestion(correct, options);
+}
+
+// ---------------------
+// FRAGE ANZEIGEN
+// ---------------------
+function renderQuestion(correct, options) {
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <div class="quiz__letter-box">
+      <h1 class="quiz__letter">${correct.letter}</h1>
+    </div>
+
+    <div class="quiz__options">
+      ${options.map(opt => `
+        <button class="quiz__button" onclick="checkAnswer('${opt}', '${correct.correct}')">
+          ${opt}
+        </button>
+      `).join("")}
+    </div>
+
+    <p id="feedback" class="quiz__feedback"></p>
+  `;
+}
+
+// ---------------------
+// ANTWORT PRÜFEN
+// ---------------------
+function checkAnswer(selected, correct) {
+  const buttons = document.querySelectorAll(".quiz__button");
+  buttons.forEach(btn => btn.classList.add("is-locked"));
+
+  const feedback = document.getElementById("feedback");
+
+  if (selected === correct) {
+    score++;
+    document.getElementById("score").innerText = "Punkte: " + score;
+    feedback.innerText = "Richtig!";
+    document.querySelector(`button:contains('${selected}')`)?.classList.add("quiz__button--correct");
+  } else {
+    feedback.innerText = "Falsch!";
+    const selectedBtn = Array.from(buttons).find(b => b.textContent === selected);
+    const correctBtn = Array.from(buttons).find(b => b.textContent === correct);
+    selectedBtn?.classList.add("quiz__button--wrong");
+    correctBtn?.classList.add("quiz__button--correct");
+  }
+
+  // Nächste Frage nach kurzer Pause
+  setTimeout(nextQuestion, 700);
+}
+
+// ---------------------
+// SPIEL ENDE
+// ---------------------
+function endGame() {
+  clearInterval(timerInterval);
+
+  document.getElementById("timer").classList.add("d-none");
+  document.getElementById("score").classList.add("d-none");
+
+  const container = document.querySelector(".quiz__content");
+  container.innerHTML = `
+    <div class="quiz__end">
+      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
+      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
+      <div class="quiz__end-buttons">
+        <a href="/nato/quiz_timer" class="quiz__next">Erneut versuchen</a>
+        <a href="{{ url_for('nato.nato_menu') }}" class="quiz__next">Zurück</a>
+      </div>
+    </div>
+  `;
+}
+</script>
+{% endblock %}
