@@ -1,0 +1,142 @@
+/*************************************************************
+BASISSTILE & ALLGEMEINE REGELN
+*************************************************************/
+
+/* =============================
+   RESET & STANDARDWERTE
+   ============================= */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-base);
+  color: var(--txt-light);
+  background-color: var(--gray-dark);
+  line-height: var(--line-height-normal);
+}
+
+/* Globale Box-Sizing-Vererbung */
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+/* Bilder und Medien */
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* =============================
+   GRUNDSTRUKTUR
+   ============================= */
+
+main.container {
+  background: transparent !important; /* lässt Hintergrund sichtbar */
+  padding: var(--space-7) var(--space-4);
+}
+
+/* =============================
+   LINKS & BUTTONS
+   ============================= */
+
+a, button {
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Entfernt Standard-Styling bei Buttons */
+button {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* =============================
+   FORMULAR-ELEMENTE
+   ============================= */
+
+input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Entfernt Browser-Default-Styles bei Selects */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* =============================
+   SCROLLBAR (optionaler Stil)
+   ============================= */
+
+/* Für WebKit-Browser */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-line);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bw-gold);
+}
+
+/* =============================
+   TEXT-SELEKTION & FOKUS
+   ============================= */
+
+::selection {
+  background-color: var(--bw-gold);
+  color: var(--gray-dark);
+}
+
+/* Fokusringe nur sichtbar, wenn sinnvoll */
+:focus-visible {
+  outline: 2px solid var(--bw-gold);
+  outline-offset: 2px;
+}
+
+/* =============================
+   TYPOGRAFIE
+   ============================= */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: var(--font-weight-bold);
+  color: var(--bw-gold);
+  line-height: var(--line-height-tight);
+  margin: 0 0 var(--space-4);
+}
+
+p {
+  margin: 0 0 var(--space-4);
+  color: var(--txt-light);
+}
+
+/* =============================
+   GRUNDLEGENDER FLEX UND GRID
+   ============================= */
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.grid-center {
+  display: grid;
+  place-items: center;
+}
