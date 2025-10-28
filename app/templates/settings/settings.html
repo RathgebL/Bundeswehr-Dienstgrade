@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="settings page-box">
+<div class="page-box page--narrow">
   <h1 class="settings__title heading-primary">Einstellungen</h1>
 
   <form method="POST" class="settings__form">
@@ -14,7 +14,7 @@
     <!-- Standard-Truppenteil -->
     <div class="settings__section">
       <label class="settings__label">Standard-Truppenteil:</label>
-      <select name="default_branch" class="select settings__select">
+      <select name="default_branch" class="select">
         <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
         <option value="Luftwaffe" {% if defaults.default_branch|lower == "luftwaffe" %}selected{% endif %}>Luftwaffe</option>
         <option value="Marine" {% if defaults.default_branch|lower == "marine" %}selected{% endif %}>Marine</option>
@@ -27,7 +27,7 @@
     <!-- Heer -->
     <div class="settings__section">
       <label class="settings__label">Heer:</label>
-      <select name="bg_heer" class="select settings__select">
+      <select name="bg_heer" class="select">
         <option value="Hintergrund-Heer-Wald.png" 
           {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wald.png" %}selected{% endif %}>Wald</option>
         <option value="Hintergrund-Heer-Wüste.png" 
@@ -38,7 +38,7 @@
     <!-- Luftwaffe -->
     <div class="settings__section">
       <label class="settings__label">Luftwaffe:</label>
-      <select name="bg_luftwaffe" class="select settings__select">
+      <select name="bg_luftwaffe" class="select">
         <option value="Hintergrund-Luftwaffe-Grau.png" 
           {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Grau.png" %}selected{% endif %}>Grau</option>
         <option value="Hintergrund-Luftwaffe-Blau.png" 
@@ -49,7 +49,7 @@
     <!-- Marine -->
     <div class="settings__section">
       <label class="settings__label">Marine:</label>
-      <select name="bg_marine" class="select settings__select">
+      <select name="bg_marine" class="select">
         <option value="Hintergrund-Marine-Hell.png" 
           {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Hell.png" %}selected{% endif %}>Hell</option>
         <option value="Hintergrund-Marine-Dunkel.png" 

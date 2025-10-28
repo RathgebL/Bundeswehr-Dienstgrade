@@ -2,25 +2,6 @@
 PAGE – NATO-QUIZ MODES
 *************************************************************/
 
-.nato-quizmodes {
-  background-color: var(--surface-bg);
-  color: var(--text-default);
-  padding: var(--space-7);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  max-width: 600px;
-  margin: var(--space-8) auto;
-  text-align: center;
-}
-
-/* ===== Titel ===== */
-.nato-quizmodes__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-6);
-}
-
 /* ===== Formular ===== */
 .quiz__form {
   display: flex;

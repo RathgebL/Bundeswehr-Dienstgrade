@@ -8,7 +8,7 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   color: var(--text-default);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
-  padding: var(--space-3) var(--space-4);
+  padding: var(--space-2) var(--space-4);
   font-size: var(--font-size-base);
   text-align: center;
   appearance: none;
@@ -16,18 +16,13 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   -moz-appearance: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  min-width: 140px;
 }
 
 /* Hover- und Fokuszustände */
 .select:hover {
   background-color: var(--gray-line);
   border-color: var(--accent-secondary);
-}
-
-.select:focus {
-  outline: none;
-  border-color: var(--accent-secondary);
-  box-shadow: 0 0 6px var(--accent-secondary);
 }
 
 /* Deaktivierter Zustand */

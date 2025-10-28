@@ -2,24 +2,6 @@
 LAYOUTS – TABELLEN (NATO, Dienstgrade, etc.)
 *************************************************************/
 
-/* ===== Breitenvarianten ===== */
-.table-page--narrow {
-  max-width: 700px;
-}
-
-.table-page--medium {
-  max-width: 1000px;
-}
-
-.table-page--wide {
-  max-width: 1400px;
-}
-
-.table-page--full {
-  max-width: 100%;
-  border-radius: 0;
-}
-
 /* ===== Grundstruktur für Seitencontainer ===== */
 .table-page {
   background-color: var(--surface-bg);

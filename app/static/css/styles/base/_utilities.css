@@ -44,6 +44,32 @@ UTILITY-KLASSEN — SCHNELLE LAYOUT- UND STILHILFEN
 }
 
 /* =============================
+   BREITENVARIANTEN (MAX-WIDTHS)
+   ============================= */
+
+/* Schmale Seiten (z. B. Settings, kleine Menüs) */
+.page--narrow {
+  max-width: 700px;
+}
+
+/* Mittlere Standardbreite (z. B. Karten, Quiz) */
+.page--medium {
+  max-width: 1000px;
+}
+
+/* Breite Seiten (z. B. Tabellen, Übersichten) */
+.page--wide {
+  max-width: 1400px;
+}
+
+/* Volle Breite (z. B. Startseite oder Spezialseiten) */
+.page--full {
+  max-width: 100%;
+  border-radius: 0;
+}
+
+
+/* =============================
    SPACING (Margin / Padding)
    ============================= */
 

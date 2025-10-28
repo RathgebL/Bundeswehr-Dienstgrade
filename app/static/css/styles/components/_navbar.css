@@ -10,7 +10,6 @@ COMPONENTS – NAVBAR / HAUPTNAVIGATION
   position: sticky;
   top: 0;
   z-index: 1000;
-  backdrop-filter: blur(4px); /* optionaler Glas-Effekt */
 }
 
 /* Innerer Container – sorgt für zentrierte Inhalte */

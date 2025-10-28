@@ -2,19 +2,6 @@
 PAGE – HOMEPAGE
 *************************************************************/
 
-/* Hauptcontainer der Startseite */
-.home {
-  background-color: var(--surface-bg);
-  color: var(--text-default);
-  padding: var(--space-7);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  margin: var(--space-8) auto;
-  max-width: 900px;
-  width: 95%;
-  text-align: center;
-}
-
 /* Haupttitel */
 .home__title {
   color: var(--text-accent);

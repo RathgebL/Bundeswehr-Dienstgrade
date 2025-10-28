@@ -2,11 +2,6 @@
 PAGE – DIENSTGRAD-TABELLE (Spezifische Anpassungen)
 *************************************************************/
 
-/* Breitere Variante für mehrspaltige Tabellen */
-.table-page.ranks {
-  max-width: 1400px;
-}
-
 /* Bilder in der Tabelle */
 .ranks__table img {
   width: 60px;

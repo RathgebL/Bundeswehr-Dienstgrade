@@ -2,27 +2,6 @@
 LAYOUTS – MENÜSEITEN (Ränge, NATO-Alphabet, etc.)
 *************************************************************/
 
-/* ===== Gemeinsame Box ===== */
-.menu-box {
-  background-color: var(--surface-bg);
-  color: var(--text-default);
-  padding: var(--space-8);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  max-width: 768px;
-  margin: var(--space-8) auto;
-  text-align: center;
-}
-
-/* ===== Titel ===== */
-.menu-box__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-6);
-  line-height: var(--line-height-tight);
-}
-
 /* ===== Untertitel ===== */
 .menu-box__subtitle {
   font-size: var(--font-size-m);
@@ -39,10 +18,10 @@ LAYOUTS – MENÜSEITEN (Ränge, NATO-Alphabet, etc.)
   flex-direction: column;
   align-items: center;
   gap: var(--space-5);
-  margin-bottom: var(--space-7);
+  margin-bottom: var(--space-4);
 }
 
-/* Optional: Einheitliche Button-Größe */
+/* Einheitliche Button-Größe */
 .menu-box__buttons .btn {
   width: 100%;
   max-width: 300px;

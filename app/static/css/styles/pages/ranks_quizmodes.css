@@ -2,26 +2,6 @@
 PAGE – QUIZMODUS (DIENSTGRADE)
 *************************************************************/
 
-.quiz {
-  background-color: var(--surface-bg);
-  color: var(--text-default);
-  padding: var(--space-7);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  max-width: 600px;
-  margin: var(--space-8) auto;
-  text-align: center;
-  font-family: var(--font-family-sans);
-}
-
-/* ===== Titel ===== */
-.quiz__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-6);
-}
-
 /* ===== Formular ===== */
 .quiz__form {
   display: flex;
@@ -44,30 +24,6 @@ PAGE – QUIZMODUS (DIENSTGRADE)
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-base);
   color: var(--text-default);
-}
-
-/* ===== Selects (globaler Stil) ===== */
-.quiz__select {
-  background-color: var(--gray-mid);
-  color: var(--text-default);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-sm);
-  padding: var(--space-3) var(--space-4);
-  font-size: var(--font-size-base);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-align: center;
-}
-
-.quiz__select:hover {
-  background-color: var(--gray-line);
-  border-color: var(--accent-secondary);
-}
-
-.quiz__select:focus {
-  outline: none;
-  border-color: var(--accent-secondary);
-  box-shadow: 0 0 6px var(--accent-secondary);
 }
 
 /* ===== Buttons ===== */

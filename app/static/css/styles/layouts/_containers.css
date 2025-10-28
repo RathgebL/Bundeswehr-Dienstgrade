@@ -4,25 +4,13 @@ LAYOUTS – CONTAINER & SEKTIONSSTRUKTUREN
 
 /* Allgemeiner Seitencontainer für Hauptinhalte */
 .page-box {
-  background: transparent;
-  color: var(--text-default);
-  padding: var(--space-7);
+  background-color: var(--surface-bg);
   border-radius: var(--radius-card);
-  box-shadow: none;
+  box-shadow: 0 6px 18px var(--shadow-color);
   margin: var(--space-8) auto;
-  max-width: 1200px;
+  padding: var(--space-7);
   width: 95%;
   text-align: center;
-}
-
-/* Kleinere Box für fokussierte Inhalte (z. B. Einstellungen, Quiz) */
-.page-box--narrow {
-  max-width: 600px;
-}
-
-/* Breitere Variante (z. B. Tabellen oder Übersichten) */
-.page-box--wide {
-  max-width: 1400px;
 }
 
 /* Sektionen innerhalb einer Seite */
