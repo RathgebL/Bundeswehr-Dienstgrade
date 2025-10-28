@@ -525,7 +525,7 @@ SEITE: DIENSTGRAD-TABELLE
 .ranks__table-wrapper {
   background-color: var(--gray-dark);
   padding: var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   box-shadow: 0 4px 12px var(--shadows);
   overflow-x: auto;
 }
@@ -626,7 +626,7 @@ SEITE: QUIZMODUS
   background-color: var(--gray-mid);
   color: var(--txt-light);
   border: 1px solid var(--gray-line);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   padding: var(--space-3) var(--space-5);
   width: 220px;
   text-align: center;
@@ -709,7 +709,7 @@ SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
   max-height: 200px;
   width: auto;
   object-fit: contain;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   box-shadow: 0 4px 16px var(--shadows);
   margin-bottom: var(--space-6);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
@@ -818,7 +818,7 @@ SEITE: QUIZ (Dienstgrad erkennen & Schulterklappe finden)
 .quiz__grid .quiz__image {
   max-height: 180px;
   width: auto;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   box-shadow: 0 4px 12px var(--shadows);
 }
 
@@ -1069,7 +1069,7 @@ SEITE: DIENSTGRAD-KARTEIKARTEN
   position: absolute;
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   backface-visibility: hidden;
   box-shadow: 0 8px 30px var(--shadows);
   padding: var(--space-6);
@@ -1230,7 +1230,7 @@ SEITE: NATO-ALPHABET-TABELLE
 .nato__table-wrapper {
   background-color: var(--gray-dark);
   padding: var(--space-4);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-m);
   box-shadow: 0 4px 12px var(--shadows);
   overflow-x: auto;                              /* für kleinere Bildschirme scrollbar */
 }
