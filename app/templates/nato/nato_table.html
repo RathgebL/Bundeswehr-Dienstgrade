@@ -1,9 +1,13 @@
 {% extends "base/base.html" %}
-{% block content %}
-<div class="nato">
-  <h1 class="nato__title">NATO-Alphabet</h1>
 
-  <!-- Tabellen-Wrapper -->
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/nato_table.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="nato page-box">
+  <h1 class="nato__title heading-primary">NATO-Alphabet</h1>
+
   <div class="nato__table-wrapper">
     <table class="nato__table">
       <thead>
@@ -23,9 +27,8 @@
     </table>
   </div>
 
-  <!-- Zurück-Button -->
   <div class="btn-back-container">
-    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
   </div>
 </div>
 {% endblock %}

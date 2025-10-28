@@ -1,10 +1,13 @@
 {% extends "base/base.html" %}
 
-{% block content %}
-<div class="flashcards">
-  <h1 class="nato__title">Karteikarten</h1>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/nato_cards.css') }}">
+{% endblock %}
 
-  <!-- Kartenbereich -->
+{% block content %}
+<div class="flashcards page-box">
+  <h1 class="nato__title heading-primary">Karteikarten</h1>
+
   <div id="flashcard" class="flashcard-container">
     <div class="card-flip" onclick="flipCard()">
       <!-- Vorderseite: Buchstabe -->
@@ -20,27 +23,25 @@
     </div>
   </div>
 
-  <!-- Steuerung -->
   <div class="flashcard-buttons">
     <div class="flashcard-controls">
-      <button class="btn-card" onclick="prevCard()">Vorherige Karte</button>
-      <button class="btn-card" onclick="nextCard()">Nächste Karte</button>
+      <button class="btn btn--primary" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn btn--primary" onclick="nextCard()">Nächste Karte</button>
     </div>
 
     <div class="flashcard-controls">
-      <button class="btn-card-secondary" onclick="shuffleCards()">Mischen</button>
-      <button class="btn-card-secondary" onclick="resetCards()">Ordnen</button>
+      <button class="btn btn--secondary" onclick="shuffleCards()">Mischen</button>
+      <button class="btn btn--secondary" onclick="resetCards()">Ordnen</button>
     </div>
   </div>
 
-  <!-- Zurück-Button -->
   <div class="btn-back-container">
-    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
   </div>
 </div>
 
 <script>
-const entriesInitial = {{ entries|tojson|safe }}; // Daten vom Server
+const entriesInitial = {{ entries|tojson|safe }};
 let entries = [...entriesInitial];
 let currentIndex = 0;
 let entriesOriginal = [...entriesInitial];

@@ -1,0 +1,151 @@
+/*************************************************************
+PAGE – NATO-ALPHABET KARTEIKARTEN
+*************************************************************/
+
+.flashcards {
+  background-color: var(--surface-bg);
+  color: var(--text-default);
+  padding: var(--space-7);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+  max-width: 700px;
+  margin: var(--space-8) auto;
+  text-align: center;
+}
+
+/* ===== Titel ===== */
+.nato__title {
+  color: var(--text-accent);
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+}
+
+/* ===== Kartencontainer ===== */
+.flashcard-container {
+  perspective: 1000px;
+  width: 100%;
+  max-width: 400px;
+  margin: 0 auto var(--space-6);
+}
+
+.card-flip {
+  position: relative;
+  width: 100%;
+  height: 260px;
+  transform-style: preserve-3d;
+  transition: transform 0.6s ease-in-out;
+  cursor: pointer;
+}
+
+.card-flip.flipped {
+  transform: rotateY(180deg);
+}
+
+/* ===== Kartenflächen ===== */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-card);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--gray-dark);
+  color: var(--text-default);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  padding: var(--space-5);
+}
+
+.card-front {
+  background-color: var(--gray-dark);
+}
+
+.card-back {
+  background-color: var(--accent-primary);
+  color: var(--text-light);
+  transform: rotateY(180deg);
+}
+
+/* ===== Vorderseite (Buchstabe) ===== */
+.nato-letter {
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+}
+
+.nato-flip-hint {
+  font-size: var(--font-size-s);
+  color: var(--text-muted);
+}
+
+/* ===== Rückseite (Wort) ===== */
+.nato-word {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  text-transform: capitalize;
+}
+
+/* ===== Buttons ===== */
+.flashcard-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  align-items: center;
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.flashcard-controls {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.btn-card,
+.btn-card-secondary {
+  min-width: 160px;
+}
+
+/* ===== Animationen ===== */
+.shake {
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.reset-glow {
+  box-shadow: 0 0 10px var(--accent-secondary);
+}
+
+/* ===== Zurück-Button ===== */
+.btn-back-container {
+  text-align: center;
+  margin-top: var(--space-6);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .flashcards {
+    padding: var(--space-5);
+  }
+
+  .card-flip {
+    height: 220px;
+  }
+
+  .nato-letter {
+    font-size: var(--font-size-xxl);
+  }
+
+  .nato-word {
+    font-size: var(--font-size-l);
+  }
+}

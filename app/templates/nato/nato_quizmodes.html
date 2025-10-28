@@ -1,10 +1,13 @@
 {% extends "base/base.html" %}
 
-{% block content %}
-<div class="quiz">
-  <h1 class="quiz__title">Quizmodus</h1>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/nato_quizmodes.css') }}">
+{% endblock %}
 
-  <!-- Formular: Auswahl des Spielmodus -->
+{% block content %}
+<div class="nato-quizmodes page-box">
+  <h1 class="nato-quizmodes__title heading-primary">Quizmodus</h1>
+
   <form id="quizForm" class="quiz__form">
     <div class="quiz__section">
       <label for="mode" class="quiz__label">Spielmodus:</label>
@@ -15,14 +18,12 @@
     </div>
   </form>
 
-  <!-- Button zum Starten -->
   <div class="quiz__buttons">
     <button type="button" class="quiz__button" onclick="startQuiz()">Quiz starten</button>
   </div>
 
-  <!-- Zurück-Button -->
-  <div class="quiz__back-container" style="margin-top: var(--space-6); text-align: center;">
-    <a href="{{ url_for('nato.nato_menu') }}" class="btn-back">Zurück zum Menü</a>
+  <div class="btn-back-container">
+    <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
   </div>
 </div>
 
@@ -37,7 +38,7 @@
 
   function startQuiz() {
     const mode = document.getElementById("mode").value;
-    let url = mode === "timer" ? quizTimerUrl : quizNormalUrl;
+    const url = mode === "timer" ? quizTimerUrl : quizNormalUrl;
     window.location.href = url;
   }
 </script>

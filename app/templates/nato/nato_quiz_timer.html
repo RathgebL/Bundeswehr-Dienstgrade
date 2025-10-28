@@ -1,14 +1,16 @@
 {% extends "base/base.html" %}
 
-{% block content %}
-<div class="quiz">
-  <h1 class="quiz__title">Zeitmodus: NATO-Alphabet</h1>
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/nato_quiz_timer.css') }}">
+{% endblock %}
 
-  <!-- Timer & Punktestand -->
+{% block content %}
+<div class="nato-quiz-timer page-box">
+  <h1 class="nato-quiz-timer__title heading-primary">Zeitmodus: NATO-Alphabet</h1>
+
   <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
   <p id="score" class="quiz__score d-none">Punkte: 0</p>
 
-  <!-- Dynamischer Inhalt -->
   <div class="quiz__content"></div>
 </div>
 
@@ -19,10 +21,6 @@ let timeLeft = 60;
 let score = 0;
 let timerInterval;
 
-
-// ---------------------
-// SPIELSTART
-// ---------------------
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("timer").classList.remove("d-none");
   document.getElementById("score").classList.remove("d-none");
@@ -52,7 +50,7 @@ function startTimer() {
 }
 
 // ---------------------
-// FRAGEPOOL MISCHEN
+// FRAGEPOOL
 // ---------------------
 let questionIndex = 0;
 let shuffledNato = [];
@@ -63,25 +61,19 @@ function shuffleQuestions() {
 }
 
 // ---------------------
-// NÄCHSTE FRAGE
+// FRAGENLOGIK
 // ---------------------
 function nextQuestion() {
-  // Keine weiteren Fragen nach Ende
   if (gameOver) return;
 
-  // Wenn alle Buchstaben durch sind → neu mischen
-  if (questionIndex >= shuffledNato.length) {
-    shuffleQuestions();
-  }
+  if (questionIndex >= shuffledNato.length) shuffleQuestions();
 
-  const correct = shuffledNato[questionIndex];
-  questionIndex++;
-
+  const correct = shuffledNato[questionIndex++];
   const wrongs = [
     correct.wrong1, correct.wrong2, correct.wrong3,
     correct.wrong4, correct.wrong5, correct.wrong6,
     correct.wrong7, correct.wrong8, correct.wrong9
-  ].filter(w => w);
+  ].filter(Boolean);
 
   const wrongSelected = wrongs.sort(() => 0.5 - Math.random()).slice(0, 3);
   const options = [correct.correct, ...wrongSelected].sort(() => 0.5 - Math.random());
@@ -89,9 +81,6 @@ function nextQuestion() {
   renderQuestion(correct, options);
 }
 
-// ---------------------
-// FRAGE ANZEIGEN
-// ---------------------
 function renderQuestion(correct, options) {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
@@ -111,9 +100,6 @@ function renderQuestion(correct, options) {
   `;
 }
 
-// ---------------------
-// ANTWORT PRÜFEN
-// ---------------------
 function checkAnswer(selected, correct) {
   const buttons = document.querySelectorAll(".quiz__button");
   buttons.forEach(btn => btn.classList.add("is-locked"));
@@ -123,7 +109,6 @@ function checkAnswer(selected, correct) {
     score++;
     document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
-
     const correctBtn = Array.from(buttons).find(b => b.textContent.trim() === correct);
     correctBtn?.classList.add("quiz__button--correct");
   } else {
@@ -134,15 +119,15 @@ function checkAnswer(selected, correct) {
     correctBtn?.classList.add("quiz__button--correct");
   }
 
-  // Nächste Frage nach kurzer Pause
   setTimeout(nextQuestion, 800);
 }
 
 // ---------------------
-// SPIEL ENDE
+// SPIELENDE
 // ---------------------
 function endGame() {
   clearInterval(timerInterval);
+  gameOver = true;
 
   document.getElementById("timer").classList.add("d-none");
   document.getElementById("score").classList.add("d-none");
