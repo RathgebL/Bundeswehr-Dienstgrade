@@ -13,7 +13,7 @@ html, body {
   font-family: var(--font-family-sans);
   font-size: var(--font-size-base);
   color: var(--txt-light);
-  background-color: var(--gray-dark);
+  background-color: transparent;
   line-height: var(--line-height-normal);
 }
 
