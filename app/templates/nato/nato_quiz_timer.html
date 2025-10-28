@@ -14,9 +14,11 @@
 
 <script>
 let allNato = {{ nato_entries|tojson|safe }};
+let gameOver = false;
 let timeLeft = 60;
 let score = 0;
 let timerInterval;
+
 
 // ---------------------
 // SPIELSTART
@@ -25,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("timer").classList.remove("d-none");
   document.getElementById("score").classList.remove("d-none");
 
+  shuffleQuestions();
   nextQuestion();
   startTimer();
 });
@@ -40,10 +43,7 @@ function startTimer() {
     timeLeft--;
     timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-    if (timeLeft <= 10) {
-      timer.style.color = "var(--red)";
-    }
-
+    if (timeLeft <= 10) timer.style.color = "var(--red)";
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       endGame();
@@ -52,10 +52,31 @@ function startTimer() {
 }
 
 // ---------------------
-// FRAGE GENERIEREN
+// FRAGEPOOL MISCHEN
+// ---------------------
+let questionIndex = 0;
+let shuffledNato = [];
+
+function shuffleQuestions() {
+  shuffledNato = [...allNato].sort(() => Math.random() - 0.5);
+  questionIndex = 0;
+}
+
+// ---------------------
+// NÄCHSTE FRAGE
 // ---------------------
 function nextQuestion() {
-  const correct = allNato[Math.floor(Math.random() * allNato.length)];
+  // Keine weiteren Fragen nach Ende
+  if (gameOver) return;
+
+  // Wenn alle Buchstaben durch sind → neu mischen
+  if (questionIndex >= shuffledNato.length) {
+    shuffleQuestions();
+  }
+
+  const correct = shuffledNato[questionIndex];
+  questionIndex++;
+
   const wrongs = [
     correct.wrong1, correct.wrong2, correct.wrong3,
     correct.wrong4, correct.wrong5, correct.wrong6,
@@ -96,24 +117,25 @@ function renderQuestion(correct, options) {
 function checkAnswer(selected, correct) {
   const buttons = document.querySelectorAll(".quiz__button");
   buttons.forEach(btn => btn.classList.add("is-locked"));
-
   const feedback = document.getElementById("feedback");
 
   if (selected === correct) {
     score++;
     document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
-    document.querySelector(`button:contains('${selected}')`)?.classList.add("quiz__button--correct");
+
+    const correctBtn = Array.from(buttons).find(b => b.textContent.trim() === correct);
+    correctBtn?.classList.add("quiz__button--correct");
   } else {
     feedback.innerText = "Falsch!";
-    const selectedBtn = Array.from(buttons).find(b => b.textContent === selected);
-    const correctBtn = Array.from(buttons).find(b => b.textContent === correct);
+    const selectedBtn = Array.from(buttons).find(b => b.textContent.trim() === selected);
+    const correctBtn = Array.from(buttons).find(b => b.textContent.trim() === correct);
     selectedBtn?.classList.add("quiz__button--wrong");
     correctBtn?.classList.add("quiz__button--correct");
   }
 
   // Nächste Frage nach kurzer Pause
-  setTimeout(nextQuestion, 700);
+  setTimeout(nextQuestion, 800);
 }
 
 // ---------------------

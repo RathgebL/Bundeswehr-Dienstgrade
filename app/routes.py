@@ -456,11 +456,28 @@ def nato_quiz_timer():
     if not nato_entries:
         return "Keine NATO-Daten gefunden.", 500
 
+    # --- JSON-kompatible Dictionaries erzeugen ---
+    nato_data = [{
+        "id": n.id,
+        "letter": n.letter or "",
+        "correct": n.correct or "",
+        "wrong1": n.wrong1 or "",
+        "wrong2": n.wrong2 or "",
+        "wrong3": n.wrong3 or "",
+        "wrong4": n.wrong4 or "",
+        "wrong5": n.wrong5 or "",
+        "wrong6": n.wrong6 or "",
+        "wrong7": n.wrong7 or "",
+        "wrong8": n.wrong8 or "",
+        "wrong9": n.wrong9 or ""
+    } for n in nato_entries]
+
+    # --- Hintergrund setzen ---
     branch = session.get("default_branch", "Heer")
     background = DEFAULT_BACKGROUNDS.get(branch, DEFAULT_BACKGROUNDS["Heer"])
 
     return render_template(
         "nato/nato_quiz_timer.html",
-        nato_entries=nato_entries,
+        nato_entries=nato_data,
         background=background
     )
