@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="nato-menu page-box">
-  <h1 class="nato-menu__title heading-primary">NATO-Alphabet</h1>
-  <p class="nato-menu__subtitle heading-secondary">
+<div class="menu-box nato-menu">
+  <h1 class="menu-box__title">NATO-Alphabet</h1>
+  <p class="menu-box__subtitle">
     Wähle einen Modus aus, um das NATO-Alphabet zu lernen:
   </p>
 
-  <div class="nato-menu__buttons">
+  <div class="menu-box__buttons">
     <a href="{{ url_for('nato.nato_table') }}" class="btn btn--primary">Tabelle</a>
     <a href="{{ url_for('nato.nato_cards') }}" class="btn btn--primary">Karteikarten</a>
-    <a href="{{ url_for('nato.nato_quizmodes') }}" class="btn btn--primary">Quiz</a>
-    <a href="{{ url_for('main.home') }}" class="btn btn--secondary">Zurück zur Startseite</a>
+    <a href="{{ url_for('nato.nato_quiz') }}" class="btn btn--primary">Quiz</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn--secondary btn--back">Zurück zur Startseite</a>
   </div>
 </div>
 {% endblock %}

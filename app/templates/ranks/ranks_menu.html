@@ -5,17 +5,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="ranks-menu page-box">
-  <h1 class="ranks-menu__title heading-primary">Bundeswehr Dienstgrade</h1>
-  <p class="ranks-menu__subtitle heading-secondary">
+<div class="menu-box ranks-menu">
+  <h1 class="menu-box__title">Bundeswehr Dienstgrade</h1>
+  <p class="menu-box__subtitle">
     Wähle einen Modus aus, um die Dienstgrade zu lernen:
   </p>
 
-  <div class="ranks-menu__buttons">
+  <div class="menu-box__buttons">
     <a href="{{ url_for('ranks.ranks_table') }}" class="btn btn--primary">Tabelle</a>
     <a href="{{ url_for('ranks.ranks_cards') }}" class="btn btn--primary">Karteikarten</a>
-    <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn btn--primary">Quiz</a>
-    <a href="{{ url_for('main.home') }}" class="btn btn--secondary">Zurück zur Startseite</a>
+    <a href="{{ url_for('ranks.ranks_quiz1') }}" class="btn btn--primary">Quiz</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn--secondary btn--back">Zurück zur Startseite</a>
   </div>
 </div>
 {% endblock %}
