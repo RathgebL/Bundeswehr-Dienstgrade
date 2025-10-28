@@ -1,14 +1,18 @@
 {% extends "base/base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/ranks_quizmodes.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="quiz">
-  <h1 class="quiz__title">Quizmodus</h1>
+<div class="quiz page-box">
+  <h1 class="quiz__title heading-primary">Quizmodus</h1>
 
   <form id="quizForm" class="quiz__form">
     <!-- Spielmodus -->
     <div class="quiz__section">
       <label for="mode" class="quiz__label">Spielmodus:</label>
-      <select name="mode" id="mode" class="select-base" onchange="changeMode()">
+      <select name="mode" id="mode" class="select quiz__select" onchange="changeMode()">
         <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
         <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitspiel</option>
       </select>
@@ -17,7 +21,7 @@
     <!-- Truppenteil -->
     <div class="quiz__section">
       <label for="branch" class="quiz__label">Truppenteil:</label>
-      <select name="branch" id="branch" class="select-base" onchange="changeBranch()">
+      <select name="branch" id="branch" class="select quiz__select" onchange="changeBranch()">
         {% for b in branches %}
           <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
         {% endfor %}
@@ -25,14 +29,15 @@
     </div>
   </form>
 
+  <!-- Quizbuttons -->
   <div class="quiz__buttons">
     <button type="button" class="quiz__button" onclick="startQuiz(1)">Dienstgrad erkennen</button>
     <button type="button" class="quiz__button" onclick="startQuiz(2)">Schulterklappe finden</button>
   </div>
 
-  <!-- Zurück-Button -->
-  <div class="quiz__back-container" style="margin-top: var(--space-6); text-align: center;">
-    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn-back">Zurück zum Dienstgrad-Menü</a>
+  <!-- Zurück -->
+  <div class="quiz__back-container">
+    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary">Zurück zum Dienstgrad-Menü</a>
   </div>
 </div>
 

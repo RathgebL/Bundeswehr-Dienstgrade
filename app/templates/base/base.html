@@ -2,18 +2,33 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>Bundeswehr Dienstgrade</title>
+  <title>Bundeswehr Lernplattform</title>
 
-  <!-- Bootstrap -->
+  <!-- Optional: Bootstrap (nur für Grid / Utility, falls wirklich nötig) -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
     rel="stylesheet"
   >
 
-  <!-- Eigene Styles -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <!-- Designsystem (Reihenfolge ist wichtig!) -->
+  <!-- Basis-Variablen & globale Regeln -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_globals.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_utilities.css') }}">
 
-  {# Hintergrundlogik direkt im Template #}
+  <!-- Layouts (Container, Headings, etc.) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layouts/_containers.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/layouts/_headings.css') }}">
+
+  <!-- Komponenten (Buttons, Selects, Cards, Navbar etc.) -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_buttons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_selects.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_cards.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_navbar.css') }}">
+
+  <!-- Seiten (werden individuell ergänzt) -->
+  {% block styles %}{% endblock %}
+
+  {# Dynamischer Hintergrund basierend auf Benutzerwahl #}
   {% set branch = request.args.get('branch') or session.get('default_branch', 'Heer') %}
   {% set backgrounds = session.get('backgrounds', {
       'Heer': 'Hintergrund-Heer-Wald.png',
@@ -25,41 +40,45 @@
   <style>
     /* Dynamischer Seitenhintergrund je nach Truppengattung */
     body {
-      background-image: url('{{ url_for("static", filename="images/" + background) }}') !important;
+      background-image: url('{{ url_for("static", filename="images/" + background) }}');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
       background-repeat: no-repeat;
-      color: var(--txt-light);
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+      color: var(--text-default);
       font-family: var(--font-family-sans);
+    }
+
+    main.container {
+      background: transparent;
+      padding: 0;
     }
   </style>
 </head>
 
 <body>
   <!-- =========================================================
-       NAVIGATIONSBEREICH
+       NAVIGATION
        ========================================================= -->
   <nav class="navbar">
     <div class="navbar__inner">
-      <!-- Brand / Titel -->
       <a class="navbar__brand" href="/">Startseite</a>
 
-      <!-- Einstellungs-Button -->
-      <a
-        href="{{ url_for('main.settings', next=request.path) }}"
-        class="navbar__settings-btn"
-      >
-        Einstellungen
-      </a>
+      <div class="navbar__actions">
+        <a
+          href="{{ url_for('main.settings', next=request.path) }}"
+          class="navbar__settings-btn"
+        >
+          Einstellungen
+        </a>
+      </div>
     </div>
   </nav>
 
   <!-- =========================================================
        HAUPTINHALT
        ========================================================= -->
-  <main class="container mt-4">
+  <main>
     {% block content %}{% endblock %}
   </main>
 </body>

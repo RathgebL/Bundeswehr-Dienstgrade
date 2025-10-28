@@ -1,0 +1,48 @@
+/*************************************************************
+PAGE – DIENSTGRADE MENÜ
+*************************************************************/
+
+.ranks-menu {
+  background-color: var(--surface-bg);
+  color: var(--text-default);
+  padding: var(--space-8);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+  max-width: 768px;
+  margin: var(--space-8) auto;
+  text-align: center;
+}
+
+.ranks-menu__title {
+  color: var(--text-accent);
+  font-size: var(--font-size-xxxl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-6);
+  line-height: var(--line-height-tight);
+}
+
+.ranks-menu__subtitle {
+  font-size: var(--font-size-m);
+  color: var(--text-default);
+  font-weight: var(--font-weight-regular);
+  margin-bottom: var(--space-7);
+  line-height: var(--line-height-normal);
+}
+
+.ranks-menu__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.ranks-menu__buttons .btn-home {
+  width: 100%;
+  max-width: 300px;
+}
+
+@media (max-width: 768px) {
+  .ranks-menu {
+    padding: var(--space-6);
+  }
+}

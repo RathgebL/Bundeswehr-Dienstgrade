@@ -1,22 +1,21 @@
 {% extends "base/base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/ranks_menu.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="home">
-  <h1 class="home__title">Bundeswehr Dienstgrade</h1>
-  <p class="home__subtitle">Wähle einen Modus aus, um die Dienstgrade zu lernen:</p>
+<div class="ranks-menu page-box">
+  <h1 class="ranks-menu__title heading-primary">Bundeswehr Dienstgrade</h1>
+  <p class="ranks-menu__subtitle heading-secondary">
+    Wähle einen Modus aus, um die Dienstgrade zu lernen:
+  </p>
 
-  <div class="home__buttons">
-    <!-- Dienstgrad-Tabelle -->
-    <a href="{{ url_for('ranks.ranks_table') }}" class="btn-home">Tabelle</a>
-
-    <!-- Karteikarten -->
-    <a href="{{ url_for('ranks.ranks_cards') }}" class="btn-home">Karteikarten</a>
-
-    <!-- Quiz -->
-    <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn-home">Quiz</a>
-
-    <!-- Zurück zur Startseite -->
-    <a href="{{ url_for('main.home') }}" class="btn-back">Zurück zur Startseite</a>
+  <div class="ranks-menu__buttons">
+    <a href="{{ url_for('ranks.ranks_table') }}" class="btn btn--primary">Tabelle</a>
+    <a href="{{ url_for('ranks.ranks_cards') }}" class="btn btn--primary">Karteikarten</a>
+    <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn btn--primary">Quiz</a>
+    <a href="{{ url_for('main.home') }}" class="btn btn--secondary">Zurück zur Startseite</a>
   </div>
 </div>
 {% endblock %}
