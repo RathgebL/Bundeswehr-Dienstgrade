@@ -6,22 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- =========================================================
-       DESIGN SYSTEM – Reihenfolge ist WICHTIG
+       DESIGN SYSTEM IMPORTIEREN
        ========================================================= -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 
-  <!-- 1. BASE: Variablen, globale Stile, Grundlayout -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_globals.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_typography.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_layout.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/base/_utilities.css') }}">
-
-  <!-- 2. COMPONENTS: Wiederverwendbare UI-Elemente -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_buttons.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_selects.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_navbar.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/components/_cards.css') }}">
-
-  <!-- 3. PAGE-SPECIFIC STYLES -->
+  <!-- =========================================================
+       PAGE-SPECIFIC STYLES (optional)
+       ========================================================= -->
   {% block styles %}{% endblock %}
 
   <!-- =========================================================
