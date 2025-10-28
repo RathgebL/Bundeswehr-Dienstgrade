@@ -1,8 +1,12 @@
 {% extends "base/base.html" %}
 
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/ranks_quiz2_timer.css') }}">
+{% endblock %}
+
 {% block content %}
-<div class="quiz">
-  <h1 class="quiz__title">Zeitmodus: Schulterklappe finden</h1>
+<div class="quiz page-box">
+  <h1 class="quiz__title heading-primary">Zeitmodus: Schulterklappe finden</h1>
 
   <!-- Timer & Punktestand -->
   <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
@@ -20,9 +24,6 @@ let timerInterval;
 let questionLocked = false;
 let gameEnded = false;
 
-// ---------------------
-// SPIELSTART
-// ---------------------
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("timer").classList.remove("d-none");
   document.getElementById("score").classList.remove("d-none");
@@ -30,9 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
   startTimer();
 });
 
-// ---------------------
-// TIMER
-// ---------------------
 function startTimer() {
   const timer = document.getElementById("timer");
   timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
@@ -49,9 +47,6 @@ function startTimer() {
   }, 1000);
 }
 
-// ---------------------
-// QUIZ-LOGIK
-// ---------------------
 function nextQuestion() {
   if (gameEnded) return;
   questionLocked = false;
@@ -80,9 +75,6 @@ function renderQuestion(correct, options) {
   `;
 }
 
-// ---------------------
-// ANTWORT PRÜFEN
-// ---------------------
 function checkAnswer(selectedId, correctId) {
   if (questionLocked || gameEnded) return;
   questionLocked = true;
@@ -108,15 +100,11 @@ function checkAnswer(selectedId, correctId) {
   if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 700);
 }
 
-// ---------------------
-// SPIEL ENDE
-// ---------------------
 function endGame() {
   if (gameEnded) return;
   gameEnded = true;
   clearInterval(timerInterval);
 
-  // Timer & Score ausblenden (wie bei quiz1_timer)
   document.getElementById("timer").classList.add("d-none");
   document.getElementById("score").classList.add("d-none");
 
