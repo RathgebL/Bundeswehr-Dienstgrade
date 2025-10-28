@@ -1,0 +1,180 @@
+/*************************************************************
+COMPONENTS – KARTEN & KACHELN
+*************************************************************/
+
+/* Grundlegendes Kartenlayout */
+.card {
+  background-color: var(--surface-card);
+  color: var(--text-default);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+  padding: var(--space-5);
+  text-align: center;
+  transition: all 0.25s ease-in-out;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover-Animation */
+.card:hover {
+  transform: translateY(-6px);
+  background-color: var(--hover-bg);
+  box-shadow: 0 8px 22px var(--shadow-color);
+}
+
+/* Karten-Titel */
+.card__title {
+  color: var(--text-accent);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-2);
+}
+
+/* Karten-Beschreibung */
+.card__text {
+  font-size: var(--font-size-base);
+  opacity: 0.85;
+}
+
+/* Karten-Icon */
+.card__icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-3);
+  color: var(--text-accent);
+}
+
+/* =============================
+   VARIANTEN
+   ============================= */
+
+/* Kleinere kompakte Karten (z. B. Home-Seite) */
+.card--small {
+  width: 280px;
+  padding: var(--space-4);
+}
+
+/* Breitere Infokarten oder Tabellenkacheln */
+.card--wide {
+  width: 100%;
+  max-width: 600px;
+  text-align: left;
+}
+
+/* Kartenrückseite (für Flashcards) */
+.card--back {
+  background-color: var(--surface-dark);
+  transform: rotateY(180deg);
+}
+
+/* Kartencontainer mit Perspektive für Flip-Animation */
+.card-container {
+  width: 320px;
+  height: 380px;
+  perspective: 1200px;
+  position: relative;
+  margin: 0 auto;
+}
+
+/* Flip-Mechanismus (Vorder- & Rückseite) */
+.card-flip {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+  cursor: pointer;
+}
+
+.card-flip.is-flipped {
+  transform: rotateY(180deg);
+}
+
+/* Beide Flächen der Karte */
+.card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-card);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: var(--space-6);
+  transition: background-color 0.3s ease;
+}
+
+/* Rückseite */
+.card__face--back {
+  transform: rotateY(180deg);
+  background-color: var(--surface-dark);
+}
+
+/* =============================
+   FLASCHCARDS – BESONDERES VERHALTEN
+   ============================= */
+
+.card__image {
+  max-height: 240px;
+  width: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  margin: var(--space-4) 0;
+}
+
+.card__meta {
+  font-size: var(--font-size-base);
+  opacity: 0.9;
+  margin-top: var(--space-3);
+}
+
+.card__hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-default);
+  opacity: 0.75;
+  margin-top: var(--space-3);
+}
+
+/* Animationen */
+@keyframes shake {
+  0% { transform: rotateY(0deg) translateX(0); }
+  25% { transform: rotateY(5deg) translateX(5px); }
+  50% { transform: rotateY(0deg) translateX(0); }
+  75% { transform: rotateY(-5deg) translateX(-5px); }
+  100% { transform: rotateY(0deg) translateX(0); }
+}
+
+.card--shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.card--glow {
+  box-shadow: 0 0 15px var(--accent-secondary);
+  transition: box-shadow 0.4s ease;
+}
+
+/* =============================
+   GRID-DARSTELLUNG FÜR MEHRERE KARTEN
+   ============================= */
+
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+/* Responsive Verhalten */
+@media (max-width: 768px) {
+  .card-container {
+    width: 280px;
+    height: 340px;
+  }
+
+  .card {
+    padding: var(--space-4);
+  }
+}

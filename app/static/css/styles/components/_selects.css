@@ -1,0 +1,102 @@
+/*************************************************************
+COMPONENTS – SELECT-FELDER & DROPDOWNS
+*************************************************************/
+
+/* Grundstil für alle Select-Felder */
+.select {
+  background-color: var(--gray-mid);
+  color: var(--text-default);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--font-size-base);
+  text-align: center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+/* Hover- und Fokuszustände */
+.select:hover {
+  background-color: var(--gray-line);
+  border-color: var(--accent-secondary);
+}
+
+.select:focus {
+  outline: none;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 0 6px var(--accent-secondary);
+}
+
+/* Deaktivierter Zustand */
+.select:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Container für Select mit Label */
+.select-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  text-align: left;
+}
+
+/* Label für Dropdowns */
+.select-label {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-default);
+  font-size: var(--font-size-base);
+}
+
+/* Varianten */
+.select--small {
+  padding: var(--space-2) var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+.select--large {
+  padding: var(--space-4) var(--space-5);
+  font-size: var(--font-size-m);
+}
+
+/* Optional: für Inline-Filter (z. B. Tabellenfilter) */
+.select--inline {
+  display: inline-block;
+  width: auto;
+  margin-left: var(--space-2);
+}
+
+/* Für volle Breite (z. B. Quiz oder Einstellungen) */
+.select--full {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* Pfeil-Icon (optional für native Selects mit Pseudo-Element) */
+.select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+}
+
+.select-wrapper::after {
+  content: "▼";
+  position: absolute;
+  right: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.8rem;
+  color: var(--text-default);
+  pointer-events: none;
+}
+
+/* Fokuszustand mit sichtbarer Umrandung */
+.select-wrapper:focus-within::after {
+  color: var(--accent-secondary);
+}

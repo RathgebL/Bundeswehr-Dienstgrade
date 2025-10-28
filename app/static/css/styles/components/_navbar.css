@@ -1,0 +1,82 @@
+/*************************************************************
+COMPONENTS – NAVBAR / HAUPTNAVIGATION
+*************************************************************/
+
+/* Hauptleiste */
+.navbar {
+  background-color: var(--surface-bg);
+  padding: var(--space-2) var(--space-4);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(4px); /* optionaler Glas-Effekt */
+}
+
+/* Innerer Container – sorgt für zentrierte Inhalte */
+.navbar__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1600px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Markenname / Titel */
+.navbar__brand {
+  font-family: var(--font-family-sans);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-default);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.navbar__brand:hover {
+  color: var(--accent-secondary);
+}
+
+/* Einstellungs-Button oder andere Aktionen */
+.navbar__settings-btn {
+  background-color: transparent;
+  border: 1px solid var(--text-default);
+  color: var(--text-default);
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--radius-button);
+  text-decoration: none;
+  font-weight: var(--font-weight-medium);
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.navbar__settings-btn:hover {
+  background-color: var(--accent-secondary);
+  color: var(--text-default);
+  transform: translateY(-1px);
+}
+
+/* Optionaler Bereich für zusätzliche Links oder Icons */
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+/* Responsive Verhalten */
+@media (max-width: 768px) {
+  .navbar__inner {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .navbar__brand {
+    font-size: var(--font-size-base);
+  }
+
+  .navbar__settings-btn {
+    font-size: var(--font-size-sm);
+    padding: var(--space-2) var(--space-3);
+  }
+}

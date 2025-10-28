@@ -1,0 +1,118 @@
+/*************************************************************
+COMPONENTS – BUTTONS
+*************************************************************/
+
+/* Grundstruktur für alle Buttons */
+.btn {
+  display: inline-block;
+  font-family: var(--font-family-sans);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-base);
+  border: none;
+  border-radius: var(--radius-button);
+  padding: var(--space-3) var(--space-5);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 0 3px 8px var(--shadow-color);
+  color: var(--text-default);
+  text-align: center;
+  background-color: var(--gray-mid);
+}
+
+/* Hover- und Aktivzustände (global) */
+.btn:hover:not(.is-locked) {
+  transform: translateY(-2px);
+  background-color: var(--hover-bg);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Deaktivierte Buttons */
+.btn.is-locked,
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+  transform: none;
+}
+
+/* Varianten – Farben nach Funktion */
+.btn--primary {
+  background-color: var(--accent-primary);
+  color: var(--text-default);
+}
+
+.btn--primary:hover:not(.is-locked) {
+  background-color: var(--accent-secondary);
+}
+
+.btn--secondary {
+  background-color: var(--gray-mid);
+  color: var(--text-default);
+}
+
+.btn--secondary:hover:not(.is-locked) {
+  background-color: var(--hover-bg);
+}
+
+.btn--success {
+  background-color: var(--accent-success);
+  color: var(--text-default);
+}
+
+.btn--danger {
+  background-color: var(--accent-error);
+  color: var(--text-default);
+}
+
+/* Alternative Layout-Varianten */
+.btn--wide {
+  width: 100%;
+  max-width: 300px;
+}
+
+.btn--small {
+  font-size: var(--font-size-sm);
+  padding: var(--space-2) var(--space-4);
+}
+
+.btn--large {
+  font-size: var(--font-size-l);
+  padding: var(--space-4) var(--space-6);
+}
+
+/* Spezielle Varianten */
+.btn--back {
+  background-color: var(--gray-mid);
+  color: var(--text-default);
+  margin-top: var(--space-4);
+}
+
+.btn--back:hover:not(.is-locked) {
+  background-color: var(--hover-bg);
+}
+
+/* Für Karten, Quiz, Flashcards usw. */
+.btn--card {
+  background-color: var(--accent-primary);
+  color: var(--text-default);
+  width: 180px;
+  min-height: 48px;
+}
+
+.btn--card:hover:not(.is-locked) {
+  background-color: var(--accent-secondary);
+}
+
+/* Button-Gruppen */
+.btn-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
