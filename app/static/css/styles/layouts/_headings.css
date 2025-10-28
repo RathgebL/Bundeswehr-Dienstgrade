@@ -1,0 +1,60 @@
+/*************************************************************
+LAYOUTS – HEADINGS & TITEL-STILE
+*************************************************************/
+
+/* Hauptüberschrift (Seiten-Titel) */
+.heading-primary {
+  color: var(--text-accent);
+  font-size: var(--font-heading);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  line-height: var(--line-height-tight);
+  margin-bottom: var(--space-6);
+}
+
+/* Unterüberschrift (Abschnittstitel) */
+.heading-secondary {
+  color: var(--text-accent);
+  font-size: var(--font-subheading);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+/* Kleinere Abschnittstitel (z. B. in Karten, Formularen, Tabellen) */
+.heading-tertiary {
+  color: var(--text-default);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-2);
+}
+
+/* Variante für Titel in Karten oder Komponenten */
+.heading-card {
+  color: var(--text-accent);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-3);
+  text-align: center;
+}
+
+/* Zentrierte Variante für besondere Elemente */
+.heading-centered {
+  text-align: center;
+}
+
+/* Anpassung für mobile Geräte */
+@media (max-width: 768px) {
+  .heading-primary {
+    font-size: var(--font-size-xl);
+  }
+
+  .heading-secondary {
+    font-size: var(--font-size-l);
+  }
+
+  .heading-tertiary {
+    font-size: var(--font-size-base);
+  }
+}

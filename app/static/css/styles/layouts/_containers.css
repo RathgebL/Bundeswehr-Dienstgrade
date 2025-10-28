@@ -1,0 +1,92 @@
+/*************************************************************
+LAYOUTS – CONTAINER & SEKTIONSSTRUKTUREN
+*************************************************************/
+
+/* Allgemeiner Seitencontainer für Hauptinhalte */
+.page-box {
+  background-color: var(--surface-bg);
+  color: var(--text-default);
+  padding: var(--space-7);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+  margin: var(--space-8) auto;
+  max-width: 1200px;
+  width: 95%;
+  text-align: center;
+}
+
+/* Kleinere Box für fokussierte Inhalte (z. B. Einstellungen, Quiz) */
+.page-box--narrow {
+  max-width: 600px;
+}
+
+/* Breitere Variante (z. B. Tabellen oder Übersichten) */
+.page-box--wide {
+  max-width: 1400px;
+}
+
+/* Sektionen innerhalb einer Seite */
+.section {
+  padding: var(--space-6) 0;
+}
+
+.section + .section {
+  border-top: 1px solid var(--border-color);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+}
+
+/* Zentrierter Container für Buttons oder Aktionen */
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-5);
+}
+
+/* Zentrierungshilfe für Inhalte (wird häufig genutzt) */
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+/* Tabelle-Wrapper (gemeinsames Layout für Rank/NATO Tabellen) */
+.table-wrapper {
+  background-color: var(--surface-card);
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 12px var(--shadow-color);
+  overflow-x: auto;
+}
+
+/* Einheitlicher Abstand nach oben für Seiteninhalte */
+.page-spacing {
+  margin-top: var(--space-8);
+}
+
+/* Begrenzte Breite für Lesbarkeit bei langen Textseiten */
+.content-wrapper {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+/* Flexibles Grid für Kartenübersichten */
+.cards-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
+/* Responsive Verhalten */
+@media (max-width: 768px) {
+  .page-box {
+    padding: var(--space-5);
+  }
+}
