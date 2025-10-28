@@ -1,0 +1,58 @@
+/*************************************************************
+MAIN.CSS – ZENTRALE STYLE-BÜNDELUNG
+Autor: Lennart Rathgeb
+Datum: 2025
+Beschreibung:
+Dieses Stylesheet importiert alle modularen CSS-Teile:
+Base, Utilities, Components und Pages.
+*************************************************************/
+
+/* =========================================================
+   1. BASE (Grundlagen, globale Variablen & Reset)
+   ========================================================= */
+@import url("styles/base/_globals.css");
+@import url("styles/base/_variables.css");
+@import url("styles/base/_utilities.css");
+
+/* =========================================================
+   2. LAYOUTS (Kontainer und Überschriften)
+   ========================================================= */
+@import url("styles/layouts/_containers.css");
+@import url("styles/layouts/_headings.css");
+
+/* =========================================================
+   3. COMPONENTS (Wiederverwendbare Module)
+   ========================================================= */
+@import url("styles/components/_buttons.css");
+@import url("styles/components/_cards.css");
+@import url("styles/components/_selects.css");
+@import url("styles/components/_navbar.css");
+
+/* =========================================================
+   4. PAGES (Seiten-spezifische Styles)
+   ========================================================= */
+@import url("styles/pages/home.css");
+@import url("styles/pages/settings.css");
+@import url("styles/pages/ranks_menu.css");
+@import url("styles/pages/ranks_table.css");
+@import url("styles/pages/ranks_cards.css");
+@import url("styles/pages/ranks_quizmodes.css");
+@import url("styles/pages/ranks_quiz1.css");
+@import url("styles/pages/ranks_quiz1_timer.css");
+@import url("styles/pages/ranks_quiz2.css");
+@import url("styles/pages/ranks_quiz2_timer.css");
+@import url("styles/pages/nato_menu.css");
+@import url("styles/pages/nato_table.css");
+@import url("styles/pages/nato_cards.css");
+@import url("styles/pages/nato_quizmodes.css");
+@import url("styles/pages/nato_quiz.css");
+@import url("styles/pages/nato_quiz_timer.css");
+
+/* =========================================================
+   5. ZUSÄTZLICHE ANPASSUNGEN (falls nötig)
+   ========================================================= */
+
+/* Globale Übergangsphasen oder Debugging-Hilfen */
+:root {
+  scroll-behavior: smooth;
+}
