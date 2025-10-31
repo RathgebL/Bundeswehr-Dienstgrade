@@ -16,7 +16,7 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   -moz-appearance: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  min-width: 140px;
+  min-width: 300px;
 }
 
 /* Hover- und Fokuszustände */

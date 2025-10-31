@@ -15,13 +15,9 @@ LAYOUTS – CONTAINER & SEKTIONSSTRUKTUREN
 
 /* Sektionen innerhalb einer Seite */
 .section {
-  padding: var(--space-6) 0;
-}
-
-.section + .section {
-  border-top: 1px solid var(--border-color);
-  margin-top: var(--space-6);
-  padding-top: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
 }
 
 /* Zentrierter Container für Buttons oder Aktionen */
@@ -29,8 +25,8 @@ LAYOUTS – CONTAINER & SEKTIONSSTRUKTUREN
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: var(--space-4);
-  flex-wrap: wrap;
+  gap: var(--space-5);
+  flex-direction: column;
   margin-top: var(--space-5);
 }
 

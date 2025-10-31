@@ -8,11 +8,11 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">Einstellungen</h1>
 
-  <form method="POST" class="settings__form">
+  <form method="POST" class="actions">
     <input type="hidden" name="next" value="{{ next_page }}">
 
     <!-- Standard-Truppenteil -->
-    <div class="settings__section">
+    <div class="section">
       <label class="select-label">Standard-Truppenteil:</label>
       <select name="default_branch" class="select">
         <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
@@ -25,7 +25,7 @@
     <h2 class="heading-secondary">Hintergründe</h2>
 
     <!-- Heer -->
-    <div class="settings__section">
+    <div class="section">
       <label class="select-label">Heer:</label>
       <select name="bg_heer" class="select">
         <option value="Hintergrund-Heer-Wald.png" 
@@ -36,7 +36,7 @@
     </div>
 
     <!-- Luftwaffe -->
-    <div class="settings__section">
+    <div class="section">
       <label class="select-label">Luftwaffe:</label>
       <select name="bg_luftwaffe" class="select">
         <option value="Hintergrund-Luftwaffe-Grau.png" 
@@ -47,7 +47,7 @@
     </div>
 
     <!-- Marine -->
-    <div class="settings__section">
+    <div class="section">
       <label class="select-label">Marine:</label>
       <select name="bg_marine" class="select">
         <option value="Hintergrund-Marine-Hell.png" 
