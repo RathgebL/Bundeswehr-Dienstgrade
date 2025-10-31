@@ -14,7 +14,7 @@
     <!-- Standard-Truppenteil -->
     <div class="section">
       <label class="select-label">Standard-Truppenteil:</label>
-      <select name="default_branch" class="select">
+      <select name="default_branch" class="select select--large">
         <option value="Heer" {% if defaults.default_branch|lower == "heer" %}selected{% endif %}>Heer</option>
         <option value="Luftwaffe" {% if defaults.default_branch|lower == "luftwaffe" %}selected{% endif %}>Luftwaffe</option>
         <option value="Marine" {% if defaults.default_branch|lower == "marine" %}selected{% endif %}>Marine</option>
@@ -27,7 +27,7 @@
     <!-- Heer -->
     <div class="section">
       <label class="select-label">Heer:</label>
-      <select name="bg_heer" class="select">
+      <select name="bg_heer" class="select select--large">
         <option value="Hintergrund-Heer-Wald.png" 
           {% if defaults.backgrounds["Heer"] == "Hintergrund-Heer-Wald.png" %}selected{% endif %}>Wald</option>
         <option value="Hintergrund-Heer-Wüste.png" 
@@ -38,7 +38,7 @@
     <!-- Luftwaffe -->
     <div class="section">
       <label class="select-label">Luftwaffe:</label>
-      <select name="bg_luftwaffe" class="select">
+      <select name="bg_luftwaffe" class="select select--large">
         <option value="Hintergrund-Luftwaffe-Grau.png" 
           {% if defaults.backgrounds["Luftwaffe"] == "Hintergrund-Luftwaffe-Grau.png" %}selected{% endif %}>Grau</option>
         <option value="Hintergrund-Luftwaffe-Blau.png" 
@@ -49,7 +49,7 @@
     <!-- Marine -->
     <div class="section">
       <label class="select-label">Marine:</label>
-      <select name="bg_marine" class="select">
+      <select name="bg_marine" class="select select--large">
         <option value="Hintergrund-Marine-Hell.png" 
           {% if defaults.backgrounds["Marine"] == "Hintergrund-Marine-Hell.png" %}selected{% endif %}>Hell</option>
         <option value="Hintergrund-Marine-Dunkel.png" 

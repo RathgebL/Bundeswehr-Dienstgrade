@@ -284,6 +284,8 @@ def ranks_quiz2_timer():
 def ranks_cards():
     """Interaktive Karteikarten für Dienstgrade"""
     branch = request.args.get("branch", "Alle")
+    branches = ["Alle", "Heer", "Luftwaffe", "Marine"]
+
     query = Rank.query.filter_by(branch=branch) if branch != "Alle" else Rank.query
     ranks = query.order_by(Rank.branch, Rank.sort_order).all() or Rank.query.order_by(Rank.sort_order).all()
 
@@ -301,7 +303,13 @@ def ranks_cards():
 
     background = session.get("current_background", "Hintergrund-Heer-Wald.png")
 
-    return render_template("ranks/ranks_cards.html", ranks=rank_data, background=background, selected_branch=branch)
+    return render_template(
+        "ranks/ranks_cards.html",
+        ranks=rank_data,
+        branches=branches,
+        background=background,
+        selected_branch=branch
+    )
 
 
 # =====================================

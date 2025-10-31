@@ -21,12 +21,6 @@ LAYOUTS – MENÜSEITEN (Ränge, NATO-Alphabet, etc.)
   margin-bottom: var(--space-4);
 }
 
-/* Einheitliche Button-Größe */
-.menu-box__buttons .btn {
-  width: 100%;
-  max-width: 300px;
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .menu-box {

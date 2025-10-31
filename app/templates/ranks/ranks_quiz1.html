@@ -16,13 +16,13 @@
   >
 
   <!-- Antwortoptionen -->
-  <div class="quiz__options">
+  <div class="btn-group">
     {% for opt in options %}
     <button
+      class="btn btn--primary btn--medium btn--tall"
       id="{{ opt.id }}"
       data-id="{{ opt.id }}"
       onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-      class="quiz__button"
     >
       {{ opt.title }}
     </button>
@@ -30,14 +30,14 @@
   </div>
 
   <!-- Feedback -->
-  <p id="feedback" class="quiz__feedback"></p>
+  <p id="feedback" class="heading-secondary"></p>
 
   <!-- Button-Bereich -->
-  <div class="quiz__actions">
+  <div class="btn-group">
     <a
       href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
       id="menu-btn"
-      class="quiz__next quiz__back"
+      class="btn btn--secondary btn--medium"
     >
       Zurück zum Menü
     </a>
@@ -45,7 +45,7 @@
     <a
       href="{{ url_for('ranks.ranks_quiz1') }}"
       id="next-btn"
-      class="quiz__next d-none"
+      class="btn btn--primary btn--medium d-none"
     >
       Nächste Frage
     </a>
@@ -59,11 +59,11 @@ function checkAnswer(selected, correctId) {
 
   if (selected === correctId) {
     document.getElementById("feedback").innerText = "Richtig!";
-    document.getElementById(selected).classList.add("quiz__button--correct");
+    document.getElementById(selected).classList.add("btn--success");
   } else {
     document.getElementById("feedback").innerText = "Falsch!";
-    document.getElementById(selected).classList.add("quiz__button--wrong");
-    document.getElementById(correctId).classList.add("quiz__button--correct");
+    document.getElementById(selected).classList.add("btn--danger");
+    document.getElementById(correctId).classList.add("btn--success");
   }
 
   document.getElementById("next-btn").classList.remove("d-none");

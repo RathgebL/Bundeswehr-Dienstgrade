@@ -8,13 +8,3 @@ PAGE – DIENSTGRAD-TABELLE (Spezifische Anpassungen)
   height: auto;
   border-radius: var(--radius-sm);
 }
-
-/* Filter oben */
-.ranks__filter {
-  margin-bottom: var(--space-6);
-}
-
-.ranks__filter label {
-  margin-right: var(--space-2);
-  font-weight: var(--font-weight-semibold);
-}

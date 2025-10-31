@@ -8,18 +8,15 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">Karteikarten</h1>
 
-  <!-- Filterbereich -->
-  <div class="ranks-cards__filter">
-    <form method="get" action="{{ url_for('ranks.ranks_cards') }}">
-      <label for="branch">Truppenteil:</label>
-      <select name="branch" id="branch" class="select" onchange="this.form.submit()">
-        <option value="Alle" {% if selected_branch == 'Alle' %}selected{% endif %}>Alle</option>
-        <option value="Heer" {% if selected_branch == 'Heer' %}selected{% endif %}>Heer</option>
-        <option value="Luftwaffe" {% if selected_branch == 'Luftwaffe' %}selected{% endif %}>Luftwaffe</option>
-        <option value="Marine" {% if selected_branch == 'Marine' %}selected{% endif %}>Marine</option>
-      </select>
-    </form>
-  </div>
+  <!-- Filter -->
+  <form method="get" action="{{ url_for('ranks.ranks_cards') }}">
+    <label class="select-label" for="branch">Truppenteil:</label>
+    <select name="branch" id="branch" class="select select--small" onchange="this.form.submit()">
+      {% for b in branches %}
+      <option value="{{ b }}" {% if selected_branch == b %}selected{% endif %}>{{ b }}</option>
+      {% endfor %}
+    </select>
+  </form>
 
   <!-- Karte -->
   <div id="flashcard" class="flashcard">
@@ -46,20 +43,18 @@
 
   <!-- Steuerung -->
   <div class="ranks-cards__buttons">
-    <div class="ranks-cards__controls">
-      <button class="btn-card" onclick="prevCard()">Vorherige Karte</button>
-      <button class="btn-card" onclick="nextCard()">Nächste Karte</button>
-    </div>
+    <div class="btn-group">
+      <button class="btn btn--primary btn--narrow">Vorherige Karte</button>
+      <button class="btn btn--primary btn--narrow">Nächste Karte</button>
 
-    <div class="ranks-cards__controls">
-      <button class="btn-card-secondary" onclick="shuffleCards()">Mischen</button>
-      <button class="btn-card-secondary" onclick="resetCards()">Ordnen</button>
+      <button class="btn btn--primary btn--narrow">Mischen</button>
+      <button class="btn btn--primary btn--narrow">Ordnen</button>
     </div>
   </div>
 
   <!-- Zurück -->
   <div class="btn-back-container">
-    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
+    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
   </div>
 </div>
 

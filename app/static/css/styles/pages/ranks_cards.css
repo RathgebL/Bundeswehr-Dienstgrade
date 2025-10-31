@@ -2,31 +2,11 @@
 PAGE – DIENSTGRAD-KARTEIKARTEN
 *************************************************************/
 
-/* ===== Titel ===== */
-.ranks-cards__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-5);
-}
-
-/* ===== Filterbereich ===== */
-.ranks-cards__filter {
-  text-align: center;
-  margin-bottom: var(--space-5);
-}
-
-.ranks-cards__filter label {
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-default);
-  margin-right: var(--space-2);
-}
-
 /* ===== Kartencontainer ===== */
 .flashcard {
   width: 320px;
   height: 380px;
-  margin: 0 auto;
+  margin: var(--space-5) auto;
   perspective: 1200px;
   position: relative;
 }
@@ -117,36 +97,6 @@ PAGE – DIENSTGRAD-KARTEIKARTEN
   margin-top: var(--space-5);
 }
 
-.ranks-cards__controls {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: var(--space-4);
-}
-
-.btn-card,
-.btn-card-secondary {
-  background-color: var(--accent-primary);
-  color: var(--text-default);
-  font-weight: 600;
-  border: none;
-  border-radius: var(--radius-button);
-  width: 200px;
-  min-height: 48px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  box-shadow: 0 2px 6px var(--shadow-color);
-  transition: all 0.2s ease-in-out;
-}
-
-.btn-card:hover,
-.btn-card-secondary:hover {
-  background-color: var(--accent-secondary);
-  transform: translateY(-2px);
-}
-
 /* ===== Animationseffekte ===== */
 @keyframes shake {
   0%,100% { transform: rotateY(0deg) translateX(0); }
@@ -159,11 +109,4 @@ PAGE – DIENSTGRAD-KARTEIKARTEN
 .reset-glow {
   box-shadow: 0 0 15px var(--accent-secondary);
   transition: box-shadow 0.4s ease;
-}
-
-/* ===== Zurück-Button ===== */
-.btn-back-container {
-  display: flex;
-  justify-content: center;
-  margin-top: var(--space-6);
 }

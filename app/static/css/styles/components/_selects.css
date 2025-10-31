@@ -16,7 +16,6 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   -moz-appearance: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  min-width: 300px;
 }
 
 /* Hover- und Fokuszustände */
@@ -44,17 +43,16 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   font-weight: var(--font-weight-semibold);
   color: var(--text-default);
   font-size: var(--font-size-base);
+  margin-right: var(--space-2);
 }
 
 /* Varianten */
 .select--small {
-  padding: var(--space-2) var(--space-3);
-  font-size: var(--font-size-sm);
+  min-width: 140px;
 }
 
 .select--large {
-  padding: var(--space-4) var(--space-5);
-  font-size: var(--font-size-m);
+  min-width: 300px;
 }
 
 /* Optional: für Inline-Filter (z. B. Tabellenfilter) */

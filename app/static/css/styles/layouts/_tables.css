@@ -2,30 +2,10 @@
 LAYOUTS – TABELLEN (NATO, Dienstgrade, etc.)
 *************************************************************/
 
-/* ===== Grundstruktur für Seitencontainer ===== */
-.table-page {
-  background-color: var(--surface-bg);
-  color: var(--text-default);
-  padding: var(--space-7);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  margin: var(--space-8) auto;
-  text-align: center;
-}
-
-/* ===== Titel ===== */
-.table-page__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-6);
-  line-height: var(--line-height-tight);
-}
-
 /* ===== Tabellen-Wrapper ===== */
 .table-wrapper {
   overflow-x: auto;
-  margin-bottom: var(--space-7);
+  margin: var(--space-5);
 }
 
 /* ===== Tabelle ===== */
