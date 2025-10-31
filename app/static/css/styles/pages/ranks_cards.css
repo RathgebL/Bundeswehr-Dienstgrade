@@ -2,63 +2,6 @@
 PAGE – DIENSTGRAD-KARTEIKARTEN
 *************************************************************/
 
-/* ===== Kartencontainer ===== */
-.flashcard {
-  width: 320px;
-  height: 380px;
-  margin: var(--space-5) auto;
-  perspective: 1200px;
-  position: relative;
-}
-
-/* ===== Flip-Animation ===== */
-.flashcard__flip {
-  width: 100%;
-  height: 100%;
-  transform-style: preserve-3d;
-  transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-  cursor: pointer;
-}
-
-.flashcard__flip.is-flipped {
-  transform: rotateY(180deg);
-}
-
-/* ===== Kartenflächen ===== */
-.flashcard__face {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: var(--radius-card);
-  backface-visibility: hidden;
-  box-shadow: 0 8px 30px var(--shadow-color);
-  background-color: var(--gray-mid);
-  padding: var(--space-6);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.flashcard__face--back {
-  background-color: var(--gray-dark);
-  transform: rotateY(180deg);
-}
-
-/* ===== Vorderseite ===== */
-.rank-image {
-  max-height: 240px;
-  width: auto;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 4px 20px var(--shadow-color);
-  margin-bottom: var(--space-4);
-}
-
-.flashcard__hint {
-  font-size: var(--font-size-base);
-  opacity: 0.75;
-}
-
 /* ===== Rückseite ===== */
 .rank-title {
   color: var(--text-accent);
@@ -67,8 +10,7 @@ PAGE – DIENSTGRAD-KARTEIKARTEN
 }
 
 .rank-meta {
-  margin-top: var(--space-3);
-  margin-bottom: var(--space-3);
+  margin: var(--space-3) 0;
   text-align: center;
 }
 

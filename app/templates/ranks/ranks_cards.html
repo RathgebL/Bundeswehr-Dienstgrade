@@ -19,17 +19,21 @@
   </form>
 
   <!-- Karte -->
-  <div id="flashcard" class="flashcard">
-    <div class="flashcard__flip" onclick="flipCard()">
-      <div class="flashcard__face flashcard__face--front">
-        <img id="rank-image"
-             src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
-             alt="{{ ranks[0].title }}"
-             class="rank-image">
-        <p class="flashcard__hint">Klick zum Umdrehen</p>
+  <div id="flashcard" class="card-container">
+    <div class="card-flip" onclick="flipCard()">
+      <!-- Vorderseite -->
+      <div class="card__face card__face--front">
+        <img
+          id="rank-image"
+          src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
+          alt="{{ ranks[0].title }}"
+          class="card__image"
+        >
+        <p class="card__hint">Klick zum Umdrehen</p>
       </div>
-
-      <div class="flashcard__face flashcard__face--back">
+  
+      <!-- Rückseite -->
+      <div class="card__face card__face--back">
         <h4 id="rank-title" class="rank-title">{{ ranks[0].title }}</h4>
         <div id="rank-meta" class="rank-meta">
           <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
@@ -53,9 +57,8 @@
   </div>
 
   <!-- Zurück -->
-  <div class="btn-back-container">
-    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
-  </div>
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
+
 </div>
 
 <script>
