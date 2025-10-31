@@ -2,25 +2,6 @@
 PAGE – EINSTELLUNGEN
 *************************************************************/
 
-/* Haupttitel */
-.settings__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  text-align: center;
-  margin-bottom: var(--space-6);
-}
-
-/* Untertitel (Abschnittsüberschrift) */
-.settings__subtitle {
-  color: var(--text-accent);
-  font-size: var(--font-subheading);
-  font-weight: var(--font-weight-semibold);
-  margin-top: var(--space-6);
-  margin-bottom: var(--space-2);
-  text-align: center;
-}
-
 /* Formular-Container */
 .settings__form {
   display: flex;
@@ -33,35 +14,4 @@ PAGE – EINSTELLUNGEN
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-}
-
-/* Label */
-.settings__label {
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-default);
-}
-
-/* Button-Gruppe */
-.settings__buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-6);
-  margin-top: var(--space-6);
-}
-
-/* Responsiv */
-@media (max-width: 768px) {
-  .settings {
-    padding: var(--space-5);
-  }
-
-  .settings__buttons {
-    flex-direction: column;
-    gap: var(--space-4);
-  }
-
-  .settings__select {
-    font-size: var(--font-size-sm);
-  }
 }

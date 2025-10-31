@@ -2,6 +2,24 @@
 COMPONENTS – BUTTONS
 *************************************************************/
 
+.btn,
+.btn:link,
+.btn:visited,
+button.btn {
+  display: inline-block;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
 /* Grundstruktur für alle Buttons */
 .btn {
   display: inline-block;
@@ -11,13 +29,13 @@ COMPONENTS – BUTTONS
   border: none;
   border-radius: var(--radius-button);
   padding: var(--space-3) var(--space-5);
+  min-width: 140px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   box-shadow: 0 3px 8px var(--shadow-color);
   color: var(--text-default);
   text-align: center;
-  background-color: var(--gray-mid);
 }
 
 /* Hover- und Aktivzustände (global) */

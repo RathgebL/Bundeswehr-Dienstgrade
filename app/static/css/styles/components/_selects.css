@@ -90,8 +90,3 @@ COMPONENTS – SELECT-FELDER & DROPDOWNS
   color: var(--text-default);
   pointer-events: none;
 }
-
-/* Fokuszustand mit sichtbarer Umrandung */
-.select-wrapper:focus-within::after {
-  color: var(--accent-secondary);
-}

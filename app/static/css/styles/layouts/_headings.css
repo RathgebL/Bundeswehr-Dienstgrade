@@ -17,7 +17,7 @@ LAYOUTS – HEADINGS & TITEL-STILE
   color: var(--text-accent);
   font-size: var(--font-subheading);
   font-weight: var(--font-weight-semibold);
-  text-align: left;
+  text-align: center;
   margin-top: var(--space-6);
   margin-bottom: var(--space-3);
 }
