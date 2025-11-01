@@ -1,39 +1,46 @@
 /*************************************************************
-COMPONENTS – KARTEN & KACHELN
+COMPONENT: CARDS
 *************************************************************/
 
-/* Container für die Karten */
-.cards {
+/* ========== Layout-Container ========== */
+.cards-grid {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: var(--space-6);
+  justify-items: center;
 }
 
-/* Grundlegendes Kartenlayout */
+.card-wrapper {
+  display: flex;
+  align-items: center;
+  margin: var(--space-3) auto;
+  height: 320px;
+  perspective: 1200px;
+}
+
+/* ========== Basis ========== */
 .card {
   background-color: var(--surface-card);
   color: var(--text-default);
   border-radius: var(--radius-card);
   box-shadow: 0 6px 18px var(--shadow-color);
-  padding: var(--space-5);
+  padding: var(--space-3);
   text-align: center;
-  transition: all 0.25s ease-in-out;
-  text-decoration: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  transition: all 0.25s ease-in-out;
 }
 
-/* Hover-Animation */
 .card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-4px);
   background-color: var(--hover-bg);
   box-shadow: 0 8px 22px var(--shadow-color);
 }
 
-/* Karten-Titel */
+/* ========== Elemente ========== */
 .card__title {
   color: var(--text-accent);
   font-size: var(--font-size-l);
@@ -41,60 +48,35 @@ COMPONENTS – KARTEN & KACHELN
   margin-bottom: var(--space-2);
 }
 
-/* Karten-Beschreibung */
 .card__text {
   font-size: var(--font-size-base);
   opacity: 0.85;
 }
 
-/* Karten-Icon */
-.card__icon {
-  font-size: 2.5rem;
-  margin-bottom: var(--space-3);
-  color: var(--text-accent);
-}
-
-/* =============================
-   VARIANTEN
-   ============================= */
-
-/* Kleinere kompakte Karten (z. B. Home-Seite) */
+/* ========== Varianten ========== */
 .card--small {
-  width: 300px;
+  width: 280px;
+  max-width: 90%;
 }
 
-/* Breitere Infokarten oder Tabellenkacheln */
-.card--wide {
-  width: 100%;
-  max-width: 600px;
-  text-align: left;
-}
-
-/* Container – nur fürs Zentrieren */
-.flashcard {
-  display: flex;
-  justify-content: center;
-  height: 340px;
-  margin: var(--space-3) auto;
+.card--interactive {
+  cursor: pointer;
   perspective: 1200px;
 }
 
-/* Flip-Mechanismus */
-.card-flip {
+/* ========== Flip Mechanismus ========== */
+.card__flip {
+  position: relative;
   width: 100%;
   height: 100%;
-  position: relative;
   transform-style: preserve-3d;
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
-  cursor: pointer;
 }
 
-/* Flip-Zustand */
-.card-flip.is-flipped {
+.card__flip.is-flipped {
   transform: rotateY(180deg);
 }
 
-/* Kartenflächen */
 .card__face {
   position: absolute;
   inset: 0;
@@ -105,23 +87,18 @@ COMPONENTS – KARTEN & KACHELN
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   padding: var(--space-3);
   transition: background-color 0.3s ease;
 }
 
-/* Rückseite */
 .card__face--back {
   transform: rotateY(180deg);
-  z-index: 3;
 }
 
-/* =============================
-   FLASCHCARDS – BESONDERES VERHALTEN
-   ============================= */
-
+/* ========== Medien und Effekte ========== */
 .card__image {
   max-height: 200px;
-  width: auto;
   border-radius: var(--radius-sm);
   box-shadow: 0 4px 20px var(--shadow-color);
   margin: var(--space-3) auto;
@@ -129,48 +106,16 @@ COMPONENTS – KARTEN & KACHELN
 
 .card__hint {
   font-size: var(--font-size-sm);
-  color: var(--text-default);
   opacity: 0.75;
   margin-top: var(--space-3);
 }
 
-/* Animationen */
+/* ========== Animationen ========== */
 @keyframes shake {
-  0% { transform: rotateY(0deg) translateX(0); }
+  0%, 100% { transform: rotateY(0deg) translateX(0); }
   25% { transform: rotateY(5deg) translateX(5px); }
-  50% { transform: rotateY(0deg) translateX(0); }
   75% { transform: rotateY(-5deg) translateX(-5px); }
-  100% { transform: rotateY(0deg) translateX(0); }
 }
 
-.card--shake {
-  animation: shake 0.4s ease-in-out;
-}
-
-.card--glow {
-  box-shadow: 0 0 15px var(--accent-secondary);
-  transition: box-shadow 0.4s ease;
-}
-
-/* =============================
-   GRID-DARSTELLUNG FÜR MEHRERE KARTEN
-   ============================= */
-
-.cards-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-6);
-}
-
-/* Responsive Verhalten */
-@media (max-width: 768px) {
-  .card-container {
-    width: 280px;
-    height: 340px;
-  }
-
-  .card {
-    padding: var(--space-4);
-  }
-}
+.card--shake { animation: shake 0.4s ease-in-out; }
+.card--glow  { box-shadow: 0 0 15px var(--accent-secondary); }

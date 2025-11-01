@@ -2,40 +2,29 @@
 COMPONENTS – BUTTONS
 *************************************************************/
 
-.btn,
-.btn:link,
-.btn:visited,
-button.btn {
-  display: inline-block;
-  text-decoration: none;
-  font-family: inherit;
-  font-size: inherit;
-  line-height: 1;
-  text-align: center;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-}
-
-/* Grundstruktur für alle Buttons */
+/* Grundstruktur für alle Buttons (Links & echte Buttons) */
 .btn {
   display: inline-block;
   font-family: var(--font-family-sans);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-base);
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-default);
+
+  min-width: 140px;
+  padding: var(--space-3) var(--space-5);
   border: none;
   border-radius: var(--radius-button);
-  padding: var(--space-3) var(--space-5);
-  min-width: 140px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
   box-shadow: 0 3px 8px var(--shadow-color);
-  color: var(--text-default);
-  text-align: center;
+
+  cursor: pointer;
+  background: none;
+  transition: all 0.2s ease-in-out;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 /* Hover- und Aktivzustände (global) */
@@ -58,18 +47,16 @@ button.btn {
 }
 
 /* Varianten – Farben nach Funktion */
-.btn--primary {
-  background-color: var(--accent-primary);
-  color: var(--text-default);
+.btn--primary { 
+    background-color: var(--accent-primary); 
 }
 
-.btn--primary:hover:not(.is-locked) {
-  background-color: var(--accent-secondary);
+.btn--primary:hover:not(.is-locked) { 
+    background-color: var(--accent-secondary); 
 }
 
 .btn--secondary {
-  background-color: var(--gray-mid);
-  color: var(--text-default);
+    background-color: var(--gray-mid); 
 }
 
 .btn--secondary:hover:not(.is-locked) {
@@ -78,12 +65,10 @@ button.btn {
 
 .btn--success {
   background-color: var(--accent-success);
-  color: var(--text-default);
 }
 
 .btn--danger {
   background-color: var(--accent-error);
-  color: var(--text-default);
 }
 
 /* Alternative Layout-Varianten */
@@ -93,18 +78,6 @@ button.btn {
 
 .btn--tall {
   min-height: 80px;
-}
-
-/* Für Karten, Quiz, Flashcards usw. */
-.btn--card {
-  background-color: var(--accent-primary);
-  color: var(--text-default);
-  width: 180px;
-  min-height: 48px;
-}
-
-.btn--card:hover:not(.is-locked) {
-  background-color: var(--accent-secondary);
 }
 
 /* Button-Gruppen */

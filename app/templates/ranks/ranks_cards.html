@@ -19,11 +19,11 @@
   </form>
 
   <!-- Karte -->
-  <div id="flashcard" class="flashcard card--small">
-    <div class="card-flip" onclick="flipCard()">
+  <div id="flashcard" class="card-wrapper card--small">
+    <div class="card__flip" onclick="flipCard()">
         
       <!-- Vorderseite -->
-      <div class="flashcard card__face">
+      <div class="card__face">
         <img id="rank-image"
           src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
           alt="{{ ranks[0].title }}"
@@ -32,7 +32,7 @@
       </div>  
 
       <!-- Rückseite -->
-      <div class="flashcard card--small card__face card__face--back">
+      <div class="card__face card__face--back">
         <h4 id="rank-title" class="rank-title">{{ ranks[0].title }}</h4>
         <div id="rank-meta" class="rank-meta">
           <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
@@ -65,7 +65,7 @@ let ranks = [...ranksInitial];
 let currentIndex = 0;
 const ranksOriginal = [...ranksInitial];
 
-const flipContainer = document.querySelector(".card-flip");
+const flipContainer = document.querySelector(".card__flip");
 const img = document.getElementById("rank-image");
 const title = document.getElementById("rank-title");
 const desc = document.getElementById("rank-desc");
