@@ -63,56 +63,50 @@ COMPONENTS – KARTEN & KACHELN
   text-align: left;
 }
 
-/* Kartenrückseite (für Flashcards) */
-.card--back {
-  background-color: var(--surface-dark);
-  transform: rotateY(180deg);
-}
-
-/* Kartencontainer mit Perspektive für Flip-Animation */
-.card-container {
-  width: 280px;
-  height: 320px;
+/* Container – nur fürs Zentrieren */
+.flashcard {
+  display: flex;
+  justify-content: center;
+  height: 340px;
+  width: 300px;
+  margin: var(--space-3) auto;
   perspective: 1200px;
-  position: relative;
-  margin: var(--space-5) auto;
 }
 
-/* Flip-Mechanismus (Vorder- & Rückseite) */
+/* Flip-Mechanismus */
 .card-flip {
   width: 100%;
   height: 100%;
+  position: relative;
   transform-style: preserve-3d;
   transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
   cursor: pointer;
 }
 
+/* Flip-Zustand */
 .card-flip.is-flipped {
   transform: rotateY(180deg);
 }
 
-/* Beide Flächen der Karte */
+/* Kartenflächen */
 .card__face {
-  backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+  background-color: var(--surface-card);
   border-radius: var(--radius-card);
   box-shadow: 0 8px 30px var(--shadow-color);
+  backface-visibility: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  padding: var(--space-2);
+  padding: var(--space-3);
   transition: background-color 0.3s ease;
-}
-
-/* Vorderseite */
-.card__face--front {
-  background-color: var(--surface-card);
 }
 
 /* Rückseite */
 .card__face--back {
   transform: rotateY(180deg);
-  background-color: var(--surface-dark);
+  z-index: 3;
 }
 
 /* =============================
@@ -120,11 +114,11 @@ COMPONENTS – KARTEN & KACHELN
    ============================= */
 
 .card__image {
-  max-height: 240px;
+  max-height: 200px;
   width: auto;
   border-radius: var(--radius-sm);
   box-shadow: 0 4px 20px var(--shadow-color);
-  margin: var(--space-4) 0;
+  margin: var(--space-3) auto;
 }
 
 .card__hint {

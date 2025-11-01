@@ -19,21 +19,20 @@
   </form>
 
   <!-- Karte -->
-  <div id="flashcard" class="card-container">
+  <div id="flashcard" class="flashcard">
     <div class="card-flip" onclick="flipCard()">
+        
       <!-- Vorderseite -->
-      <div class="card__face card__face--front">
-        <img
-          id="rank-image"
+      <div class="flashcard card__face">
+        <img id="rank-image"
           src="{{ url_for('static', filename='images/' + ranks[0].image_filename) }}"
           alt="{{ ranks[0].title }}"
-          class="card__image"
-        >
+          class="card__image">
         <p class="card__hint">Klick zum Umdrehen</p>
-      </div>
-  
+      </div>  
+
       <!-- Rückseite -->
-      <div class="card__face card__face--back">
+      <div class="flashcard card__face card__face--back">
         <h4 id="rank-title" class="rank-title">{{ ranks[0].title }}</h4>
         <div id="rank-meta" class="rank-meta">
           <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
@@ -48,11 +47,10 @@
   <!-- Steuerung -->
   <div class="ranks-cards__buttons">
     <div class="btn-group">
-      <button class="btn btn--primary btn--narrow">Vorherige Karte</button>
-      <button class="btn btn--primary btn--narrow">Nächste Karte</button>
-
-      <button class="btn btn--primary btn--narrow">Mischen</button>
-      <button class="btn btn--primary btn--narrow">Ordnen</button>
+      <button class="btn btn--primary btn--narrow" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn btn--primary btn--narrow" onclick="nextCard()">Nächste Karte</button>
+      <button class="btn btn--primary btn--narrow" onclick="shuffleCards()">Mischen</button>
+      <button class="btn btn--primary btn--narrow" onclick="resetCards()">Ordnen</button>
     </div>
   </div>
 
@@ -67,7 +65,7 @@ let ranks = [...ranksInitial];
 let currentIndex = 0;
 const ranksOriginal = [...ranksInitial];
 
-const flipContainer = document.querySelector(".flashcard__flip");
+const flipContainer = document.querySelector(".card-flip");
 const img = document.getElementById("rank-image");
 const title = document.getElementById("rank-title");
 const desc = document.getElementById("rank-desc");
@@ -106,16 +104,19 @@ function shuffleCards() {
   }
   currentIndex = 0;
   updateCard();
-  flipContainer.classList.add("shake");
-  setTimeout(() => flipContainer.classList.remove("shake"), 400);
+  triggerShake();
 }
 
 function resetCards() {
   ranks = [...ranksOriginal];
   currentIndex = 0;
   updateCard();
-  flipContainer.classList.add("reset-glow");
-  setTimeout(() => flipContainer.classList.remove("reset-glow"), 400);
+  triggerShake();
+}
+
+function triggerShake() {
+  flipContainer.classList.add("shake");
+  setTimeout(() => flipContainer.classList.remove("shake"), 400);
 }
 </script>
 {% endblock %}

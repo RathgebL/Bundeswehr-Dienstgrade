@@ -36,7 +36,6 @@ PAGE – DIENSTGRAD-KARTEIKARTEN
   flex-direction: column;
   align-items: center;
   gap: var(--space-4);
-  margin-top: var(--space-5);
 }
 
 /* ===== Animationseffekte ===== */
@@ -47,8 +46,3 @@ PAGE – DIENSTGRAD-KARTEIKARTEN
 }
 
 .shake { animation: shake 0.4s ease-in-out; }
-
-.reset-glow {
-  box-shadow: 0 0 15px var(--accent-secondary);
-  transition: box-shadow 0.4s ease;
-}
