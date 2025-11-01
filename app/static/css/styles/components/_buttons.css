@@ -91,20 +91,8 @@ button.btn {
 .btn--medium { width: 260px; }
 .btn--wide   { width: 320px; }
 
-
 .btn--tall {
   min-height: 60px;
-}
-
-/* Spezielle Varianten */
-.btn--back {
-  background-color: var(--gray-mid);
-  color: var(--text-default);
-  margin-top: var(--space-4);
-}
-
-.btn--back:hover:not(.is-locked) {
-  background-color: var(--hover-bg);
 }
 
 /* Für Karten, Quiz, Flashcards usw. */

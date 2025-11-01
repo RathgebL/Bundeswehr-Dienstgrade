@@ -8,20 +8,22 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">Quizmodus</h1>
 
-  <form id="quizForm" class="quiz__form">
-    <!-- Spielmodus -->
-    <div class="quiz__section">
-      <label for="mode" class="quiz__label">Spielmodus:</label>
-      <select name="mode" id="mode" class="select" onchange="changeMode()">
+  <!-- Spielmodus -->
+  <form id="quizForm" class="actions">
+    <div class="section">
+      <label for="mode" class="select-label">Spielmodus:</label>
+      <select name="mode" id="mode" class="select select--small" onchange="changeMode()">
         <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
         <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitspiel</option>
       </select>
     </div>
+  </form>
 
     <!-- Truppenteil -->
-    <div class="quiz__section">
-      <label for="branch" class="quiz__label">Truppenteil:</label>
-      <select name="branch" id="branch" class="select" onchange="changeBranch()">
+  <form id="quizForm" class="actions">
+    <div class="section">
+      <label for="branch" class="select-label">Truppenteil:</label>
+      <select name="branch" id="branch" class="select select--small" onchange="changeBranch()">
         {% for b in branches %}
           <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
         {% endfor %}
@@ -30,15 +32,13 @@
   </form>
 
   <!-- Quizbuttons -->
-  <div class="quiz__buttons">
-    <button type="button" class="quiz__button" onclick="startQuiz(1)">Dienstgrad erkennen</button>
-    <button type="button" class="quiz__button" onclick="startQuiz(2)">Schulterklappe finden</button>
+  <div class="menu-box__buttons">
+    <button type="button" class="btn btn--primary btn--wide" onclick="startQuiz(1)">Dienstgrad erkennen</button>
+    <button type="button" class="btn btn--primary btn--wide" onclick="startQuiz(2)">Schulterklappe finden</button>
   </div>
 
-  <!-- Zurück -->
-  <div class="quiz__back-container">
-    <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
-  </div>
+  <!-- Zurück-Button -->
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
 </div>
 
 <script>
