@@ -2,47 +2,11 @@
 PAGE – HOMEPAGE
 *************************************************************/
 
-/* Haupttitel */
-.home__title {
-  color: var(--text-accent);
-  font-size: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--line-height-tight);
-  margin-bottom: var(--space-6);
-}
-
-/* Container für die Karten */
-.home__cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: var(--space-6);
-}
-
-/* Einzelne Karte */
-.home__card {
-  background-color: var(--surface-card);
-  color: var(--text-default);
-  border-radius: var(--radius-card);
-  box-shadow: 0 6px 18px var(--shadow-color);
-  width: 280px;
-  padding: var(--space-5);
-  text-decoration: none;
-  transition: all 0.25s ease-in-out;
-}
-
-/* Hovereffekt */
-.home__card:hover {
-  transform: translateY(-6px);
-  background-color: var(--hover-bg);
-  box-shadow: 0 8px 22px var(--shadow-color);
-}
-
 /* Icon innerhalb der Karte */
 .home__icon {
   font-size: 2.5rem;
-  margin-bottom: var(--space-3);
   color: var(--text-accent);
+  margin-bottom: var(--space-3);
 }
 
 /* Kartentitel */
@@ -50,14 +14,13 @@ PAGE – HOMEPAGE
   color: var(--text-accent);
   font-size: var(--font-size-l);
   font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-2);
+  margin-bottom: var(--space-3);
 }
 
 /* Beschreibungstext */
 .home__card-text {
   font-size: var(--font-size-base);
   color: var(--text-default);
-  opacity: 0.85;
 }
 
 /* Responsive Verhalten */

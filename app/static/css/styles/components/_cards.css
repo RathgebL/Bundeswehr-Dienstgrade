@@ -2,6 +2,14 @@
 COMPONENTS – KARTEN & KACHELN
 *************************************************************/
 
+/* Container für die Karten */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-6);
+}
+
 /* Grundlegendes Kartenlayout */
 .card {
   background-color: var(--surface-card);
@@ -52,8 +60,7 @@ COMPONENTS – KARTEN & KACHELN
 
 /* Kleinere kompakte Karten (z. B. Home-Seite) */
 .card--small {
-  width: 280px;
-  padding: var(--space-4);
+  width: 300px;
 }
 
 /* Breitere Infokarten oder Tabellenkacheln */
@@ -68,7 +75,6 @@ COMPONENTS – KARTEN & KACHELN
   display: flex;
   justify-content: center;
   height: 340px;
-  width: 300px;
   margin: var(--space-3) auto;
   perspective: 1200px;
 }

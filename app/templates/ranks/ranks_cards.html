@@ -19,7 +19,7 @@
   </form>
 
   <!-- Karte -->
-  <div id="flashcard" class="flashcard">
+  <div id="flashcard" class="flashcard card--small">
     <div class="card-flip" onclick="flipCard()">
         
       <!-- Vorderseite -->
@@ -32,7 +32,7 @@
       </div>  
 
       <!-- Rückseite -->
-      <div class="flashcard card__face card__face--back">
+      <div class="flashcard card--small card__face card__face--back">
         <h4 id="rank-title" class="rank-title">{{ ranks[0].title }}</h4>
         <div id="rank-meta" class="rank-meta">
           <p id="rank-abbr">{{ ranks[0].abbreviation or "-" }}</p>
