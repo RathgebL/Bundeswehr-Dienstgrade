@@ -14,11 +14,16 @@
 
   <!-- Dynamischer Container -->
   <div class="quiz__content"></div>
+
+  <a
+  href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
+  class="btn btn--secondary btn--medium d-none"> Zurück zum Menü 
+  </a>
 </div>
 
 <script>
 let allRanks = {{ ranks|tojson|safe }};
-let timeLeft = 60;
+let timeLeft = 10;
 let score = 0;
 let timerInterval;
 
@@ -63,36 +68,35 @@ function renderQuestion(correct, options) {
   container.innerHTML = `
     <img src="/static/images/${correct.image_filename}" alt="${correct.title}" class="quiz__image">
 
-    <div class="quiz__options">
+    <div class="btn-group">
       ${options.map(opt => `
-        <button class="quiz__button" data-id="${opt.id}" onclick="checkAnswer(${opt.id}, ${correct.id})">
+        <button class="btn btn--primary btn--medium btn--tall" data-id="${opt.id}" onclick="checkAnswer(${opt.id}, ${correct.id})">
           ${opt.title}
         </button>
       `).join("")}
     </div>
 
-    <p id="feedback" class="quiz__feedback"></p>
+    <p id="feedback" class="heading-secondary"></p>
   `;
 }
 
 function checkAnswer(selectedId, correctId) {
-  const buttons = document.querySelectorAll(".quiz__button");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
-
   const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll("button[data-id]");
+  buttons.forEach(btn => btn.classList.add("is-locked"));
 
   if (selectedId === correctId) {
     score++;
     document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
-    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("quiz__button--correct");
+    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("btn--success");
   } else {
     feedback.innerText = "Falsch!";
-    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("quiz__button--wrong");
-    document.querySelector(`button[data-id="${correctId}"]`).classList.add("quiz__button--correct");
+    document.querySelector(`button[data-id="${selectedId}"]`).classList.add("btn--danger");
+    document.querySelector(`button[data-id="${correctId}"]`).classList.add("btn--success");
   }
 
-  setTimeout(nextQuestion, 700);
+  setTimeout(nextQuestion, 500);
 }
 
 function endGame() {
@@ -103,11 +107,11 @@ function endGame() {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <div class="quiz__end">
-      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
+      <h2 class="heading-secondary">Zeit abgelaufen!</h2>
       <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-      <div class="quiz__end-buttons">
-        <a href="/quiz1_timer" class="quiz__next">Erneut versuchen</a>
-        <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="quiz__next">Zurück</a>
+      <div class="btn-group">
+        <a href="{{ url_for('ranks.ranks_quiz1_timer') }}" class="btn btn--primary btn--medium">Erneut versuchen</a>
+        <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
       </div>
     </div>
   `;

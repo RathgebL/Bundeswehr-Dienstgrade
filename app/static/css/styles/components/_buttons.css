@@ -92,7 +92,7 @@ button.btn {
 .btn--wide   { width: 320px; }
 
 .btn--tall {
-  min-height: 60px;
+  min-height: 80px;
 }
 
 /* Für Karten, Quiz, Flashcards usw. */

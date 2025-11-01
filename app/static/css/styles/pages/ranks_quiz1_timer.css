@@ -44,102 +44,13 @@ PAGE – QUIZ: ZEITMODUS – DIENSTGRAD ERKENNEN
   margin-bottom: var(--space-5);
 }
 
-.quiz__button {
-  background-color: var(--blue);
-  color: var(--text-default);
-  font-weight: var(--font-weight-semibold);
-  border: none;
-  border-radius: var(--radius-button);
-  padding: var(--space-3) var(--space-5);
-  width: 100%;
-  max-width: 400px;
-  box-shadow: 0 2px 6px var(--shadow-color);
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-}
-
-.quiz__button:hover:not(.is-locked) {
-  background-color: var(--accent-secondary);
-  transform: translateY(-2px);
-}
-
-/* ===== Richtig / Falsch ===== */
-.quiz__button--correct {
-  background-color: var(--green);
-  color: var(--text-light);
-}
-
-.quiz__button--wrong {
-  background-color: var(--red);
-  color: var(--text-light);
-}
-
-.is-locked {
-  pointer-events: none;
-  opacity: 0.9;
-}
-
-/* ===== Feedback ===== */
-.quiz__feedback {
-  font-size: var(--font-size-l);
-  font-weight: var(--font-weight-bold);
-  margin-bottom: var(--space-5);
-  color: var(--text-accent);
-  min-height: 2rem;
-}
-
 /* ===== Endbildschirm ===== */
 .quiz__end {
-  padding: var(--space-6);
-}
-
-.quiz__end-title {
-  color: var(--text-accent);
-  font-size: var(--font-size-xl);
-  margin-bottom: var(--space-3);
+  padding: var(--space-4);
 }
 
 .quiz__end-text {
   font-size: var(--font-size-base);
   color: var(--text-default);
   margin-bottom: var(--space-5);
-}
-
-.quiz__end-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: var(--space-4);
-  flex-wrap: wrap;
-}
-
-.quiz__next {
-  background-color: var(--accent-primary);
-  color: var(--text-light);
-  text-decoration: none;
-  padding: var(--space-3) var(--space-5);
-  border-radius: var(--radius-button);
-  box-shadow: 0 2px 6px var(--shadow-color);
-  transition: all 0.2s ease-in-out;
-}
-
-.quiz__next:hover {
-  background-color: var(--accent-secondary);
-  transform: translateY(-2px);
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 600px) {
-  .quiz {
-    padding: var(--space-5);
-  }
-
-  .quiz__button {
-    width: 100%;
-  }
-
-  .quiz__end-buttons {
-    flex-direction: column;
-    gap: var(--space-3);
-  }
 }

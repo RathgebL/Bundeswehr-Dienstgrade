@@ -36,10 +36,7 @@
   <div class="btn-group">
     <a
       href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-      id="menu-btn"
-      class="btn btn--secondary btn--medium"
-    >
-      Zurück zum Menü
+      class="btn btn--secondary btn--medium"> Zurück zum Menü
     </a>
 
     <a
@@ -54,14 +51,15 @@
 
 <script>
 function checkAnswer(selected, correctId) {
+  const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
   buttons.forEach(btn => btn.classList.add("is-locked"));
 
   if (selected === correctId) {
-    document.getElementById("feedback").innerText = "Richtig!";
+    feedback.innerText = "Richtig!";
     document.getElementById(selected).classList.add("btn--success");
   } else {
-    document.getElementById("feedback").innerText = "Falsch!";
+    feedback.innerText = "Falsch!";
     document.getElementById(selected).classList.add("btn--danger");
     document.getElementById(correctId).classList.add("btn--success");
   }

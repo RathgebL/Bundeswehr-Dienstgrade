@@ -176,3 +176,6 @@ UTILITY-KLASSEN — SCHNELLE LAYOUT- UND STILHILFEN
 .cursor-default { cursor: default; }
 
 .transition { transition: all 0.2s ease-in-out; }
+
+/* Sichtbarkeit */
+.d-none { display: none !important; }
