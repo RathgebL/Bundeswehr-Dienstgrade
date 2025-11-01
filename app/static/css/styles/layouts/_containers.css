@@ -9,6 +9,7 @@ LAYOUTS – CONTAINER & SEKTIONSSTRUKTUREN
   box-shadow: 0 6px 18px var(--shadow-color);
   margin: var(--space-8) auto;
   padding: var(--space-7);
+  overflow: auto;
   width: 95%;
   text-align: center;
 }

@@ -71,13 +71,12 @@ COMPONENTS – BUTTONS
   background-color: var(--accent-error);
 }
 
-/* Alternative Layout-Varianten */
-.btn--narrow { width: 200px; }
-.btn--medium { width: 260px; }
-.btn--wide   { width: 320px; }
-
-.btn--tall {
-  min-height: 80px;
+/* Button-Container */
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
 }
 
 /* Button-Gruppen */

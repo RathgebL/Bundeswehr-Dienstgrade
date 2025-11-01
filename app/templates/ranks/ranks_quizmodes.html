@@ -12,7 +12,7 @@
   <form id="quizForm" class="actions">
     <div class="section">
       <label for="mode" class="select-label">Spielmodus:</label>
-      <select name="mode" id="mode" class="select select--small" onchange="changeMode()">
+      <select name="mode" id="mode" class="select w-140" onchange="changeMode()">
         <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
         <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitspiel</option>
       </select>
@@ -23,7 +23,7 @@
   <form id="quizForm" class="actions">
     <div class="section">
       <label for="branch" class="select-label">Truppenteil:</label>
-      <select name="branch" id="branch" class="select select--small" onchange="changeBranch()">
+      <select name="branch" id="branch" class="select w-140" onchange="changeBranch()">
         {% for b in branches %}
           <option value="{{ b }}" {% if b == selected_branch %}selected{% endif %}>{{ b }}</option>
         {% endfor %}
@@ -33,12 +33,12 @@
 
   <!-- Quizbuttons -->
   <div class="menu-box__buttons">
-    <button type="button" class="btn btn--primary btn--wide" onclick="startQuiz(1)">Dienstgrad erkennen</button>
-    <button type="button" class="btn btn--primary btn--wide" onclick="startQuiz(2)">Schulterklappe finden</button>
+    <button type="button" class="btn btn--primary w-320" onclick="startQuiz(1)">Dienstgrad erkennen</button>
+    <button type="button" class="btn btn--primary w-320" onclick="startQuiz(2)">Schulterklappe finden</button>
   </div>
 
   <!-- Zurück-Button -->
-  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
 </div>
 
 <script>

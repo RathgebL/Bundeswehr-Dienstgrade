@@ -9,50 +9,49 @@
   <h1 class="heading-primary">Schulterklappe finden</h1>
   <h4 class="quiz__subtitle">{{ correct.title }}</h4>
 
-  <div class="quiz__grid">
+  <div class="btn-group">
     {% for opt in options %}
     <button
+      class="quiz__image-button"
       id="{{ opt.id }}"
       data-id="{{ opt.id }}"
       onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
-      class="quiz__image-button"
     >
+      <!-- Bilder -->
       <img
+        class="quiz__image"
         src="{{ url_for('static', filename='images/' + opt.image_filename) }}"
         alt="{{ opt.title }}"
-        class="quiz__image"
       >
     </button>
     {% endfor %}
   </div>
 
-  <p id="feedback" class="quiz__feedback"></p>
+  <!-- Feedback -->
+  <div id="feedback" class="heading-secondary"></div>
 
-  <div class="quiz__actions">
+  <!-- Button-Bereich -->
+  <div class="btn-group mb-0">
     <a
       href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-      id="menu-btn"
-      class="quiz__next quiz__back"
-    >
-      Zurück zum Menü
+      class="btn btn--secondary w-260"
+      >Zurück zum Menü
     </a>
 
     <a
       href="{{ url_for('ranks.ranks_quiz2') }}"
       id="next-btn"
-      class="quiz__next d-none"
-    >
-      Nächste Frage
+      class="btn btn--primary w-260 d-none"
+      >Nächste Frage
     </a>
   </div>
 </div>
 
 <script>
 function checkAnswer(selected, correctId) {
+  const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
   buttons.forEach(btn => btn.classList.add("is-locked"));
-
-  const feedback = document.getElementById("feedback");
 
   if (selected === correctId) {
     feedback.innerText = "Richtig!";

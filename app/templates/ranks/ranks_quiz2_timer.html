@@ -13,7 +13,12 @@
   <p id="score" class="quiz__score d-none">Punkte: 0</p>
 
   <!-- Dynamischer Container -->
-  <div class="quiz__content" id="quiz-content"></div>
+  <div class="quiz__content"></div>
+
+  <a
+    href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
+    class="btn btn--secondary w-260"> Zurück zum Menü 
+  </a>
 </div>
 
 <script>
@@ -39,7 +44,10 @@ function startTimer() {
     timeLeft--;
     timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-    if (timeLeft <= 10) timer.style.color = "var(--red)";
+    if (timeLeft <= 10) {
+      timer.style.color = "var(--color-red)";
+    }
+
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       endGame();
@@ -63,7 +71,7 @@ function renderQuestion(correct, options) {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <h4 class="quiz__subtitle">${correct.title}</h4>
-    <div class="quiz__grid">
+    <div class="btn-grid">
       ${options.map(opt => `
         <button class="quiz__image-button" data-id="${opt.id}"
                 onclick="checkAnswer(${opt.id}, ${correct.id})">

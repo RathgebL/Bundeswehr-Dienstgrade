@@ -15,7 +15,7 @@ COMPONENT: CARDS
   display: flex;
   align-items: center;
   margin: var(--space-3) auto;
-  height: 320px;
+  height: 300px;
   perspective: 1200px;
 }
 
@@ -51,12 +51,6 @@ COMPONENT: CARDS
 .card__text {
   font-size: var(--font-size-base);
   opacity: 0.85;
-}
-
-/* ========== Varianten ========== */
-.card--small {
-  width: 280px;
-  max-width: 90%;
 }
 
 .card--interactive {

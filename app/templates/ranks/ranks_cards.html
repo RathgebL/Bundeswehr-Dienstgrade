@@ -11,7 +11,7 @@
   <!-- Filter -->
   <form method="get" action="{{ url_for('ranks.ranks_cards') }}">
     <label class="select-label" for="branch">Truppenteil:</label>
-    <select name="branch" id="branch" class="select select--small" onchange="this.form.submit()">
+    <select name="branch" id="branch" class="select w-140" onchange="this.form.submit()">
       {% for b in branches %}
       <option value="{{ b }}" {% if selected_branch == b %}selected{% endif %}>{{ b }}</option>
       {% endfor %}
@@ -19,7 +19,7 @@
   </form>
 
   <!-- Karte -->
-  <div id="flashcard" class="card-wrapper card--small">
+  <div id="flashcard" class="card-wrapper w-320">
     <div class="card__flip" onclick="flipCard()">
         
       <!-- Vorderseite -->
@@ -45,17 +45,17 @@
   </div>
 
   <!-- Steuerung -->
-  <div class="ranks-cards__buttons">
+  <div class="btn-wrapper">
     <div class="btn-group">
-      <button class="btn btn--primary btn--narrow" onclick="prevCard()">Vorherige Karte</button>
-      <button class="btn btn--primary btn--narrow" onclick="nextCard()">Nächste Karte</button>
-      <button class="btn btn--primary btn--narrow" onclick="shuffleCards()">Mischen</button>
-      <button class="btn btn--primary btn--narrow" onclick="resetCards()">Ordnen</button>
+      <button class="btn btn--primary w-200" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn btn--primary w-200" onclick="nextCard()">Nächste Karte</button>
+      <button class="btn btn--primary w-200" onclick="shuffleCards()">Mischen</button>
+      <button class="btn btn--primary w-200" onclick="resetCards()">Ordnen</button>
     </div>
   </div>
 
   <!-- Zurück -->
-  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
 
 </div>
 

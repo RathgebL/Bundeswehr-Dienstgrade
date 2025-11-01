@@ -10,16 +10,16 @@
 
   <!-- Bild -->
   <img
+    class="quiz__image mx-auto"
     src="{{ url_for('static', filename='images/' + correct.image_filename) }}"
     alt="{{ correct.title }}"
-    class="quiz__image"
   >
 
   <!-- Antwortoptionen -->
   <div class="btn-group">
     {% for opt in options %}
     <button
-      class="btn btn--primary btn--medium btn--tall"
+      class="btn btn--primary w-260 h-80"
       id="{{ opt.id }}"
       data-id="{{ opt.id }}"
       onclick="checkAnswer({{ opt.id }}, {{ correct.id }})"
@@ -30,21 +30,21 @@
   </div>
 
   <!-- Feedback -->
-  <p id="feedback" class="heading-secondary"></p>
+  <div id="feedback" class="heading-secondary"></div>
 
   <!-- Button-Bereich -->
-  <div class="btn-group">
+  <div class="btn-group mb-0">
     <a
       href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-      class="btn btn--secondary btn--medium"> Zurück zum Menü
+      class="btn btn--secondary w-260"
+      >Zurück zum Menü
     </a>
 
     <a
       href="{{ url_for('ranks.ranks_quiz1') }}"
       id="next-btn"
-      class="btn btn--primary btn--medium d-none"
-    >
-      Nächste Frage
+      class="btn btn--primary w-260 d-none"
+      >Nächste Frage
     </a>
   </div>
 </div>
@@ -57,11 +57,17 @@ function checkAnswer(selected, correctId) {
 
   if (selected === correctId) {
     feedback.innerText = "Richtig!";
-    document.getElementById(selected).classList.add("btn--success");
+    document
+      .getElementById(selected)
+      .classList.add("btn--success");
   } else {
     feedback.innerText = "Falsch!";
-    document.getElementById(selected).classList.add("btn--danger");
-    document.getElementById(correctId).classList.add("btn--success");
+    document
+      .getElementById(selected)
+      .classList.add("btn--danger");
+    document
+      .getElementById(correctId)
+      .classList.add("btn--success");
   }
 
   document.getElementById("next-btn").classList.remove("d-none");

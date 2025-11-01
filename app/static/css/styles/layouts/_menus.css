@@ -3,11 +3,10 @@ LAYOUTS – MENÜSEITEN (Ränge, NATO-Alphabet, etc.)
 *************************************************************/
 
 /* ===== Untertitel ===== */
-.menu-box__subtitle {
+.menu-box__description {
   font-size: var(--font-size-m);
   color: var(--text-default);
   font-weight: var(--font-weight-regular);
-  margin-bottom: var(--space-6);
   line-height: var(--line-height-normal);
   text-align: center;
 }
@@ -18,12 +17,5 @@ LAYOUTS – MENÜSEITEN (Ränge, NATO-Alphabet, etc.)
   flex-direction: column;
   align-items: center;
   gap: var(--space-5);
-  margin: var(--space-6) var(--space-6);
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 768px) {
-  .menu-box {
-    padding: var(--space-6);
-  }
+  margin: var(--space-6);
 }

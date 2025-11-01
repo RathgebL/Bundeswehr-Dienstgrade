@@ -20,6 +20,8 @@ Base, Utilities, Components und Pages.
 @import url("styles/layouts/_containers.css");
 @import url("styles/layouts/_headings.css");
 @import url("styles/layouts/_menus.css");
+@import url("styles/layouts/_quiz.css");
+@import url("styles/layouts/_tables.css");
 
 /* =========================================================
    3. COMPONENTS (Wiederverwendbare Module)

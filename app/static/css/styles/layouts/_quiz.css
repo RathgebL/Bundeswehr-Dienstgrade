@@ -1,0 +1,71 @@
+/*************************************************************
+PAGE – QUIZ: SCHULTERKLAPPE FINDEN
+*************************************************************/
+
+/* ===== Timer & Score ===== */
+.quiz__timer,
+.quiz__score {
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-accent);
+  margin-bottom: var(--space-2);
+}
+
+.quiz__timer {
+  color: var(--accent-primary);
+}
+
+.quiz__score {
+  color: var(--text-default);
+}
+
+/* ===== Quiz-Inhalt ===== */
+.quiz__content {
+  margin-top: var(--space-5);
+}
+
+/* ===== Untertitel (Dienstgradname) ===== */
+.quiz__subtitle {
+  font-size: var(--font-size-l);
+  color: var(--text-default);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-5);
+}
+
+/* ===== Buttons ===== */
+.quiz__image-button {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.quiz__image-button:hover:not(.is-locked) {
+  transform: scale(1.05);
+}
+
+/* ===== Schulterklappenbilder ===== */
+.quiz__image {
+  max-height: 180px;
+  width: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px var(--shadow-color);
+  transition: all 0.2s ease;
+}
+
+.quiz__image--correct {
+  outline: 4px solid var(--color-green);
+  box-shadow: 0 0 10px var(--color-green);
+}
+
+.quiz__image--wrong {
+  outline: 4px solid var(--color-red);
+  box-shadow: 0 0 10px var(--color-red);
+}
+
+/* ===== Hoverdeaktivierung nach Auswahl ===== */
+.is-locked {
+  pointer-events: none;
+}

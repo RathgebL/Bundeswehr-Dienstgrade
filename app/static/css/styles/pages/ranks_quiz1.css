@@ -1,14 +1,3 @@
 /*************************************************************
 PAGE – QUIZ: DIENSTGRAD ERKENNEN
 *************************************************************/
-
-/* ===== Dienstgrad-Bild ===== */
-.quiz__image {
-  display: block;
-  margin: 0 auto var(--space-5);
-  max-width: 220px;
-  height: auto;
-  border-radius: var(--radius-sm);
-  box-shadow: 0 4px 20px var(--shadow-color);
-  padding: var(--space-3);
-}

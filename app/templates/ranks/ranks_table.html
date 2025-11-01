@@ -12,7 +12,7 @@
   <!-- Filter -->
   <form method="get" action="{{ url_for('ranks.ranks_table') }}">
     <label class="select-label" for="branch">Truppenteil:</label>
-    <select name="branch" id="branch" class="select select--small" onchange="this.form.submit()">
+    <select name="branch" id="branch" class="select w-140" onchange="this.form.submit()">
       {% for b in branches %}
       <option value="{{ b }}" {% if selected_branch == b %}selected{% endif %}>{{ b }}</option>
       {% endfor %}
@@ -48,7 +48,7 @@
   </div>
 
   <!-- Zurück-Button -->
-  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary btn--narrow">Zurück zum Menü</a>
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
 
 </div>
 {% endblock %}
