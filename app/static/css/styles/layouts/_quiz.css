@@ -5,18 +5,17 @@ PAGE – QUIZ: SCHULTERKLAPPE FINDEN
 /* ===== Timer & Score ===== */
 .quiz__timer,
 .quiz__score {
-  font-size: var(--font-size-l);
+  font-size: var(--font-size-m);
   font-weight: var(--font-weight-semibold);
-  color: var(--text-accent);
   margin-bottom: var(--space-2);
 }
 
 .quiz__timer {
-  color: var(--accent-primary);
+  color: var(--text-default);
 }
 
 .quiz__score {
-  color: var(--text-default);
+  color: var(--text-accent);
 }
 
 /* ===== Quiz-Inhalt ===== */
