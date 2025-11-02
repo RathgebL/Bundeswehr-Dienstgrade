@@ -14,15 +14,3 @@ PAGE – NATO-ALPHABET TABELLE
   font-size: var(--font-size-base);
   color: var(--text-default);
 }
-
-@media (max-width: 640px) {
-  .nato {
-    padding: var(--space-5);
-  }
-
-  .nato__table th,
-  .nato__table td {
-    padding: var(--space-2);
-    font-size: var(--font-size-s);
-  }
-}

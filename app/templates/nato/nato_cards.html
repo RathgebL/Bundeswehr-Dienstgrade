@@ -8,36 +8,35 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">Karteikarten</h1>
 
-  <div id="flashcard" class="flashcard-container">
-    <div class="card-flip" onclick="flipCard()">
+  <!-- Karte -->
+  <div id="flashcard" class="card-wrapper w-320 max-h-200">
+    <div class="card__flip" onclick="flipCard()">
       <!-- Vorderseite: Buchstabe -->
-      <div class="card-face card-front">
+      <div class="card__face">
         <h1 id="nato-letter" class="nato-letter">{{ entries[0].letter }}</h1>
-        <p class="nato-flip-hint">Klicke zum Umdrehen</p>
+        <p class="card__hint">Klicke zum Umdrehen</p>
       </div>
 
       <!-- Rückseite: Wort -->
-      <div class="card-face card-back">
+      <div class="card__face card__face--back">
         <h2 id="nato-word" class="nato-word">{{ entries[0].correct }}</h2>
       </div>
     </div>
   </div>
 
-  <div class="flashcard-buttons">
-    <div class="flashcard-controls">
-      <button class="btn btn--primary" onclick="prevCard()">Vorherige Karte</button>
-      <button class="btn btn--primary" onclick="nextCard()">Nächste Karte</button>
-    </div>
-
-    <div class="flashcard-controls">
-      <button class="btn btn--secondary" onclick="shuffleCards()">Mischen</button>
-      <button class="btn btn--secondary" onclick="resetCards()">Ordnen</button>
+  <!-- Steuerung -->
+  <div class="btn-wrapper">
+    <div class="btn-group">
+      <button class="btn btn--primary w-200" onclick="prevCard()">Vorherige Karte</button>
+      <button class="btn btn--primary w-200" onclick="nextCard()">Nächste Karte</button>
+      <button class="btn btn--primary w-200" onclick="shuffleCards()">Mischen</button>
+      <button class="btn btn--primary w-200" onclick="resetCards()">Ordnen</button>
     </div>
   </div>
 
-  <div class="btn-back-container">
-    <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
-  </div>
+  <!-- Zurück -->
+  <a href="{{ url_for('ranks.ranks_menu') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
+
 </div>
 
 <script>
@@ -46,22 +45,28 @@ let entries = [...entriesInitial];
 let currentIndex = 0;
 let entriesOriginal = [...entriesInitial];
 
-const flipContainer = document.querySelector(".card-flip");
+const flipContainer = document.querySelector(".card__flip");
 const letterEl = document.getElementById("nato-letter");
 const wordEl = document.getElementById("nato-word");
 
 function flipCard() {
-  flipContainer.classList.toggle("flipped");
+  flipContainer.classList.toggle("is-flipped");
+}
+
+function updateCard() {
+  const entry = entries[currentIndex];
+  letterEl.innerText = entry.letter;
+  wordEl.innerText = entry.correct;
 }
 
 function nextCard() {
-  flipContainer.classList.remove("flipped");
+  flipContainer.classList.remove("is-flipped");
   currentIndex = (currentIndex + 1) % entries.length;
   updateCard();
 }
 
 function prevCard() {
-  flipContainer.classList.remove("flipped");
+  flipContainer.classList.remove("is-flipped");
   currentIndex = (currentIndex - 1 + entries.length) % entries.length;
   updateCard();
 }
@@ -73,22 +78,19 @@ function shuffleCards() {
   }
   currentIndex = 0;
   updateCard();
-  flipContainer.classList.add("shake");
-  setTimeout(() => flipContainer.classList.remove("shake"), 400);
+  triggerShake();
 }
 
 function resetCards() {
   entries = [...entriesOriginal];
   currentIndex = 0;
   updateCard();
-  flipContainer.classList.add("reset-glow");
-  setTimeout(() => flipContainer.classList.remove("reset-glow"), 400);
+  triggerShake();
 }
 
-function updateCard() {
-  const entry = entries[currentIndex];
-  letterEl.innerText = entry.letter;
-  wordEl.innerText = entry.correct;
+function triggerShake() {
+  flipContainer.classList.add("shake");
+  setTimeout(() => flipContainer.classList.remove("shake"), 400);
 }
 </script>
 {% endblock %}

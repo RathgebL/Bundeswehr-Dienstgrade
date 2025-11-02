@@ -97,7 +97,7 @@ UTILITY-KLASSEN — SCHNELLE LAYOUT- UND STILHILFEN
 .h-400 { height: 400px; }
 .h-auto { height: auto; }
 
-.max-h-400 { max-height: 400px; }
+.max-h-200 { max-height: 200px; }
 .max-h-full { max-height: 100%; }
 
 /* =============================
