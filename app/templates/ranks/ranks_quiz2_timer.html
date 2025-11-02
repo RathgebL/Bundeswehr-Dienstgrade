@@ -17,13 +17,13 @@
 
   <a
     href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-    class="btn btn--secondary w-260"> Zurück zum Menü 
+    class="btn btn--secondary w-260 d-none"> Zurück zum Menü 
   </a>
 </div>
 
 <script>
 let allRanks = {{ ranks|tojson|safe }};
-let timeLeft = 60;
+let timeLeft = 10;
 let score = 0;
 let timerInterval;
 let questionLocked = false;
@@ -71,15 +71,18 @@ function renderQuestion(correct, options) {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <h4 class="quiz__subtitle">${correct.title}</h4>
-    <div class="btn-grid">
+
+    <div class="btn-group">
       ${options.map(opt => `
-        <button class="quiz__image-button" data-id="${opt.id}"
-                onclick="checkAnswer(${opt.id}, ${correct.id})">
+        <button 
+          class="quiz__image-button" data-id="${opt.id}"
+          onclick="checkAnswer(${opt.id}, ${correct.id})">
           <img src="/static/images/${opt.image_filename}" alt="${opt.title}" class="quiz__image">
         </button>
       `).join("")}
     </div>
-    <p id="feedback" class="quiz__feedback"></p>
+
+    <p id="feedback" class="heading-secondary"></p>
   `;
 }
 
@@ -88,7 +91,7 @@ function checkAnswer(selectedId, correctId) {
   questionLocked = true;
 
   const feedback = document.getElementById("feedback");
-  const buttons = document.querySelectorAll(".quiz__image-button");
+  const buttons = document.querySelectorAll("button[data-id]");
   buttons.forEach(btn => btn.classList.add("is-locked"));
 
   const selectedBtn = document.querySelector(`button[data-id="${selectedId}"]`);
@@ -96,8 +99,8 @@ function checkAnswer(selectedId, correctId) {
 
   if (selectedId === correctId) {
     score++;
-    document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
+    document.getElementById("score").innerText = "Punkte: " + score;
     selectedBtn.querySelector("img").classList.add("quiz__image--correct");
   } else {
     feedback.innerText = "Falsch!";
@@ -105,7 +108,7 @@ function checkAnswer(selectedId, correctId) {
     correctBtn.querySelector("img").classList.add("quiz__image--correct");
   }
 
-  if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 700);
+  if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 500);
 }
 
 function endGame() {
@@ -119,11 +122,11 @@ function endGame() {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <div class="quiz__end">
-      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
-      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-      <div class="quiz__end-buttons">
-        <a href="{{ url_for('ranks.ranks_quiz2_timer') }}" class="quiz__next">Erneut versuchen</a>
-        <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="quiz__next">Zurück</a>
+      <h2 class="heading-secondary">Zeit abgelaufen!</h2>
+      <p Du hast <strong>${score}</strong> Punkte erreicht.</p>
+      <div class="btn-group">
+        <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
+        <a href="{{ url_for('ranks.ranks_quiz2_timer') }}" class="btn btn--primary w-200">Erneut versuchen</a>
       </div>
     </div>
   `;

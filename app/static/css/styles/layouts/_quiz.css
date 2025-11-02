@@ -65,6 +65,20 @@ PAGE – QUIZ: SCHULTERKLAPPE FINDEN
   box-shadow: 0 0 10px var(--color-red);
 }
 
+/* ===== Endkarte ===== */
+.quiz__end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--space-5);
+  background-color: var(--gray-dark);
+  border-radius: var(--radius-card);
+  box-shadow: 0 6px 18px var(--shadow-color);
+  margin: var(--space-5) auto;
+}
+
 /* ===== Hoverdeaktivierung nach Auswahl ===== */
 .is-locked {
   pointer-events: none;

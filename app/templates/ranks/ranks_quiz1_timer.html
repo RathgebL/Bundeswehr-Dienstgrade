@@ -17,7 +17,7 @@
 
   <a
   href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-  class="btn btn--secondary w-260"> Zurück zum Menü 
+  class="btn btn--secondary w-260 d-none"> Zurück zum Menü 
   </a>
 </div>
 
@@ -26,11 +26,12 @@ let allRanks = {{ ranks|tojson|safe }};
 let timeLeft = 60;
 let score = 0;
 let timerInterval;
+let questionLocked = false;
+let gameEnded = false;
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("timer").classList.remove("d-none");
   document.getElementById("score").classList.remove("d-none");
-
   nextQuestion();
   startTimer();
 });
@@ -55,6 +56,9 @@ function startTimer() {
 }
 
 function nextQuestion() {
+  if (gameEnded) return;
+  questionLocked = false;
+
   const correct = allRanks[Math.floor(Math.random() * allRanks.length)];
   const wrong = allRanks.filter(r => r.id !== correct.id);
   const options = [correct, ...wrong.sort(() => 0.5 - Math.random()).slice(0, 3)];
@@ -70,7 +74,9 @@ function renderQuestion(correct, options) {
 
     <div class="btn-group">
       ${options.map(opt => `
-        <button class="btn btn--primary w-260 h-80" data-id="${opt.id}" onclick="checkAnswer(${opt.id}, ${correct.id})">
+        <button 
+          class="btn btn--primary w-260 h-80" data-id="${opt.id}" 
+          onclick="checkAnswer(${opt.id}, ${correct.id})">
           ${opt.title}
         </button>
       `).join("")}
@@ -81,14 +87,17 @@ function renderQuestion(correct, options) {
 }
 
 function checkAnswer(selectedId, correctId) {
+  if (questionLocked || gameEnded) return;
+  questionLocked = true;
+
   const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
   buttons.forEach(btn => btn.classList.add("is-locked"));
 
   if (selectedId === correctId) {
     score++;
-    document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
+    document.getElementById("score").innerText = "Punkte: " + score;
     document.querySelector(`button[data-id="${selectedId}"]`).classList.add("btn--success");
   } else {
     feedback.innerText = "Falsch!";
@@ -96,22 +105,25 @@ function checkAnswer(selectedId, correctId) {
     document.querySelector(`button[data-id="${correctId}"]`).classList.add("btn--success");
   }
 
-  setTimeout(nextQuestion, 500);
+  if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 500);
 }
 
 function endGame() {
+  if (gameEnded) return;
+  gameEnded = true;
   clearInterval(timerInterval);
+
   document.getElementById("timer").classList.add("d-none");
   document.getElementById("score").classList.add("d-none");
 
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
-    <div class="card">
+    <div class="quiz__end">
       <h2 class="heading-secondary">Zeit abgelaufen!</h2>
       <p Du hast <strong>${score}</strong> Punkte erreicht.</p>
       <div class="btn-group">
-        <a href="{{ url_for('ranks.ranks_quiz1_timer') }}" class="btn btn--primary w-200">Erneut versuchen</a>
         <a href="{{ url_for('ranks.ranks_quizmodes') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
+        <a href="{{ url_for('ranks.ranks_quiz1_timer') }}" class="btn btn--primary w-200">Erneut versuchen</a>
       </div>
     </div>
   `;
