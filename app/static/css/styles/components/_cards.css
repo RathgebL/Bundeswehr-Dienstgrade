@@ -40,6 +40,13 @@ COMPONENT: CARDS
   box-shadow: 0 8px 22px var(--shadow-color);
 }
 
+.card--static:hover {
+  transform: none !important;
+  background-color: var(--surface-card) !important;
+  box-shadow: 0 6px 18px var(--shadow-color) !important;
+  cursor: default;
+}
+
 /* ========== Elemente ========== */
 .card__title {
   color: var(--text-accent);

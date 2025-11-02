@@ -49,6 +49,15 @@ LAYOUTS – TABELLEN (NATO, Dienstgrade, etc.)
   border-bottom: none;
 }
 
+/* Tabellenbilder */
+.table img {
+  width: 60px;
+  height: auto;
+  border-radius: var(--radius-sm);
+  box-shadow: 0 2px 8px var(--shadow-color);
+  object-fit: contain;
+}
+
 /* ===== Hover-Effekt für Tabellenzeilen ===== */
 .table tbody tr:hover {
   background-color: var(--hover-bg);
@@ -66,17 +75,4 @@ LAYOUTS – TABELLEN (NATO, Dienstgrade, etc.)
 .btn-back-container {
   text-align: center;
   margin-top: var(--space-6);
-}
-
-/* ===== Responsive ===== */
-@media (max-width: 640px) {
-  .table-page {
-    padding: var(--space-5);
-  }
-
-  .table th,
-  .table td {
-    padding: var(--space-2);
-    font-size: var(--font-size-s);
-  }
 }
