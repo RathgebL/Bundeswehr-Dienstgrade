@@ -4,8 +4,10 @@ PAGE – HOMEPAGE (Spezifische Eigenschaften)
 
 /* Icon innerhalb der Karte */
 .home__icon {
-  font-size: 2.5rem;
-  color: var(--text-accent);
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 2px 6px rgba(242, 179, 48, 0.5);
+  border-radius: var(--radius-l);
   margin-bottom: var(--space-3);
 }
 
