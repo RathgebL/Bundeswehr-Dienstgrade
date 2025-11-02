@@ -14,7 +14,7 @@
       <!-- Vorderseite: Buchstabe -->
       <div class="card__face">
         <h1 id="nato-letter" class="nato-letter">{{ entries[0].letter }}</h1>
-        <p class="card__hint">Klicke zum Umdrehen</p>
+        <p class="card__hint">Klick zum Umdrehen</p>
       </div>
 
       <!-- Rückseite: Wort -->
@@ -61,14 +61,19 @@ function updateCard() {
 
 function nextCard() {
   flipContainer.classList.remove("is-flipped");
-  currentIndex = (currentIndex + 1) % entries.length;
-  updateCard();
+  setTimeout(() => {
+    currentIndex = (currentIndex + 1) % entries.length;
+    updateCard();
+  }, 200);
 }
 
 function prevCard() {
   flipContainer.classList.remove("is-flipped");
-  currentIndex = (currentIndex - 1 + entries.length) % entries.length;
-  updateCard();
+
+  setTimeout(() => {
+    currentIndex = (currentIndex - 1 + entries.length) % entries.length;
+    updateCard();
+  }, 200);
 }
 
 function shuffleCards() {

@@ -87,14 +87,19 @@ function updateCard() {
 
 function nextCard() {
   flipContainer.classList.remove("is-flipped");
-  currentIndex = (currentIndex + 1) % ranks.length;
-  updateCard();
+  setTimeout(() => {
+    currentIndex = (currentIndex + 1) % ranks.length;
+    updateCard();
+  }, 200);
 }
 
 function prevCard() {
   flipContainer.classList.remove("is-flipped");
-  currentIndex = (currentIndex - 1 + ranks.length) % ranks.length;
-  updateCard();
+
+  setTimeout(() => {
+    currentIndex = (currentIndex - 1 + ranks.length) % ranks.length;
+    updateCard();
+  }, 200);
 }
 
 function shuffleCards() {
