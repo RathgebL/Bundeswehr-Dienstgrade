@@ -36,15 +36,15 @@
   <div class="btn-group mb-0">
     <a
       href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
-      class="btn btn--secondary w-260"
-      >Zurück zum Menü
+      class="btn btn--secondary w-260">
+      Zurück zum Menü
     </a>
 
     <a
       href="{{ url_for('ranks.ranks_quiz1') }}"
       id="next-btn"
-      class="btn btn--primary w-260 d-none"
-      >Nächste Frage
+      class="btn btn--primary w-260 d-none">
+      Nächste Frage
     </a>
   </div>
 </div>
@@ -53,7 +53,7 @@
 function checkAnswer(selected, correctId) {
   const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
+  buttons.forEach(btn => btn.disabled = true);
 
   if (selected === correctId) {
     feedback.innerText = "Richtig!";

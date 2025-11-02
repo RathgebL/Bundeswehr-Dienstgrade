@@ -77,8 +77,3 @@ PAGE – QUIZ: SCHULTERKLAPPE FINDEN
   border-radius: var(--radius-card);
   box-shadow: 0 6px 18px var(--shadow-color);
 }
-
-/* ===== Hoverdeaktivierung nach Auswahl ===== */
-.is-locked {
-  pointer-events: none;
-}

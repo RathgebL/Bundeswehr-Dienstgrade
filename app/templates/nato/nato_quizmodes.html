@@ -8,23 +8,24 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">Quizmodus</h1>
 
-  <form id="quizForm" class="quiz__form">
-    <div class="quiz__section">
-      <label for="mode" class="quiz__label">Spielmodus:</label>
-      <select name="mode" id="mode" class="quiz__select" onchange="changeMode()">
+  <!-- Spielmodus -->
+  <form id="quizForm" class="actions">
+    <div class="section">
+      <label for="mode" class="select-label">Spielmodus:</label>
+      <select name="mode" id="mode" class="select w-140" onchange="changeMode()">
         <option value="normal" {% if selected_mode == 'normal' %}selected{% endif %}>Unbegrenzt</option>
         <option value="timer" {% if selected_mode == 'timer' %}selected{% endif %}>Zeitmodus</option>
       </select>
     </div>
   </form>
 
-  <div class="quiz__buttons">
-    <button type="button" class="quiz__button" onclick="startQuiz()">Quiz starten</button>
+  <!-- Quizbuttons -->
+  <div class="menu-box__buttons">
+    <button type="button" class="btn btn--primary w-320" onclick="startQuiz()">Quiz starten</button>
   </div>
 
-  <div class="btn-back-container">
-    <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary">Zurück zum Menü</a>
-  </div>
+  <!-- Zurück-Button -->
+  <a href="{{ url_for('nato.nato_menu') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
 </div>
 
 <script>

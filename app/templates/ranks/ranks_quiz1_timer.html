@@ -92,7 +92,7 @@ function checkAnswer(selectedId, correctId) {
 
   const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
+  buttons.forEach(btn => btn.disabled = true);
 
   if (selectedId === correctId) {
     score++;

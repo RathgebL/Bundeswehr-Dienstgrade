@@ -6,33 +6,39 @@
 
 {% block content %}
 <div class="page-box page--narrow">
-  <h1 class="heading-primary">Zeitmodus: NATO-Alphabet</h1>
+  <h1 class="heading-primary">Dienstgrad erkennen</h1>
 
+  <!-- Timer & Punktestand -->
   <p id="timer" class="quiz__timer d-none">Verbleibende Zeit: 60s</p>
   <p id="score" class="quiz__score d-none">Punkte: 0</p>
 
+  <!-- Dynamischer Container -->
   <div class="quiz__content"></div>
+
+  <a
+  href="{{ url_for('ranks.ranks_quizmodes', branch=selected_branch, mode='normal') }}"
+  class="btn btn--secondary w-260 d-none"> Zurück zum Menü 
+  </a>
 </div>
 
 <script>
 let allNato = {{ nato_entries|tojson|safe }};
-let gameOver = false;
 let timeLeft = 60;
 let score = 0;
 let timerInterval;
+let questionLocked = false;
+let gameEnded = false;
+let questionIndex = 0;
+let shuffledNato = [];
 
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("timer").classList.remove("d-none");
   document.getElementById("score").classList.remove("d-none");
-
   shuffleQuestions();
   nextQuestion();
   startTimer();
 });
 
-// ---------------------
-// TIMER
-// ---------------------
 function startTimer() {
   const timer = document.getElementById("timer");
   timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
@@ -41,7 +47,10 @@ function startTimer() {
     timeLeft--;
     timer.innerText = "Verbleibende Zeit: " + timeLeft + "s";
 
-    if (timeLeft <= 10) timer.style.color = "var(--red)";
+    if (timeLeft <= 10) {
+        timer.style.color = "var(--color-red)";
+    } 
+
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
       endGame();
@@ -49,22 +58,14 @@ function startTimer() {
   }, 1000);
 }
 
-// ---------------------
-// FRAGEPOOL
-// ---------------------
-let questionIndex = 0;
-let shuffledNato = [];
-
 function shuffleQuestions() {
   shuffledNato = [...allNato].sort(() => Math.random() - 0.5);
   questionIndex = 0;
 }
 
-// ---------------------
-// FRAGENLOGIK
-// ---------------------
 function nextQuestion() {
-  if (gameOver) return;
+  if (gameEnded) return;
+  questionLocked = false;
 
   if (questionIndex >= shuffledNato.length) shuffleQuestions();
 
@@ -84,50 +85,54 @@ function nextQuestion() {
 function renderQuestion(correct, options) {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
-    <div class="quiz__letter-box">
-      <h1 class="quiz__letter">${correct.letter}</h1>
+    <div class="quiz__end mx-auto w-260">
+      <h1 class="nato-letter my-auto">${correct.letter}</h1>
     </div>
 
-    <div class="quiz__options">
+    <div class="btn-group">
       ${options.map(opt => `
-        <button class="quiz__button" onclick="checkAnswer('${opt}', '${correct.correct}')">
+        <button 
+          class="btn btn--primary w-260" 
+          data-value="${opt}"
+          onclick="checkAnswer('${opt}', '${correct.correct}')">
           ${opt}
         </button>
       `).join("")}
     </div>
 
-    <p id="feedback" class="quiz__feedback"></p>
+    <p id="feedback" class="heading-secondary"></p>
   `;
 }
 
 function checkAnswer(selected, correct) {
-  const buttons = document.querySelectorAll(".quiz__button");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
+  if (questionLocked || gameEnded) return;
+  questionLocked = true;
+
   const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll("button[data-value]");
+  buttons.forEach(btn => btn.disabled = true);
 
   if (selected === correct) {
     score++;
-    document.getElementById("score").innerText = "Punkte: " + score;
     feedback.innerText = "Richtig!";
+    document.getElementById("score").innerText = "Punkte: " + score;
     const correctBtn = Array.from(buttons).find(b => b.textContent.trim() === correct);
-    correctBtn?.classList.add("quiz__button--correct");
+    correctBtn?.classList.add("btn--success");
   } else {
     feedback.innerText = "Falsch!";
     const selectedBtn = Array.from(buttons).find(b => b.textContent.trim() === selected);
     const correctBtn = Array.from(buttons).find(b => b.textContent.trim() === correct);
-    selectedBtn?.classList.add("quiz__button--wrong");
-    correctBtn?.classList.add("quiz__button--correct");
+    selectedBtn?.classList.add("btn--danger");
+    correctBtn?.classList.add("btn--success");
   }
 
-  setTimeout(nextQuestion, 800);
+  if (!gameEnded && timeLeft > 0) setTimeout(nextQuestion, 500);
 }
 
-// ---------------------
-// SPIELENDE
-// ---------------------
 function endGame() {
+  if (gameEnded) return;
+  gameEnded = true;
   clearInterval(timerInterval);
-  gameOver = true;
 
   document.getElementById("timer").classList.add("d-none");
   document.getElementById("score").classList.add("d-none");
@@ -135,11 +140,11 @@ function endGame() {
   const container = document.querySelector(".quiz__content");
   container.innerHTML = `
     <div class="quiz__end">
-      <h2 class="quiz__end-title">Zeit abgelaufen!</h2>
-      <p class="quiz__end-text">Du hast <strong>${score}</strong> Punkte erreicht.</p>
-      <div class="quiz__end-buttons">
-        <a href="/nato/quiz_timer" class="quiz__next">Erneut versuchen</a>
-        <a href="{{ url_for('nato.nato_menu') }}" class="quiz__next">Zurück</a>
+      <h2 class="heading-secondary">Zeit abgelaufen!</h2>
+      <p Du hast <strong>${score}</strong> Punkte erreicht.</p>
+      <div class="btn-group">
+        <a href="{{ url_for('nato.nato_quizmodes') }}" class="btn btn--secondary w-200">Zurück zum Menü</a>
+        <a href="{{ url_for('nato.nato_quiz_timer') }}" class="btn btn--primary w-200">Erneut versuchen</a>
       </div>
     </div>
   `;

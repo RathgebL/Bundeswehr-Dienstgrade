@@ -8,30 +8,39 @@
 <div class="page-box page--narrow">
   <h1 class="heading-primary">NATO-Alphabet Quiz</h1>
 
-  <div class="nato-quiz__letter-box">
-    <h1 class="nato-quiz__letter">{{ letter }}</h1>
+  <!-- Buchstabe -->
+  <div class="quiz__end mx-auto w-260">
+    <h1 class="nato-letter my-auto">{{ letter }}</h1>
   </div>
 
-  <div class="nato-quiz__options">
+  <!-- Antwortoptionen -->
+  <div class="btn-group">
     {% for opt in options %}
     <button
+      class="btn btn--primary w-260"
       data-value="{{ opt }}"
       onclick="checkAnswer('{{ opt }}', '{{ correct }}')"
-      class="nato-quiz__button"
     >
       {{ opt }}
     </button>
     {% endfor %}
   </div>
 
-  <p id="feedback" class="nato-quiz__feedback"></p>
+  <!-- Feedback -->
+  <div id="feedback" class="heading-secondary"></div>
 
-  <div class="nato-quiz__actions">
-    <a href="{{ url_for('nato.nato_menu') }}" class="nato-quiz__next nato-quiz__back">
+  <!-- Button-Bereich -->
+  <div class="btn-group mb-0">
+    <a 
+      href="{{ url_for('nato.nato_quizmodes') }}" 
+      class="btn btn--secondary w-260">
       Zurück zum Menü
     </a>
 
-    <a href="{{ url_for('nato.nato_quiz') }}" id="next-btn" class="nato-quiz__next d-none">
+    <a 
+      href="{{ url_for('nato.nato_quiz') }}" 
+      id="next-btn" 
+      class="btn btn--primary w-260 d-none">
       Nächste Frage
     </a>
   </div>
@@ -39,18 +48,23 @@
 
 <script>
 function checkAnswer(selected, correct) {
-  const buttons = document.querySelectorAll("button[data-value]");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
-
   const feedback = document.getElementById("feedback");
+  const buttons = document.querySelectorAll("button[data-value]");
+  buttons.forEach(btn => btn.disabled = true);
 
   if (selected === correct) {
     feedback.innerText = "Richtig!";
-    document.querySelector(`button[data-value='${selected}']`).classList.add("nato-quiz__button--correct");
+    document
+      .querySelector(`button[data-value="${correct}"]`)
+      .classList.add("btn--success");
   } else {
     feedback.innerText = "Falsch!";
-    document.querySelector(`button[data-value='${selected}']`).classList.add("nato-quiz__button--wrong");
-    document.querySelector(`button[data-value='${correct}']`).classList.add("nato-quiz__button--correct");
+    document
+      .querySelector(`button[data-value="${selected}"]`)
+      .classList.add("btn--danger");
+    document
+      .querySelector(`button[data-value="${correct}"]`)
+      .classList.add("btn--success");
   }
 
   document.getElementById("next-btn").classList.remove("d-none");

@@ -23,7 +23,7 @@
 
 <script>
 let allRanks = {{ ranks|tojson|safe }};
-let timeLeft = 10;
+let timeLeft = 60;
 let score = 0;
 let timerInterval;
 let questionLocked = false;
@@ -92,7 +92,7 @@ function checkAnswer(selectedId, correctId) {
 
   const feedback = document.getElementById("feedback");
   const buttons = document.querySelectorAll("button[data-id]");
-  buttons.forEach(btn => btn.classList.add("is-locked"));
+  buttons.forEach(btn => btn.disabled = true);
 
   const selectedBtn = document.querySelector(`button[data-id="${selectedId}"]`);
   const correctBtn = document.querySelector(`button[data-id="${correctId}"]`);

@@ -121,8 +121,8 @@ UTILITY-KLASSEN — SCHNELLE LAYOUT- UND STILHILFEN
 .mb-5 { margin-bottom: var(--space-5); }
 .mb-6 { margin-bottom: var(--space-6); }
 
-.mx-auto { margin-left: auto; margin-right: auto; }
-.my-auto { margin-top: auto; margin-bottom: auto; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important;}
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
 
 /* Padding */
 .p-1 { padding: var(--space-1); }
